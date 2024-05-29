@@ -1,4 +1,6 @@
-﻿namespace Job_Portal_API.Models
+﻿using Job_Portal_API.Models.Enums;
+
+namespace Job_Portal_API.Models
 {
     public class User
     {
@@ -9,7 +11,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ContactNumber { get; set; }
-        public string UserType { get; set; }
+        public UserType UserType { get; set; }
         public DateTime DateOfRegistration { get; set; } = DateTime.Now;
 
         // Navigation properties

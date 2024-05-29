@@ -67,11 +67,23 @@ namespace Job_Portal_API
 
             #region Repositories
             builder.Services.AddScoped<IRepository<int, User>, UserRepository>();
+            builder.Services.AddScoped<IRepository<int, Employer>, EmployerRepository>();
+            builder.Services.AddScoped<IRepository<int, JobListing>, JobListingRepository>();
+            builder.Services.AddScoped<IRepository<int, JobSeeker>, JobSeekerRepository>();
+            builder.Services.AddScoped<IRepository<int, JobSeekerEducation>,EducationRepository>();
+            builder.Services.AddScoped<IRepository<int, JobSeekerExperience>, ExperienceRepository>();
+            builder.Services.AddScoped<IRepository<int, Application>, ApplicationRepository>();
+            builder.Services.AddScoped<IRangeRepository<int, JobSeekerSkill>, JobSeekerSkillRepository>();
+
             #endregion
 
             #region Services
             builder.Services.AddScoped<IUser, UserService>();
             builder.Services.AddScoped<IToken, TokenService>();
+            builder.Services.AddScoped<IEmployer, EmployerService>();
+            builder.Services.AddScoped<IJobListing, JobListingService>();
+            builder.Services.AddScoped<IJobSeeker, JobSeekerService>();
+            builder.Services.AddScoped<IApplication, ApplicationService>();
             #endregion
 
             var app = builder.Build();

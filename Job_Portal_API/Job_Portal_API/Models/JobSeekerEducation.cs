@@ -10,6 +10,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Description { get; set; }
+        public double GPA { get; set; } 
 
         // Navigation property
         public JobSeeker JobSeeker { get; set; }

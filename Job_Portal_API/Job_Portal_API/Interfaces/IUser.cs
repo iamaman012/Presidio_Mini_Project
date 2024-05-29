@@ -8,11 +8,11 @@ namespace Job_Portal_API.Interfaces
         public Task<ReturnUserDTO> RegisterUser(RegisterUserDTO user);
 
         public Task<ReturnLoginDTO> LoginUser(LoginUserDTO user);
-        public Task<User> UpdateUserEmail(int id,String email);
-        public Task<User> DeleteUserById(int id);
+        public Task<ReturnUserDTO> UpdateUserEmail(int id,String email);
+        public Task<ReturnUserDTO> DeleteUserById(int id);
 
-        public Task<User> GetUserById(int id);
+        public Task<ReturnUserDTO> GetUserById(int id);
 
-        public Task<IEnumerable<User>> GetAllUsers();
+        public Task<IEnumerable<ReturnUserDTO>> GetAllUsers();
     }
 }

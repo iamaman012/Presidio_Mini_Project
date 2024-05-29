@@ -164,6 +164,9 @@ namespace Job_Portal_API.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("GPA")
+                        .HasColumnType("float");
+
                     b.Property<string>("Institution")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -227,56 +230,46 @@ namespace Job_Portal_API.Migrations
 
             modelBuilder.Entity("Job_Portal_API.Models.JobSeekerSkill", b =>
                 {
+                    b.Property<int>("JobSeekerSkillID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobSeekerSkillID"), 1L, 1);
+
                     b.Property<int>("JobSeekerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SkillID")
-                        .HasColumnType("int");
+                    b.Property<string>("SkillName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("JobSeekerID", "SkillID");
+                    b.HasKey("JobSeekerSkillID");
 
-                    b.HasIndex("SkillID");
+                    b.HasIndex("JobSeekerID");
 
                     b.ToTable("JobSeekerSkills");
                 });
 
             modelBuilder.Entity("Job_Portal_API.Models.JobSkill", b =>
                 {
-                    b.Property<int>("JobID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillID")
-                        .HasColumnType("int");
-
-                    b.HasKey("JobID", "SkillID");
-
-                    b.HasIndex("SkillID");
-
-                    b.ToTable("JobSkills");
-                });
-
-            modelBuilder.Entity("Job_Portal_API.Models.Skill", b =>
-                {
-                    b.Property<int>("SkillID")
+                    b.Property<int>("JobSkillID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobSkillID"), 1L, 1);
+
+                    b.Property<int>("JobID")
+                        .HasColumnType("int");
 
                     b.Property<string>("SkillName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SkillID");
+                    b.HasKey("JobSkillID");
 
-                    b.ToTable("Skills");
+                    b.HasIndex("JobID");
 
-                    b.HasData(
-                        new
-                        {
-                            SkillID = 101,
-                            SkillName = "C#"
-                        });
+                    b.ToTable("JobSkills");
                 });
 
             modelBuilder.Entity("Job_Portal_API.Models.User", b =>
@@ -408,15 +401,7 @@ namespace Job_Portal_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Job_Portal_API.Models.Skill", "Skill")
-                        .WithMany("JobSeekerSkills")
-                        .HasForeignKey("SkillID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("JobSeeker");
-
-                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Job_Portal_API.Models.JobSkill", b =>
@@ -427,15 +412,7 @@ namespace Job_Portal_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Job_Portal_API.Models.Skill", "Skill")
-                        .WithMany("JobSkills")
-                        .HasForeignKey("SkillID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("JobListing");
-
-                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Job_Portal_API.Models.Employer", b =>
@@ -459,13 +436,6 @@ namespace Job_Portal_API.Migrations
                     b.Navigation("JobSeekerExperiences");
 
                     b.Navigation("JobSeekerSkills");
-                });
-
-            modelBuilder.Entity("Job_Portal_API.Models.Skill", b =>
-                {
-                    b.Navigation("JobSeekerSkills");
-
-                    b.Navigation("JobSkills");
                 });
 
             modelBuilder.Entity("Job_Portal_API.Models.User", b =>

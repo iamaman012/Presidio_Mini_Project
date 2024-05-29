@@ -22,7 +22,7 @@ namespace Job_Portal_API.Services
             string token = string.Empty;
             var claims = new List<Claim>(){
                 new Claim(ClaimTypes.Name, user.UserID.ToString()),
-                new Claim(ClaimTypes.Role, user.UserType)
+                new Claim(ClaimTypes.Role, user.UserType.ToString())
             };
             var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
             var myToken = new JwtSecurityToken(null, null, claims, expires: DateTime.Now.AddDays(2), signingCredentials: credentials);

@@ -14,7 +14,7 @@ namespace Job_Portal_API.Context
         public DbSet<JobSeeker> JobSeekers { get; set; }
         public DbSet<JobListing> JobListings { get; set; }
         public DbSet<Application> Applications { get; set; }
-        public DbSet<Skill> Skills { get; set; }
+       
         public DbSet<JobSkill> JobSkills { get; set; }
         public DbSet<JobSeekerSkill> JobSeekerSkills { get; set; }
         public DbSet<JobSeekerExperience> Experiences { get; set; }
@@ -28,15 +28,14 @@ namespace Job_Portal_API.Context
             modelBuilder.Entity<JobSeeker>().HasKey(j => j.JobSeekerID);
             modelBuilder.Entity<JobListing>().HasKey(j => j.JobID);
             modelBuilder.Entity<Application>().HasKey(a => a.ApplicationID);
-            modelBuilder.Entity<Skill>().HasKey(s => s.SkillID);
+          
             modelBuilder.Entity<JobSeekerExperience>().HasKey(e => e.ExperienceID);
             modelBuilder.Entity<JobSeekerEducation>().HasKey(e => e.EducationID);
             modelBuilder.Entity<JobSeekerEducation>().HasKey(e => e.EducationID);
-            modelBuilder.Entity<JobSkill>().HasKey(js => new { js.JobID, js.SkillID });
-            modelBuilder.Entity<JobSeekerSkill>().HasKey(js => new { js.JobSeekerID, js.SkillID });
+            modelBuilder.Entity<JobSkill>().HasKey(js => js.JobSkillID );
+            modelBuilder.Entity<JobSeekerSkill>().HasKey(js => js.JobSeekerSkillID);
 
-            modelBuilder.Entity<Skill>()
-                .HasData(new Skill {SkillID=101, SkillName = "C#" });
+           
 
             modelBuilder.Entity<Employer>()
                 .HasOne(e => e.User)
@@ -78,15 +77,9 @@ namespace Job_Portal_API.Context
                 .HasForeignKey(js => js.JobSeekerID);
 
 
-            modelBuilder.Entity<Skill>()
-                .HasMany(s => s.JobSkills)
-                .WithOne(js => js.Skill)
-                .HasForeignKey(js => js.SkillID);
+          
 
-            modelBuilder.Entity<Skill>()
-                .HasMany(s => s.JobSeekerSkills)
-                .WithOne(js => js.Skill)
-                .HasForeignKey(js => js.SkillID);
+           
 
            modelBuilder.Entity<JobSeekerExperience>()
                 .HasOne(j => j.JobSeeker)
@@ -98,8 +91,18 @@ namespace Job_Portal_API.Context
                 .WithMany(j => j.JobSeekerEducations)
                 .HasForeignKey(j => j.JobSeekerID);
 
+            // Configure UserType enum to be stored as a string
+            modelBuilder.Entity<User>()
+                .Property(u => u.UserType)
+                .HasConversion<string>()
+                .IsRequired();
 
+          //  Configure JobType enum to be stored as a string
+           modelBuilder.Entity<JobListing>()
+                .Property(j => j.JobType)
+                .HasConversion<string>()
+                .IsRequired();
 
-        }
+    }
     }
 }

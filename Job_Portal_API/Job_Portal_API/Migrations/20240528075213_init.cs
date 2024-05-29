@@ -10,19 +10,6 @@ namespace Job_Portal_API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Skills",
-                columns: table => new
-                {
-                    SkillID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SkillName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Skills", x => x.SkillID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -30,7 +17,7 @@ namespace Job_Portal_API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     HashKey = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -163,23 +150,19 @@ namespace Job_Portal_API.Migrations
                 name: "JobSeekerSkills",
                 columns: table => new
                 {
+                    JobSeekerSkillID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     JobSeekerID = table.Column<int>(type: "int", nullable: false),
-                    SkillID = table.Column<int>(type: "int", nullable: false)
+                    SkillName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobSeekerSkills", x => new { x.JobSeekerID, x.SkillID });
+                    table.PrimaryKey("PK_JobSeekerSkills", x => x.JobSeekerSkillID);
                     table.ForeignKey(
                         name: "FK_JobSeekerSkills_JobSeekers_JobSeekerID",
                         column: x => x.JobSeekerID,
                         principalTable: "JobSeekers",
                         principalColumn: "JobSeekerID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_JobSeekerSkills_Skills_SkillID",
-                        column: x => x.SkillID,
-                        principalTable: "Skills",
-                        principalColumn: "SkillID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -215,30 +198,21 @@ namespace Job_Portal_API.Migrations
                 name: "JobSkills",
                 columns: table => new
                 {
+                    JobSkillID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     JobID = table.Column<int>(type: "int", nullable: false),
-                    SkillID = table.Column<int>(type: "int", nullable: false)
+                    SkillName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobSkills", x => new { x.JobID, x.SkillID });
+                    table.PrimaryKey("PK_JobSkills", x => x.JobSkillID);
                     table.ForeignKey(
                         name: "FK_JobSkills_JobListings_JobID",
                         column: x => x.JobID,
                         principalTable: "JobListings",
                         principalColumn: "JobID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_JobSkills_Skills_SkillID",
-                        column: x => x.SkillID,
-                        principalTable: "Skills",
-                        principalColumn: "SkillID",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Skills",
-                columns: new[] { "SkillID", "SkillName" },
-                values: new object[] { 101, "C#" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_JobID",
@@ -278,14 +252,20 @@ namespace Job_Portal_API.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobSeekerSkills_SkillID",
+                name: "IX_JobSeekerSkills_JobSeekerID",
                 table: "JobSeekerSkills",
-                column: "SkillID");
+                column: "JobSeekerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobSkills_SkillID",
+                name: "IX_JobSkills_JobID",
                 table: "JobSkills",
-                column: "SkillID");
+                column: "JobID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -310,9 +290,6 @@ namespace Job_Portal_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "JobListings");
-
-            migrationBuilder.DropTable(
-                name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "Employers");

@@ -2,6 +2,7 @@
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models;
 using Job_Portal_API.Models.DTOs;
+using Job_Portal_API.Models.Enums;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,28 +13,38 @@ namespace Job_Portal_API.Services
     {
         private readonly IRepository<int, User> _repository;
         private readonly IToken _tokenService;
+        private readonly IRepository<int, JobSeeker> _jobSeekerRepo;
 
-        public UserService(IRepository<int,User> repository,IToken tokenService)
+        public UserService(IRepository<int,User> repository,IToken tokenService, IRepository<int, JobSeeker> jobSeekerRepo)
         {
             _repository = repository;
             _tokenService = tokenService;
+            _jobSeekerRepo = jobSeekerRepo;
         }
         public async Task<ReturnUserDTO> RegisterUser(RegisterUserDTO userDTO)
         {
             try
             {
-                User user = MapRegisterUserDTOToUser(userDTO);
+                User user = MapRegisterUserDTOToUser(userDTO); ;
+                if(user.UserType == UserType.JobSeeker)
+                user.JobSeeker = new JobSeeker();
                 var result= await _repository.Add(user);
-                ReturnUserDTO returnUser = new ReturnUserDTO() {UserID=result.UserID, Email = result.Email,Role = result.UserType };
+
+                ReturnUserDTO returnUser = new ReturnUserDTO() {UserID=result.UserID, Email = result.Email,Role = result.UserType.ToString(),Name=result.FirstName+result.LastName,ContactNumber=result.ContactNumber,JobSeekerID=result.JobSeeker.JobSeekerID };
                 return returnUser;
             }
-            catch(Exception e)
+            catch(UserAlreadyExistException e)
             {
                 throw new UserAlreadyExistException();
+            }
+            catch(ArgumentException e)
+            {
+                throw new ArgumentException("Please Enter Valid User Type");
             }
         }
         public async Task<ReturnLoginDTO> LoginUser(LoginUserDTO userDTO)
         {
+            
             var users = await _repository.GetAll();
             var user = users.FirstOrDefault(u => u.Email == userDTO.Email);
             if (user == null)
@@ -56,11 +67,13 @@ namespace Job_Portal_API.Services
             throw new UnauthorizedUserException("Invalid username or password");
         }
 
-        public async Task<User> DeleteUserById(int id)
+        public async Task<ReturnUserDTO> DeleteUserById(int id)
         {
             try
             {
-                return await  _repository.DeleteById(id);
+                var user = await _repository.DeleteById(id);
+                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber };
+                return returnUser;
             }
             catch (Exception e)
             {
@@ -68,7 +81,7 @@ namespace Job_Portal_API.Services
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<ReturnUserDTO>> GetAllUsers()
         {
             var users = await _repository.GetAll();
             
@@ -76,14 +89,21 @@ namespace Job_Portal_API.Services
             {
                 throw new NoUsersFoundException();
             }
-            return users;
+            List<ReturnUserDTO> results = new List<ReturnUserDTO>();
+            foreach (var user in users)
+            {
+                results.Add(new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber });
+            }
+            return results;
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<ReturnUserDTO> GetUserById(int id)
         {
             try
             {
-                return await _repository.GetById(id);
+                var user = await _repository.GetById(id);
+                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber };
+                return returnUser;
             }
             catch (Exception e)
             {
@@ -91,15 +111,17 @@ namespace Job_Portal_API.Services
             }
         }
 
-        public async Task<User> UpdateUserEmail(int id, string email)
+        public async Task<ReturnUserDTO> UpdateUserEmail(int id, string email)
             {
                 try
                 {
                     var user = await _repository.GetById(id);
                     user.Email = email;
                     user = await _repository.Update(user);
-                    return user;
-                }
+                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber };
+                return returnUser;
+
+            }
                 catch (Exception e)
                 {
                     throw new UserNotFoundException();
@@ -107,8 +129,20 @@ namespace Job_Portal_API.Services
             }
         private User MapRegisterUserDTOToUser(RegisterUserDTO userDTO)
         {
-            User user = new User() {Email=userDTO.Email,FirstName=userDTO.FirstName,LastName=userDTO.LastName,
-            UserType=userDTO.UserType,ContactNumber=userDTO.ContactNumber};
+            // Validate and convert UserType
+            if (!Enum.TryParse<UserType>(userDTO.UserType, true, out var userType))
+            {
+                throw new ArgumentException("Invalid user type");
+            }
+            User user = new User()
+            {
+                Email = userDTO.Email,
+                FirstName = userDTO.FirstName,
+                LastName = userDTO.LastName,
+                UserType = userType,
+                ContactNumber = userDTO.ContactNumber,
+                
+            };
             
             
             HMACSHA512 hMACSHA = new HMACSHA512();
@@ -131,7 +165,7 @@ namespace Job_Portal_API.Services
         {
             ReturnLoginDTO returnDTO = new ReturnLoginDTO();
             returnDTO.UserID = user.UserID;
-            returnDTO.Role = user.UserType;
+            returnDTO.Role = user.UserType.ToString();
             returnDTO.Email = user.Email;
             returnDTO.Token = _tokenService.GenerateJSONWebToken(user);
             return returnDTO;
