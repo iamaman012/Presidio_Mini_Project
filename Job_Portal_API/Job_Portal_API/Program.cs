@@ -84,6 +84,7 @@ namespace Job_Portal_API
             builder.Services.AddScoped<IJobListing, JobListingService>();
             builder.Services.AddScoped<IJobSeeker, JobSeekerService>();
             builder.Services.AddScoped<IApplication, ApplicationService>();
+            builder.Services.AddScoped<IAdmin, AdminService>();
             #endregion
 
             var app = builder.Build();

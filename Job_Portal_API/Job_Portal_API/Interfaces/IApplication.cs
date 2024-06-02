@@ -9,5 +9,6 @@ namespace Job_Portal_API.Interfaces
 
         public Task<ApplicationStatusDTO> GetApplicationStatus(int applicationId);
         public Task<IEnumerable<ApplicationResponseDTO>> GetApplicationByJobSeekerID(int jobSeekerID);
+        public Task<ApplicationResponseDTO> DeleteApplicationById(int applicationId);
     }
 }

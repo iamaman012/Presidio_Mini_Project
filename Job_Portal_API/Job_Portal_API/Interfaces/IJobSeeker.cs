@@ -9,5 +9,12 @@ namespace Job_Portal_API.Interfaces
         public Task<JobSeekerResponseDTO> GetResumeByJobSeekerId(int jobSeekerID);
 
         public Task<IEnumerable<JobSeekerSkillResponseDTO>> AddJobSeekerSkillsAsync(JobSeekerSkillDTO jobSeekerSkillDto);
+        public Task<ExperienceResponseDTO> DeleteExperirnceById(int experienceId);
+        public Task<EducationResponseDTO> DeleteEducationById(int educationId);
+        public Task<JobSeekerSkillResponseDTO> DeleteSkillById(int skillId);
+        public Task<EducationResponseDTO> UpdateEducation(EducationResponseDTO educationDTO);
+        public Task<ExperienceResponseDTO> UpdateExperience(ExperienceResponseDTO experienceDTO);
+        public Task<UpdateSkillDTO> UpdateSkill(int jobSeekerId,int skillId,string skillName);
+
     }
 }

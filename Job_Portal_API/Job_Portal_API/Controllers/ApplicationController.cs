@@ -1,5 +1,6 @@
 ﻿using Job_Portal_API.Exceptions;
 using Job_Portal_API.Interfaces;
+using Job_Portal_API.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace Job_Portal_API.Controllers
             _jobListingService = jobListingService;
         }
 
-        [HttpPost("submit")]
+        [HttpPost("ApplyForJob")]
         public async Task<IActionResult> SubmitApplication( int jobSeekerID,int jobID)
         {
 
@@ -28,19 +29,20 @@ namespace Job_Portal_API.Controllers
             }
             catch (JobListingNotFoundException e)
             {
-                return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                return NotFound(new ErrorModelDTO(404,e.Message));
             }
             catch(JobSeekerNotFoundException e)
             {
-                return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
             }
             catch (ApplicationAlreadyExistException e)
             {
-                return StatusCode(StatusCodes.Status409Conflict, e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
 
@@ -54,10 +56,15 @@ namespace Job_Portal_API.Controllers
             }
             catch (JobListingNotFoundException e)
             {
-                return NotFound("No job listings found.");
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [HttpPost("GetJobsFilterByLocation")]
+        [HttpGet("GetJobsFilterByLocation")]
         public async Task<IActionResult> GetJobsFilterByLocation( string location)
         {
             try
@@ -67,11 +74,16 @@ namespace Job_Portal_API.Controllers
             }
             catch (JobListingNotFoundException e)
             {
-                return NotFound("No job listings found.");
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
 
-        [HttpPost("GetJobsFilterBySalary")]
+        [HttpGet("GetJobsFilterBySalary")]
         public async Task<IActionResult> GetJobsFilterBySalary(double sRange,double eRange)
         {
             try
@@ -81,10 +93,15 @@ namespace Job_Portal_API.Controllers
             }
             catch (JobListingNotFoundException e)
             {
-                return NotFound(e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [HttpPost("GetJobsFilterByJobTitle")]
+        [HttpGet("GetJobsFilterByJobTitle")]
         public async Task<IActionResult> GetJobsFilterByTitle(string jobTitle)
         {
             try
@@ -94,10 +111,15 @@ namespace Job_Portal_API.Controllers
             }
             catch (JobListingNotFoundException e)
             {
-                return NotFound(e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [HttpPost("GetJobsFilterByJobType")]
+        [HttpGet("GetJobsFilterByJobType")]
         public async Task<IActionResult> GetJobsFilterByJobType(string jobType)
         {
             try
@@ -107,14 +129,19 @@ namespace Job_Portal_API.Controllers
             }
             catch (JobListingNotFoundException e)
             {
-                return NotFound(e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
             }
             catch(InvalidJobTypeException e)
             {
-                return NotFound($"Invali Job Type {jobType}");
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [HttpPost("GetApplicationStatus")]
+        [HttpGet("GetApplicationStatus")]
         public async Task<IActionResult> GetApplicationStatus(int applicationId)
         {
             try
@@ -124,10 +151,15 @@ namespace Job_Portal_API.Controllers
             }
             catch (ApplicationNotFoundException e)
             {
-                return NotFound(e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [HttpPost("GetApplicationFilteredByJobSeekerID")]
+        [HttpGet("GetApplicationFilteredByJobSeekerID")]
         public async Task<IActionResult> GetApplicationFilteredByJobSeekerID(int jobSeekerID)
         {
             try
@@ -137,11 +169,34 @@ namespace Job_Portal_API.Controllers
             }
             catch (ApplicationNotFoundException e)
             {
-                return NotFound(e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
             }
             catch(JobSeekerNotFoundException e)
             {
-                return NotFound(e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
+        }
+        [HttpDelete("DeleteApplicationById")]
+        public async Task<IActionResult> DeleteApplicationById(int applicationId)
+        {
+            try
+            {
+                var response = await _applicationService.DeleteApplicationById(applicationId);
+                return Ok(response);
+            }
+            catch (ApplicationNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
     }

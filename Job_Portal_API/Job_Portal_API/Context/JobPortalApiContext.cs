@@ -5,10 +5,13 @@ namespace Job_Portal_API.Context
 {
     public class JobPortalApiContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public JobPortalApiContext(DbContextOptions<JobPortalApiContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Data Source=71RBBX3\\SQLEXPRESS;Integrated Security=true;Initial Catalog=db_Job_Portal_API;");
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=71RBBX3\\SQLEXPRESS;Integrated Security=true;Initial Catalog=db_Job_Portal_API;");
+        //}
         public DbSet<User> Users { get; set; }
         public DbSet<Employer> Employers { get; set; }
         public DbSet<JobSeeker> JobSeekers { get; set; }

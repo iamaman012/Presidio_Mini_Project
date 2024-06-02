@@ -15,6 +15,11 @@ namespace Job_Portal_API.Interfaces
         public Task<IEnumerable<JobListingResponseDTO>> GetJobListingsByTitleAsync(string title);
         public Task<IEnumerable<JobListingResponseDTO>> GetJobListingsByJobTypeAsync(string jobType);
 
+        public Task<IEnumerable<ApplicationResponseDTO>> GetJobResponseByJobID(int jobID);
+        public Task<ApplicationResponseDTO> UpdateApplicationStatus(int applicationId,string status);
+        public Task<JobListingResponseDTO> DeleteJobListingById(int jobID);
+        public Task<ReturnUserDTO> GetJobSeekerContactInformation(int jobSeekerId);
+
 
 
 

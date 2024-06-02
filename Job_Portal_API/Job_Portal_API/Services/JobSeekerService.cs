@@ -166,5 +166,161 @@ namespace Job_Portal_API.Services
             }
        
         }
+
+        public async Task<ExperienceResponseDTO> DeleteExperirnceById(int experienceId)
+        {
+            try
+            {
+                var experinece =  await _experienceRepository.DeleteById(experienceId);
+                return new ExperienceResponseDTO
+                {
+                    ExperienceID = experinece.ExperienceID,
+                    JobSeekerID = experinece.JobSeekerID,
+                    JobTitle = experinece.JobTitle,
+                    CompanyName = experinece.CompanyName,
+                    Location = experinece.Location,
+                    StartDate = experinece.StartDate,
+                    EndDate = experinece.EndDate,
+                    Description = experinece.Description
+                };
+
+            }
+            catch(ExperienceNotFoundException e)
+            {
+                throw new ExperienceNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<EducationResponseDTO> DeleteEducationById(int educationId)
+        {
+            try
+            {
+                var education = await _educationRepository.DeleteById(educationId);
+                return new EducationResponseDTO
+                {
+                    EducationID = education.EducationID,
+                    JobSeekerID = education.JobSeekerID,
+                    Degree = education.Degree,
+                    Institution = education.Institution,
+                    Location = education.Location,
+                    StartDate = education.StartDate,
+                    EndDate = education.EndDate,
+                    Description = education.Description,
+                    GPA = education.GPA
+                };
+            }
+            catch(EducationNotFoundException e)
+            {
+                throw new EducationNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<JobSeekerSkillResponseDTO> DeleteSkillById(int skillId)
+        {
+            try
+            {
+                var skill =  await _jobSeekerSkillRepository.DeleteById(skillId);
+                return new JobSeekerSkillResponseDTO
+                {
+                    SkillName = skill.SkillName
+                };
+            }
+            catch (JobSeekerSkillNotFoundException e)
+            {
+                throw new JobSeekerSkillNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<EducationResponseDTO> UpdateEducation(EducationResponseDTO educationDTO)
+        {
+            try
+            {
+                var jobSeeker = await _jobSeekerRepo.GetById(educationDTO.JobSeekerID);
+                var education = await _educationRepository.GetById(educationDTO.EducationID);
+                education.Degree=educationDTO.Degree;
+                education.Institution = educationDTO.Institution;
+                education.Location = educationDTO.Location;
+                education.StartDate = educationDTO.StartDate;
+                education.EndDate = educationDTO.EndDate;
+                education.Description = educationDTO.Description;
+                education.GPA = educationDTO.GPA;
+                await _educationRepository.Update(education);
+                return new EducationResponseDTO
+                {
+                    EducationID = education.EducationID,
+                    JobSeekerID = education.JobSeekerID,
+                    Degree = education.Degree,
+                    Institution = education.Institution,
+                    Location = education.Location,
+                    StartDate = education.StartDate,
+                    EndDate = education.EndDate,
+                    Description = education.Description,
+                    GPA = education.GPA
+                };
+
+            }
+            catch(JobSeekerNotFoundException e) 
+            {
+                throw new JobSeekerNotFoundException(e.Message);
+            }
+            catch(EducationNotFoundException e)
+            {
+                throw new EducationNotFoundException(e.Message);
+            }
+        }
+
+        public  async Task<ExperienceResponseDTO> UpdateExperience(ExperienceResponseDTO experienceDTO)
+        {
+            try
+            {
+                var experience = await _experienceRepository.GetById(experienceDTO.ExperienceID);
+                var jobSeeker =  await _jobSeekerRepo.GetById(experienceDTO.JobSeekerID);
+                experience.JobTitle = experienceDTO.JobTitle;
+                experience.CompanyName = experienceDTO.CompanyName;
+                experience.Location = experienceDTO.Location;
+                experience.StartDate = experienceDTO.StartDate;
+                experience.EndDate = experienceDTO.EndDate;
+                experience.Description = experienceDTO.Description;
+                await _experienceRepository.Update(experience);
+                return experienceDTO;
+            }
+            catch(ExperienceNotFoundException e)
+            {
+                throw new ExperienceNotFoundException(e.Message);
+            }
+            catch(JobSeekerNotFoundException e)
+            {
+                throw new JobSeekerNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<UpdateSkillDTO> UpdateSkill(int jobSeekerId,int skillId,string skillName)
+        {
+            try
+            {
+                var jobSeeker = await _jobSeekerRepo.GetById(jobSeekerId);
+                var jobSeekerSkill = await _jobSeekerSkillRepository.GetById(skillId);
+                jobSeekerSkill.SkillName = skillName;
+                await _jobSeekerSkillRepository.Update(jobSeekerSkill);
+                var result = new UpdateSkillDTO
+                {
+                    SkillId = skillId,
+                    SkillName = skillName,
+                    JobSeekerId = jobSeekerId
+                };
+                return result ;
+               
+
+
+            }
+            catch(JobSeekerSkillNotFoundException e)
+            {
+               throw new JobSeekerSkillNotFoundException(e.Message);
+            }
+            catch(JobSeekerNotFoundException e)
+            {
+                throw new JobSeekerNotFoundException(e.Message);
+            }
+        }
     }
 }

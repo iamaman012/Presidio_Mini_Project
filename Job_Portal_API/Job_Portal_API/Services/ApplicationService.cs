@@ -114,5 +114,28 @@ namespace Job_Portal_API.Services
             }
 
         }
+
+        public async Task<ApplicationResponseDTO> DeleteApplicationById(int applicationId)
+        {
+            try
+            {
+                var application = await _applicationRepository.DeleteById(applicationId);
+                return new ApplicationResponseDTO
+                {
+                    ApplicationID = application.ApplicationID,
+                    JobID = application.JobID,
+                    JobSeekerID = application.JobSeekerID,
+                    Status = application.Status
+                };
+            }
+            catch (ApplicationNotFoundException e)
+            {
+                throw new ApplicationNotFoundException(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

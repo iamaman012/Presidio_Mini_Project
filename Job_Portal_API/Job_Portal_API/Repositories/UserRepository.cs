@@ -20,7 +20,7 @@ namespace Job_Portal_API.Repositories
             var user =  _context.Users.FirstOrDefault(u => u.Email == entity.Email);
             if(user != null)
             {
-                throw new UserAlreadyExistException();
+                throw new UserAlreadyExistException("Email is Already Exist!!");
             }
             await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -45,7 +45,7 @@ namespace Job_Portal_API.Repositories
             var user = await _context.Users.FindAsync(id);
             if(user == null)
             {
-                throw new UserNotFoundException();
+                throw new UserNotFoundException("User Not Found!!");
             }
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();

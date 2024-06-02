@@ -12,11 +12,18 @@ namespace Job_Portal_API.Services
     {
         private readonly IRepository<int, JobListing> _jobListingRepository;
         private readonly IRepository<int, Employer> _employerRepository;
+        private readonly IRepository<int, Application> _applicationRepository;
+        private readonly IRepository<int, JobSeeker> _jobSeekerRepository;
+        private readonly IUser _userService;
 
-        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository)
+        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IUser userService,IRepository<int,JobSeeker> jobSeekerRepository)
         {
             _jobListingRepository = jobListingRepository;
             _employerRepository = employerRepository;
+            _applicationRepository = applicationRepository;
+            _jobSeekerRepository = jobSeekerRepository;
+            _userService = userService;
+
         }
 
         public JobListing MapDtoToJobListing(JobListingDTO jobListingDto)
@@ -254,6 +261,105 @@ namespace Job_Portal_API.Services
             catch (JobListingNotFoundException e)
             {
                 throw new JobListingNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<IEnumerable<ApplicationResponseDTO>> GetJobResponseByJobID(int jobID)
+        {
+            try
+            {   var job = await _jobListingRepository.GetById(jobID);
+                if (job == null) throw new JobListingNotFoundException("No Jobs for the given Job ID");
+                var applications = await _applicationRepository.GetAll();
+                var jobApplications = applications.Where(app => app.JobID == jobID);
+                if(jobApplications.Count() == 0)
+                {
+                    throw new NoApplicationExistException("No Applications Exist for the Given Job ID");
+                }
+                return jobApplications.Select(app => new ApplicationResponseDTO
+                {
+                    ApplicationID = app.ApplicationID,
+                    JobID = app.JobID,
+                    JobSeekerID = app.JobSeekerID,
+                    ApplicationDate = app.ApplicationDate,
+                    Status = app.Status.ToString()
+                });
+            }
+            catch (NoApplicationExistException e)
+            {
+                throw new NoApplicationExistException(e.Message);
+            }
+            catch (JobListingNotFoundException e)
+            {
+                throw new JobListingNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<ApplicationResponseDTO> UpdateApplicationStatus(int applicationId,string status)
+        {
+            try
+            {
+                var application = await _applicationRepository.GetById(applicationId);
+                application.Status = status;
+                await _applicationRepository.Update(application);
+                return new ApplicationResponseDTO
+                {
+                    ApplicationID = application.ApplicationID,
+                    JobID = application.JobID,
+                    JobSeekerID = application.JobSeekerID,
+                    ApplicationDate = application.ApplicationDate,
+                    Status = application.Status
+                };
+            }
+            catch (ApplicationNotFoundException e)
+            {
+                throw new ApplicationNotFoundException(e.Message);
+            }
+        }
+
+        public async  Task<JobListingResponseDTO> DeleteJobListingById(int jobID)
+        {
+            try
+            {
+                var job = await _jobListingRepository.DeleteById(jobID);
+                return new JobListingResponseDTO
+                {
+                    JobID = job.JobID,
+                    JobTitle = job.JobTitle,
+                    JobDescription = job.JobDescription,
+                    JobType = job.JobType.ToString(),
+                    Location = job.Location,
+                    Salary = job.Salary,
+                    PostingDate = job.PostingDate,
+                    ClosingDate = job.ClosingDate,
+                    EmployerID = job.EmployerID,
+                    Skills = job.JobSkills.Select(skill => new JobSkillDTO { SkillName = skill.SkillName }).ToList()
+                };
+                
+            }
+            catch(JobListingNotFoundException e)
+            {
+                throw new JobListingNotFoundException(e.Message);
+            }
+           
+        }
+
+        public async Task<ReturnUserDTO> GetJobSeekerContactInformation(int jobSeekerId)
+        {
+            try
+            {
+                var jobSeeker = await _jobSeekerRepository.GetById(jobSeekerId);
+                var userId = jobSeeker.UserID;
+                var result = await _userService.GetUserById(userId);
+                return result;
+
+            }
+            catch (JobSeekerNotFoundException e)
+            {
+                throw new JobSeekerNotFoundException(e.Message);
+            }
+            catch(UserNotFoundException e)
+            {
+                throw new UserNotFoundException(e.Message);
             }
         }
     }

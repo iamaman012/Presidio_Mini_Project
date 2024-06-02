@@ -25,17 +25,19 @@ namespace Job_Portal_API.Services
         {
             try
             {
-                User user = MapRegisterUserDTOToUser(userDTO); ;
+                User user = MapRegisterUserDTOToUser(userDTO); 
                 if(user.UserType == UserType.JobSeeker)
                 user.JobSeeker = new JobSeeker();
                 var result= await _repository.Add(user);
+                
 
-                ReturnUserDTO returnUser = new ReturnUserDTO() {UserID=result.UserID, Email = result.Email,Role = result.UserType.ToString(),Name=result.FirstName+result.LastName,ContactNumber=result.ContactNumber,JobSeekerID=result.JobSeeker.JobSeekerID };
+                ReturnUserDTO returnUser = new ReturnUserDTO {UserID=result.UserID, Email = result.Email,Role = result.UserType.ToString(),Name=result.FirstName+result.LastName,ContactNumber=result.ContactNumber,JobSeekerID=result.JobSeeker?.JobSeekerID };
+              
                 return returnUser;
             }
             catch(UserAlreadyExistException e)
             {
-                throw new UserAlreadyExistException();
+                throw new UserAlreadyExistException(e.Message);
             }
             catch(ArgumentException e)
             {
@@ -44,27 +46,35 @@ namespace Job_Portal_API.Services
         }
         public async Task<ReturnLoginDTO> LoginUser(LoginUserDTO userDTO)
         {
-            
-            var users = await _repository.GetAll();
-            var user = users.FirstOrDefault(u => u.Email == userDTO.Email);
-            if (user == null)
+            try
             {
-                throw new UnauthorizedUserException("Invalid Email or password");
-            }
-            HMACSHA512 hMACSHA = new HMACSHA512(user.HashKey);
-            var encrypterPass = hMACSHA.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
-            bool isPasswordSame = ComparePassword(encrypterPass, user.Password);
-            if (isPasswordSame)
-            {
-                
-                
-                ReturnLoginDTO loginReturnDTO = MapUserToLoginReturn(user);
-                return loginReturnDTO;
-               
+                var users = await _repository.GetAll();
+                var user = users.FirstOrDefault(u => u.Email == userDTO.Email);
+                if (user == null)
+                {
+                    throw new UnauthorizedUserException("Invalid Email or password");
+                }
+                HMACSHA512 hMACSHA = new HMACSHA512(user.HashKey);
+                var encrypterPass = hMACSHA.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
+                bool isPasswordSame = ComparePassword(encrypterPass, user.Password);
+                if (isPasswordSame)
+                {
 
-                
+
+                    ReturnLoginDTO loginReturnDTO = MapUserToLoginReturn(user);
+                    return loginReturnDTO;
+
+
+
+                }
+                throw new UnauthorizedUserException("Invalid username or password");
             }
-            throw new UnauthorizedUserException("Invalid username or password");
+            catch(UnauthorizedUserException e)
+            {
+                throw new UnauthorizedUserException(e.Message);
+            }
+           
+            
         }
 
         public async Task<ReturnUserDTO> DeleteUserById(int id)
@@ -72,42 +82,28 @@ namespace Job_Portal_API.Services
             try
             {
                 var user = await _repository.DeleteById(id);
-                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber };
+                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + " "+ user.LastName, ContactNumber = user.ContactNumber };
                 return returnUser;
             }
-            catch (Exception e)
+            catch (UserNotFoundException e)
             {
-                throw new UserNotFoundException();
+                throw new UserNotFoundException(e.Message);
             }
         }
 
-        public async Task<IEnumerable<ReturnUserDTO>> GetAllUsers()
-        {
-            var users = await _repository.GetAll();
-            
-            if (users.Count() == 0)
-            {
-                throw new NoUsersFoundException();
-            }
-            List<ReturnUserDTO> results = new List<ReturnUserDTO>();
-            foreach (var user in users)
-            {
-                results.Add(new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber });
-            }
-            return results;
-        }
+       
 
         public async Task<ReturnUserDTO> GetUserById(int id)
         {
             try
             {
                 var user = await _repository.GetById(id);
-                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber };
+                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID };
                 return returnUser;
             }
-            catch (Exception e)
+            catch (UserNotFoundException e)
             {
-                throw new UserNotFoundException();
+                throw new UserNotFoundException(e.Message);
             }
         }
 
@@ -122,9 +118,9 @@ namespace Job_Portal_API.Services
                 return returnUser;
 
             }
-                catch (Exception e)
+                catch (UserNotFoundException e)
                 {
-                    throw new UserNotFoundException();
+                    throw new UserNotFoundException(e.Message);
                 }
             }
         private User MapRegisterUserDTOToUser(RegisterUserDTO userDTO)
@@ -172,5 +168,40 @@ namespace Job_Portal_API.Services
         }
 
         
+
+        public  async Task<string> ChangePassword(int id, string oldPassword, string newPassword, string confirmPassword)
+        {
+            try
+            {
+                if(newPassword != confirmPassword)
+                {
+                    throw new ArgumentException("New Password and Confirm Password does not match");
+                }
+                var user = await _repository.GetById(id);
+                HMACSHA512 hMACSHA = new HMACSHA512(user.HashKey);
+                var encrypterPass = hMACSHA.ComputeHash(Encoding.UTF8.GetBytes(oldPassword));
+                bool isPasswordSame = ComparePassword(encrypterPass, user.Password);
+                if (isPasswordSame)
+                {
+                    user.Password = hMACSHA.ComputeHash(Encoding.UTF8.GetBytes(newPassword));
+                    user = await _repository.Update(user);
+                    return "Password Changed Successfully";
+                }
+                throw new UnauthorizedUserException("Invalid Password");
+
+            }
+            catch(ArgumentException e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+            catch(UserNotFoundException e)
+            {
+                throw new UserNotFoundException(e.Message);
+            }
+            catch (UnauthorizedUserException e)
+            {
+                throw new UnauthorizedUserException(e.Message);
+            }
+        }
     }
 }

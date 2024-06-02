@@ -106,5 +106,18 @@ namespace Job_Portal_API.Services
                 CompanyLocation = employer.CompanyLocation
             };
         }
+
+        public async Task<ReturnEmployerDTO> GetEmployerById(int id)
+        {
+            try
+            {
+                var employer = await _repository.GetById(id);
+                return await MapEmployeroDTO(employer);
+            }
+            catch (UserNotFoundException e)
+            {
+                throw new UserNotFoundException("Employer Not Exist!!");
+            }
+        }
     }
 }

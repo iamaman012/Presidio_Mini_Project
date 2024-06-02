@@ -21,22 +21,34 @@ namespace Job_Portal_API.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult<ReturnUserDTO>>Register(RegisterUserDTO user)
+        public async Task<IActionResult>Register(RegisterUserDTO userDTO)
         {
             if (ModelState.IsValid)
             {   
                 try
                 {
-                    var result = await _service.RegisterUser(user);
+                    var result = await _service.RegisterUser(userDTO);
+                   
                     return Ok(result);
                 }
-                catch (Exception e)
+                catch (UserAlreadyExistException e)
                 {
-                    return StatusCode(StatusCodes.Status409Conflict, e.Message);
+                    return Conflict(new ErrorModelDTO(409,e.Message));
+                }
+                catch (ArgumentException e)
+                {
+                    return BadRequest(new ErrorModelDTO(400,e.Message));
+                }
+                catch (Exception e)
+                {   var errorResponse = new ErrorModelDTO(500, e.Message);
+                    return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
                 }
             }
-            return BadRequest("All fields are required!!");
+            return BadRequest(new ErrorModelDTO(400,"All Fields are Required"));
         }
+
+       
+
         [HttpPost("Login")]
         public async Task<ActionResult<ReturnLoginDTO>> Login(LoginUserDTO userDTO)
         {
@@ -47,68 +59,101 @@ namespace Job_Portal_API.Controllers
                     var result = await _service.LoginUser(userDTO);
                     return Ok(result);
                 }
-                catch (UserNotFoundException e)
+                catch (UnauthorizedUserException e)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                    return NotFound(new ErrorModelDTO(404, e.Message));
+                }
+                catch (Exception e)
+                {
+                    var errorResponse = new ErrorModelDTO(500, e.Message);
+                    return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
                 }
             }
-            return BadRequest("All fields are required!!");
+            return BadRequest(new ErrorModelDTO(400, "All Fields are Required"));
         }
-        [Authorize(Roles = "Admin")]
-        [HttpGet("GetAllUsers")]
-        public async Task<ActionResult<IEnumerable<ReturnUserDTO>>> GetAllUsers()
+       
+       
+        [HttpDelete("DeleteUserById")]
+        public async Task<ActionResult<ReturnUserDTO>> DeleteUser(int userid)
         {
             try
             {
-                var result = await _service.GetAllUsers();
+                var result = await _service.DeleteUserById(userid);
                 return Ok(result);
+            }
+            catch (UserNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [Authorize]
-        [Authorize(Roles = "Employer,Admin,JobSeeker")]
-        [HttpDelete("DeleteUser/{id}")]
-        public async Task<ActionResult<ReturnUserDTO>> DeleteUser(int id)
+       
+        [HttpGet("GetUserById")]
+        public async Task<ActionResult<ReturnUserDTO>> GetUserById(int userid)
         {
             try
             {
-                var result = await _service.DeleteUserById(id);
+                var result = await _service.GetUserById(userid);
                 return Ok(result);
             }
             catch (UserNotFoundException e)
             {
-                return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [Authorize(Roles = "Employer,Admin,JobSeeker")]
-        [HttpPost("GetUserById")]
-        public async Task<ActionResult<ReturnUserDTO>> GetUserById(int id)
+        
+        [HttpPut("UpdateUserEmailByID")]
+        public async Task<ActionResult<ReturnUserDTO>> UpdateUserEmail(int userid, string email)
         {
             try
             {
-                var result = await _service.GetUserById(id);
+                var result = await _service.UpdateUserEmail(userid, email);
                 return Ok(result);
             }
             catch (UserNotFoundException e)
             {
-                return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [Authorize]
-        [HttpPut("UpdateUserEmail")]
-        public async Task<ActionResult<ReturnUserDTO>> UpdateUserEmail(int id, string email)
+        [HttpPut("ChangePassword")]
+        public async Task<ActionResult<ReturnUserDTO>> ChangePassword(int userid, string oldPassword, string newPassword, string confirmPassword)
         {
             try
             {
-                var result = await _service.UpdateUserEmail(id, email);
+                var result = await _service.ChangePassword(userid, oldPassword, newPassword, confirmPassword);
+
                 return Ok(result);
             }
             catch (UserNotFoundException e)
             {
-                return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(new ErrorModelDTO(400, e.Message));
+            }
+            catch (UnauthorizedUserException e)
+            {
+                return Unauthorized(new ErrorModelDTO(401, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
     }

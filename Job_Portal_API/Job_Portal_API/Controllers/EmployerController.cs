@@ -31,46 +31,86 @@ namespace Job_Portal_API.Controllers
                 }
                 catch (UserNotFoundException e)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                    return NotFound(new ErrorModelDTO(404, e.Message));
+                }
+                catch (UserAlreadyExistException e)
+                {
+                    return BadRequest(new ErrorModelDTO(400, e.Message));
+                }
+                catch (UserTypeNotAllowedException e)
+                {
+                    return BadRequest(new ErrorModelDTO(400, e.Message));
+                }
+                catch(Exception e)
+                {  var errorResponse = new ErrorModelDTO(500, e.Message);
+                    return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
                 }
             }
-            return BadRequest("All fields are required!!");
+            return BadRequest(new ErrorModelDTO(400,"All fields are Required!1"));
         }
         [Authorize(Roles = "Employer,Admin")]
         [HttpPut("UpdateCompanyDescription/{id}")]
-        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyDescription(int id, string companyDescription)
+        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyDescription(int employerId, string companyDescription)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _service.UpdateCompanyDescription(id, companyDescription);
+                    var result = await _service.UpdateCompanyDescription(employerId, companyDescription);
                     return Ok(result);
                 }
                 catch (UserNotFoundException e)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                    return NotFound(new ErrorModelDTO(404, e.Message));
+                }
+                catch (Exception e)
+                {
+                    var errorResponse = new ErrorModelDTO(500, e.Message);
+                    return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
                 }
             }
             return BadRequest("All fields are required!!");
         }
         [Authorize(Roles = "Employer,Admin")]
         [HttpPut("UpdateCompanyLocation/{id}")]
-        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyLocation(int id, string companyLocation)
+        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyLocation(int emoloyerId, string companyLocation)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _service.UpdateCompanyLocation(id, companyLocation);
+                    var result = await _service.UpdateCompanyLocation(emoloyerId, companyLocation);
                     return Ok(result);
                 }
                 catch (UserNotFoundException e)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, e.Message);
+                    return NotFound(new ErrorModelDTO(404, e.Message));
+                }
+                catch (Exception e)
+                {
+                    var errorResponse = new ErrorModelDTO(500, e.Message);
+                    return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
                 }
             }
             return BadRequest("All fields are required!!");
+        }
+        [HttpGet("GetEmployerById")]
+        public async Task<ActionResult<ReturnEmployerDTO>> GetEmployerById(int employerId)
+        {
+            try
+            {
+                var result = await _service.GetEmployerById(employerId);
+                return Ok(result);
+            }
+            catch (UserNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404,e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
         }
     }
 }
