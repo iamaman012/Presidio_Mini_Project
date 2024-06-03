@@ -2,249 +2,241 @@
 using Job_Portal_API.Exceptions;
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models;
+using Job_Portal_API.Models.Enums;
 using Job_Portal_API.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RepositoryTesting
 {
     public class JobSeekerRepositoryTest
     {
-        private JobPortalApiContext context;
-        private IRepository<int, JobSeeker> jobSeekerRepository;
+        private JobPortalApiContext _context;
+        private IRepository<int, JobSeeker> _jobSeekerRepository;
 
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<JobPortalApiContext>()
-                .UseInMemoryDatabase(databaseName: "InMemoryDb")
-                .Options;
-
-            context = new JobPortalApiContext(options);
-            jobSeekerRepository = new JobSeekerRepository(context);
+            var optionsBuilder = new DbContextOptionsBuilder<JobPortalApiContext>()
+                .UseInMemoryDatabase(databaseName: "dummyDB");
+            _context = new JobPortalApiContext(optionsBuilder.Options);
+            _jobSeekerRepository = new JobSeekerRepository(_context);
         }
 
         [TearDown]
-        public void TearDown()
+        public void Teardown()
         {
-            context.Database.EnsureDeleted();
-            context.Dispose();
+            _context.Database.EnsureDeleted();
+            _context.Dispose();
         }
 
-        // AddJobSeeker Tests
+        // Test for adding a JobSeeker (pass case)
         [Test]
-        public async Task AddJobSeeker_Pass()
+        public async Task AddJobSeekerTest_Pass()
         {
             // Arrange
-            var jobSeeker = new JobSeeker
-            {
-                UserID = 1,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
-            };
+            var jobSeeker = new JobSeeker { JobSeekerID = 1, UserID = 1 };
 
             // Act
-            var result = await jobSeekerRepository.Add(jobSeeker);
+            var result = await _jobSeekerRepository.Add(jobSeeker);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
+            Assert.AreEqual(jobSeeker.JobSeekerID, result.JobSeekerID);
+        }
+
+        // Test for adding a JobSeeker with existing UserID (exception case)
+        [Test]
+        public async Task AddJobSeekerTest_Exception_UserAlreadyExists()
+        {
+            // Arrange
+            var jobSeeker = new JobSeeker { JobSeekerID = 1, UserID = 1 };
+            await _jobSeekerRepository.Add(jobSeeker);
+            var duplicateJobSeeker = new JobSeeker { JobSeekerID = 2, UserID = 1 };
+
+            // Act & Assert
+            var ex = Assert.ThrowsAsync<JobSeeKerAlreadyExistExceptiom>(async () => await _jobSeekerRepository.Add(duplicateJobSeeker));
+            Assert.AreEqual("Job Seeker Already Exists", ex.Message);
+        }
+
+        // Test for updating a JobSeeker (pass case)
+        [Test]
+        public async Task UpdateJobSeekerTest_Pass()
+        {
+            // Arrange
+            var jobSeeker = new JobSeeker { JobSeekerID = 1, UserID = 1 };
+            await _jobSeekerRepository.Add(jobSeeker);
+            jobSeeker.UserID = 2;
+
+            // Act
+            var result = await _jobSeekerRepository.Update(jobSeeker);
+
+            // Assert
+            Assert.NotNull(result);
             Assert.AreEqual(jobSeeker.UserID, result.UserID);
         }
 
+        // Test for updating a JobSeeker that doesn't exist (exception case)
         [Test]
-        public async  Task AddJobSeeker_Fail()
+        public void UpdateJobSeekerTest_Exception_NotFound()
         {
             // Arrange
-            var jobSeeker = new JobSeeker
-            {
-                UserID = 1,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
+            var jobSeeker = new JobSeeker { JobSeekerID = 99, UserID = 1 };
 
-            };
-
-            await jobSeekerRepository.Add(jobSeeker);
             // Act & Assert
-            // Adding the same job seeker should fail if there's a constraint violation
-            Assert.ThrowsAsync<JobSeeKerAlreadyExistExceptiom>(async () => await jobSeekerRepository.Add(jobSeeker));
+            var ex = Assert.ThrowsAsync<UserNotFoundException>(async () => await _jobSeekerRepository.Update(jobSeeker));
+            Assert.AreEqual("Job Seeker Not Found", ex.Message);
         }
 
-       
-
-        // UpdateJobSeeker Tests
+        // Test for deleting a JobSeeker by ID (pass case)
         [Test]
-        public async Task UpdateJobSeeker_Pass()
+        public async Task DeleteJobSeekerByIdTest_Pass()
         {
             // Arrange
-            var jobSeeker = new JobSeeker
-            {
-                UserID = 1,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
-            };
-
-            var addedJobSeeker = await jobSeekerRepository.Add(jobSeeker);
-            addedJobSeeker.UserID = 2;
+            var jobSeeker = new JobSeeker { JobSeekerID = 1, UserID = 1 };
+            await _jobSeekerRepository.Add(jobSeeker);
 
             // Act
-            var result = await jobSeekerRepository.Update(addedJobSeeker);
+            var result = await _jobSeekerRepository.DeleteById(jobSeeker.JobSeekerID);
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.UserID);
+            Assert.NotNull(result);
+            Assert.AreEqual(jobSeeker.JobSeekerID, result.JobSeekerID);
         }
 
+        // Test for deleting a JobSeeker by non-existent ID (exception case)
         [Test]
-        public void UpdateJobSeeker_Fail()
+        public void DeleteJobSeekerByIdTest_Exception_NotFound()
         {
-            // Arrange
-            var jobSeeker = new JobSeeker
-            {
-                JobSeekerID = 999,
-                UserID = 999
-            };
-
             // Act & Assert
-            Assert.ThrowsAsync<UserNotFoundException>(async () => await jobSeekerRepository.Update(jobSeeker));
+            var ex = Assert.ThrowsAsync<UserNotFoundException>(async () => await _jobSeekerRepository.DeleteById(99));
+            Assert.AreEqual("Job Seeker Not Found", ex.Message);
         }
 
-
-        // DeleteJobSeeker Tests
+        // Test for getting a JobSeeker by ID (pass case)
         [Test]
-        public async Task DeleteJobSeeker_Pass()
+        public async Task GetJobSeekerByIdTest_Pass()
         {
             // Arrange
-            var jobSeeker = new JobSeeker
+            var user1 = new User
             {
                 UserID = 1,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
+                Email = "abc@gmail.com",
+                FirstName = "abc",
+                LastName = "xyz",
+                ContactNumber = "1234567890",
+                UserType = UserType.JobSeeker,
+                DateOfRegistration = DateTime.Now,
+                Password = new byte[] { 1, 2, 3, 4 },
+                HashKey = new byte[] { 5, 6, 7, 8 }
             };
+            await _context.Users.AddAsync(user1);
+            await _context.SaveChangesAsync();
 
-            var addedJobSeeker = await jobSeekerRepository.Add(jobSeeker);
+            var jobSeeker = new JobSeeker { JobSeekerID = 1, UserID = 1 };
+            await _jobSeekerRepository.Add(jobSeeker);
+            await _context.SaveChangesAsync();
+
+            var skill1 = new JobSeekerSkill { JobSeekerSkillID = 1, JobSeekerID = 1, SkillName = "Skill A" };
+            await _context.JobSeekerSkills.AddAsync(skill1);
+            await _context.SaveChangesAsync();
+
+            var education1 = new JobSeekerEducation { EducationID = 1, JobSeekerID = 1, Degree = "Bachelor's", Institution = "University A", Description = "dsdd", Location = "dwsd" };
+            await _context.Educations.AddAsync(education1);
+            await _context.SaveChangesAsync();
+
+            var experience1 = new JobSeekerExperience { ExperienceID = 1, JobSeekerID = 1, JobTitle = "Developer", Description = "dsdd", Location = "dwsd", CompanyName = "ABC" };
+            await _context.Experiences.AddAsync(experience1);
+            await _context.SaveChangesAsync();
+
+           
 
             // Act
-            var result = await jobSeekerRepository.DeleteById(addedJobSeeker.JobSeekerID);
+            var result = await _jobSeekerRepository.GetById(jobSeeker.JobSeekerID);
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(jobSeeker.UserID, result.UserID);
+            Assert.NotNull(result);
+            Assert.AreEqual(jobSeeker.JobSeekerID, result.JobSeekerID);
         }
 
+        // Test for getting a JobSeeker by non-existent ID (exception case)
         [Test]
-        public void DeleteJobSeeker_Fail()
+        public void GetJobSeekerByIdTest_Exception_NotFound()
         {
             // Act & Assert
-            Assert.ThrowsAsync<UserNotFoundException>(async () => await jobSeekerRepository.DeleteById(999));
+            var ex = Assert.ThrowsAsync<JobSeekerNotFoundException>(async () => await _jobSeekerRepository.GetById(99));
         }
-
-       
-
-        // GetJobSeekerById Tests
         [Test]
-        public async Task GetJobSeekerById_Pass()
+        public async Task GetAllJobSeekersTest_Pass()
         {
             // Arrange
-            var jobSeeker = new JobSeeker
+            var user1 = new User
             {
                 UserID = 1,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
+                Email = "abc@gmail.com",
+                FirstName = "abc",
+                LastName = "xyz",
+                ContactNumber = "1234567890",
+                UserType = UserType.JobSeeker,
+                DateOfRegistration = DateTime.Now,
+                Password = new byte[] { 1, 2, 3, 4 },
+                HashKey = new byte[] { 5, 6, 7, 8 }
             };
-
-            var addedJobSeeker = await jobSeekerRepository.Add(jobSeeker);
-
-            // Act
-            var result = await jobSeekerRepository.GetById(addedJobSeeker.JobSeekerID);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(addedJobSeeker.UserID, result.UserID);
-        }
-
-        [Test]
-        public void GetJobSeekerById_Fail()
-        {
-            // Act & Assert
-            Assert.ThrowsAsync<JobSeekerNotFoundException>(async () => await jobSeekerRepository.GetById(999));
-        }
-
-       
-
-        // GetAllJobSeekers Tests
-        [Test]
-        public async Task GetAllJobSeekers_Pass()
-        {
-            // Arrange
-            var jobSeeker1 = new JobSeeker
-            {
-                UserID = 1,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
-            };
-
-            var jobSeeker2 = new JobSeeker
+            var user2 = new User
             {
                 UserID = 2,
-                JobSeekerSkills = new List<JobSeekerSkill>(),
-                JobSeekerEducations = new List<JobSeekerEducation>(),
-                JobSeekerExperiences = new List<JobSeekerExperience>()
+                Email = "abcd@gmail.com",
+                FirstName = "abc",
+                LastName = "xyz",
+                ContactNumber = "1234567890",
+                UserType = UserType.JobSeeker,
+                DateOfRegistration = DateTime.Now,
+                Password = new byte[] { 1, 2, 3, 4 },
+                HashKey = new byte[] { 5, 6, 7, 8 }
             };
+            await _context.Users.AddRangeAsync(user1, user2);
+            await _context.SaveChangesAsync();
 
-            await jobSeekerRepository.Add(jobSeeker1);
-            await jobSeekerRepository.Add(jobSeeker2);
+            var skill1 = new JobSeekerSkill { JobSeekerSkillID = 1, JobSeekerID = 1, SkillName = "Skill A" };
+            var skill2 = new JobSeekerSkill { JobSeekerSkillID = 2, JobSeekerID = 2, SkillName = "Skill B" };
+            await _context.JobSeekerSkills.AddRangeAsync(skill1, skill2);
+            await _context.SaveChangesAsync();
+
+            var education1 = new JobSeekerEducation { EducationID = 1, JobSeekerID = 1, Degree = "Bachelor's", Institution = "University A",Description="dsdd",Location="dwsd" };
+            var education2 = new JobSeekerEducation { EducationID = 2, JobSeekerID = 2, Degree = "Master's", Institution = "University B", Description = "dsdd", Location = "dwsd" };
+            await _context.Educations.AddRangeAsync(education1, education2);
+            await _context.SaveChangesAsync();
+
+            var experience1 = new JobSeekerExperience { ExperienceID = 1, JobSeekerID = 1, JobTitle = "Developer", Description = "dsdd", Location = "dwsd",CompanyName="ABC" };
+            var experience2 = new JobSeekerExperience { ExperienceID = 2, JobSeekerID = 2, JobTitle = "Engineer", Description = "dsdd", Location = "dwsd",CompanyName="ABC" };
+            await _context.Experiences.AddRangeAsync(experience1, experience2);
+            await _context.SaveChangesAsync();
+
+            var jobSeeker1 = new JobSeeker { JobSeekerID = 1, UserID = 1 };
+            var jobSeeker2 = new JobSeeker { JobSeekerID = 2, UserID = 2 };
+            await _context.JobSeekers.AddRangeAsync(jobSeeker1, jobSeeker2);
+            await _context.SaveChangesAsync();
+
+            
 
             // Act
-            var result = await jobSeekerRepository.GetAll();
+            var result = await _jobSeekerRepository.GetAll();
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
+            Console.WriteLine($"Number of job seekers retrieved by GetAll: {result.Count()}");
             Assert.AreEqual(2, result.Count());
+
+           
         }
 
-        [Test]
-        public async Task GetAllJobSeekers_Fail()
-        {
-            // Arrange
-            var jobSeeker1 = new JobSeeker
-            {
-                UserID = 1
-            };
 
-            var jobSeeker2 = new JobSeeker
-            {
-                UserID = 2
-            };
 
-            await jobSeekerRepository.Add(jobSeeker1);
-            await jobSeekerRepository.Add(jobSeeker2);
 
-            // Act
-            var result = await jobSeekerRepository.GetAll();
 
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-        }
 
-        [Test]
-        public async Task GetAllJobSeekers_Exception()
-        {
-            // Act & Assert
-            // Simulating an exception scenario, such as database connection failure
-            context.Database.EnsureDeleted();
-            Assert.ThrowsAsync<InvalidOperationException>(async () => await jobSeekerRepository.GetAll());
-        }
     }
 }

@@ -27,12 +27,6 @@ namespace Job_Portal_API.Repositories
             
 
 
-            //foreach (var skill in result.JobSkills)
-            //{
-            //    skill.JobID = result.JobID;
-            //    await _context.JobSkills.AddAsync(skill);
-            //    await _context.SaveChangesAsync();
-            //}
             return result;
            
 

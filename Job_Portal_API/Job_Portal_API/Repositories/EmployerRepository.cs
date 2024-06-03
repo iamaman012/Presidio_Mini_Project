@@ -17,13 +17,17 @@ namespace Job_Portal_API.Repositories
         public  async Task<Employer> Add(Employer entity)
         {
             try
-            {
+            {   var employer = _context.Employers.FirstOrDefault(e => e.UserID == entity.UserID);
+                if(employer != null)
+                {
+                    throw new UserAlreadyExistException("Employer Already Exist");
+                }
                 await _context.Employers.AddAsync(entity);
                 await _context.SaveChangesAsync();
-                var result = _context.Employers.FirstOrDefault(e => e.UserID == entity.UserID);
-                return result;
+               
+                return entity;
             }
-            catch (Exception e)
+            catch (UserAlreadyExistException e)
             {
                 throw new UserAlreadyExistException("Employer Already Exist");
             }

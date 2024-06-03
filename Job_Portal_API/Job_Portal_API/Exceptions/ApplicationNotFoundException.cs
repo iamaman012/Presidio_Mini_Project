@@ -3,7 +3,7 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    internal class ApplicationNotFoundException : Exception
+    public class ApplicationNotFoundException : Exception
     {
         public string message;
         public ApplicationNotFoundException()

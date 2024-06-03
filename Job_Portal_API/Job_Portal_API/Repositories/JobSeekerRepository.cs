@@ -18,15 +18,15 @@ namespace Job_Portal_API.Repositories
         public async Task<JobSeeker> Add(JobSeeker entity)
         {
 
-            var jobSeeker = _context.JobSeekers.Where(js => js.UserID == entity.UserID);
-            if(jobSeeker!=null)
+            var jobSeeker = await _context.JobSeekers.FirstOrDefaultAsync(js => js.UserID == entity.UserID);
+            if (jobSeeker != null)
             {
-                throw new JobSeeKerAlreadyExistExceptiom("JOb Seeker Alread Exist");
+                throw new JobSeeKerAlreadyExistExceptiom("Job Seeker Already Exists");
             }
             await _context.JobSeekers.AddAsync(entity);
             await _context.SaveChangesAsync();
-            var jobSeeker= await _context.JobSeekers.FirstOrDefaultAsync(js=>js.UserID==entity.UserID);
-            return jobSeeker;
+            var result = await _context.JobSeekers.FirstOrDefaultAsync(js => js.UserID == entity.UserID);
+            return result;
         }
 
         public async Task<JobSeeker> Update(JobSeeker entity)
@@ -76,6 +76,7 @@ namespace Job_Portal_API.Repositories
                .Include(js => js.JobSeekerSkills)
                .Include(js => js.JobSeekerEducations)
                .Include(js => js.JobSeekerExperiences).ToListAsync();
+           
             return jobSeekers;
         }
     }

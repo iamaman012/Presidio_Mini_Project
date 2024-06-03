@@ -3,7 +3,7 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    internal class JobListingNotFoundException : Exception
+    public class JobListingNotFoundException : Exception
     {
         public string mesg;
         public JobListingNotFoundException()

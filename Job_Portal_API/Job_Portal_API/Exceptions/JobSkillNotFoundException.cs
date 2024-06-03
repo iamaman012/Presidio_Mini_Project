@@ -3,15 +3,15 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    public class ExperienceNotFoundException : Exception
+    public class JobSkillNotFoundException : Exception
     {
         public string message;
-        public ExperienceNotFoundException()
+        public JobSkillNotFoundException()
         {
-            message = "Experience not found in the database";
+            message = "JobSkill not found";
         }
 
-        public ExperienceNotFoundException(string? message)
+        public JobSkillNotFoundException(string? message)
         {
             this.message = message;
         }

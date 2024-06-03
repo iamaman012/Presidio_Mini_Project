@@ -3,7 +3,7 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    internal class JobSeeKerAlreadyExistExceptiom : Exception
+    public class JobSeeKerAlreadyExistExceptiom : Exception
     {
         public string message;
         public JobSeeKerAlreadyExistExceptiom()
