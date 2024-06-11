@@ -3,7 +3,7 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    internal class UserTypeNotAllowedException : Exception
+    public class UserTypeNotAllowedException : Exception
     {
         public string message;
         public UserTypeNotAllowedException()

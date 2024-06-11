@@ -6,6 +6,7 @@ using Job_Portal_API.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_API.Controllers
 {
@@ -71,13 +72,13 @@ namespace Job_Portal_API.Controllers
             }
             return BadRequest(new ErrorModelDTO(400, "All Fields are Required"));
         }
-       
-       
+
+        [Authorize]
         [HttpDelete("DeleteUserById")]
-        public async Task<ActionResult<ReturnUserDTO>> DeleteUser(int userid)
+        public async Task<ActionResult<ReturnUserDTO>> DeleteUser([Required]int userid)
         {
             try
-            {
+            {   
                 var result = await _service.DeleteUserById(userid);
                 return Ok(result);
             }
@@ -91,9 +92,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-       
+        [Authorize]
         [HttpGet("GetUserById")]
-        public async Task<ActionResult<ReturnUserDTO>> GetUserById(int userid)
+        public async Task<ActionResult<ReturnUserDTO>> GetUserById([Required]int userid)
         {
             try
             {
@@ -110,9 +111,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        
+        [Authorize]
         [HttpPut("UpdateUserEmailByID")]
-        public async Task<ActionResult<ReturnUserDTO>> UpdateUserEmail(int userid, string email)
+        public async Task<ActionResult<ReturnUserDTO>> UpdateUserEmail([Required]int userid, [Required,EmailAddress]string email)
         {
             try
             {
@@ -129,8 +130,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize]
         [HttpPut("ChangePassword")]
-        public async Task<ActionResult<ReturnUserDTO>> ChangePassword(int userid, string oldPassword, string newPassword, string confirmPassword)
+        public async Task<ActionResult<ReturnUserDTO>> ChangePassword([Required] int userid, [Required] string oldPassword,[Required] string newPassword, [Required]string confirmPassword)
         {
             try
             {

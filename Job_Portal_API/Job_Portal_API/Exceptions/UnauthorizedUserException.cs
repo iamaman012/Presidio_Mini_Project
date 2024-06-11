@@ -3,7 +3,7 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    internal class UnauthorizedUserException : Exception
+    public class UnauthorizedUserException : Exception
     {
         public string message;
         public UnauthorizedUserException()

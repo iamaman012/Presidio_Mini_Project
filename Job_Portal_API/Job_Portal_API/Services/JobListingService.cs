@@ -14,15 +14,17 @@ namespace Job_Portal_API.Services
         private readonly IRepository<int, Employer> _employerRepository;
         private readonly IRepository<int, Application> _applicationRepository;
         private readonly IRepository<int, JobSeeker> _jobSeekerRepository;
-        private readonly IUser _userService;
+        private readonly IRepository<int, User> _userRepository;
+        
 
-        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IUser userService,IRepository<int,JobSeeker> jobSeekerRepository)
+        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IRepository<int,User> userRepository,IRepository<int,JobSeeker> jobSeekerRepository)
         {
             _jobListingRepository = jobListingRepository;
             _employerRepository = employerRepository;
             _applicationRepository = applicationRepository;
             _jobSeekerRepository = jobSeekerRepository;
-            _userService = userService;
+            _userRepository = userRepository;
+         
 
         }
 
@@ -60,7 +62,7 @@ namespace Job_Portal_API.Services
                 PostingDate = jobListing.PostingDate,
                 ClosingDate = jobListing.ClosingDate,
                 EmployerID = jobListing.EmployerID,
-                Skills = jobListing.JobSkills.Select(skill => new JobSkillDTO { SkillName = skill.SkillName }).ToList()
+                Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID, SkillName = skill.SkillName }).ToList()
             };
             return result;
         }
@@ -80,9 +82,9 @@ namespace Job_Portal_API.Services
             {
                 throw new UserNotFoundException(e.Message);
             }
-            catch(Exception e)
+            catch(ArgumentException e)
             {
-                throw new Exception(e.Message);
+                throw new ArgumentException(e.Message);
             }
 
 
@@ -107,7 +109,7 @@ namespace Job_Portal_API.Services
                 PostingDate = jobListing.PostingDate,
                 ClosingDate = jobListing.ClosingDate,
                 EmployerID = jobListing.EmployerID,
-                Skills = jobListing.JobSkills.Select(skill => new JobSkillDTO { SkillName = skill.SkillName }).ToList()
+                Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID, SkillName = skill.SkillName }).ToList()
             });
         }
 
@@ -127,7 +129,7 @@ namespace Job_Portal_API.Services
                     PostingDate = jobListing.PostingDate,
                     ClosingDate = jobListing.ClosingDate,
                     EmployerID = jobListing.EmployerID,
-                    Skills = jobListing.JobSkills.Select(skill => new JobSkillDTO { SkillName = skill.SkillName }).ToList()
+                    Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID,SkillName = skill.SkillName }).ToList()
                 };
             }
             catch(JobListingNotFoundException e)
@@ -161,7 +163,7 @@ namespace Job_Portal_API.Services
                     PostingDate = jobListing.PostingDate,
                     ClosingDate = jobListing.ClosingDate,
                     EmployerID = jobListing.EmployerID,
-                    Skills = jobListing.JobSkills.Select(skill => new JobSkillDTO { SkillName = skill.SkillName }).ToList()
+                    Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID=skill.JobSkillID,SkillName = skill.SkillName }).ToList()
                 });
             }
             catch(UserNotFoundException e)
@@ -332,7 +334,7 @@ namespace Job_Portal_API.Services
                     PostingDate = job.PostingDate,
                     ClosingDate = job.ClosingDate,
                     EmployerID = job.EmployerID,
-                    Skills = job.JobSkills.Select(skill => new JobSkillDTO { SkillName = skill.SkillName }).ToList()
+                    Skills = job.JobSkills.Select(skill => new JobSkillResponseDTO { SkillName = skill.SkillName }).ToList()
                 };
                 
             }
@@ -349,8 +351,18 @@ namespace Job_Portal_API.Services
             {
                 var jobSeeker = await _jobSeekerRepository.GetById(jobSeekerId);
                 var userId = jobSeeker.UserID;
-                var result = await _userService.GetUserById(userId);
-                return result;
+                var result = await _userRepository.GetById(userId);
+                var userDto = new ReturnUserDTO
+                {
+                    UserID = result.UserID,
+                    JobSeekerID = result.JobSeeker?.JobSeekerID,
+                    Email = result.Email,
+                    Role = result.UserType.ToString(),
+                    Name = result.FirstName + " " + result.LastName,
+                    ContactNumber = result.ContactNumber
+
+                };
+                return userDto;
 
             }
             catch (JobSeekerNotFoundException e)
@@ -362,5 +374,7 @@ namespace Job_Portal_API.Services
                 throw new UserNotFoundException(e.Message);
             }
         }
+
+      
     }
 }

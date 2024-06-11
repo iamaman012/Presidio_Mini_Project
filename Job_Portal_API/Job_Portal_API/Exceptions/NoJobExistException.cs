@@ -3,7 +3,7 @@
 namespace Job_Portal_API.Exceptions
 {
     [Serializable]
-    internal class NoJobExistException : Exception
+    public class NoJobExistException : Exception
     {   
         public string message;
         public NoJobExistException()

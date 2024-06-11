@@ -26,7 +26,7 @@ namespace Job_Portal_API.Services
             try
             {
                 var applications = await _applicationRepository.GetAll();
-                var existApplication = applications.Where(ap => ap.JobSeekerID == jobSeekerID && ap.JobID == jobID);
+                var existApplication = applications.FirstOrDefault(ap => ap.JobSeekerID == jobSeekerID && ap.JobID == jobID);
                 if (existApplication != null) throw new ApplicationAlreadyExistException("Application Already Exist");
                 var jobListing = await _jobListingRepository.GetById(jobID);
                 var jobSeeker = await _jobSeekerRepository.GetById(jobSeekerID);
@@ -65,7 +65,8 @@ namespace Job_Portal_API.Services
                 ApplicationID = application.ApplicationID,
                 JobID = application.JobID,
                 JobSeekerID = application.JobSeekerID,
-                Status = application.Status
+                Status = application.Status,
+                ApplicationDate = application.ApplicationDate
             };
         }
 

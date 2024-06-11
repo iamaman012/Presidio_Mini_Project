@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Job_Portal_API", "Job_Portal_API\Job_Portal_API.csproj", "{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryTesting", "RepositoryTesting\RepositoryTesting.csproj", "{AF33A89A-8E85-4701-AA09-E3536E94D791}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryTesting", "RepositoryTesting\RepositoryTesting.csproj", "{AF33A89A-8E85-4701-AA09-E3536E94D791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesTest", "ServicesTest\ServicesTest.csproj", "{6CCAA5BC-5A86-4881-BD11-EE6F23B39871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AF33A89A-8E85-4701-AA09-E3536E94D791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF33A89A-8E85-4701-AA09-E3536E94D791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF33A89A-8E85-4701-AA09-E3536E94D791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CCAA5BC-5A86-4881-BD11-EE6F23B39871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCAA5BC-5A86-4881-BD11-EE6F23B39871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCAA5BC-5A86-4881-BD11-EE6F23B39871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCAA5BC-5A86-4881-BD11-EE6F23B39871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

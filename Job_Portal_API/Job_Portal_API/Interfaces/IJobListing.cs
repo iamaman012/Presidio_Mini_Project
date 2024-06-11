@@ -19,6 +19,7 @@ namespace Job_Portal_API.Interfaces
         public Task<ApplicationResponseDTO> UpdateApplicationStatus(int applicationId,string status);
         public Task<JobListingResponseDTO> DeleteJobListingById(int jobID);
         public Task<ReturnUserDTO> GetJobSeekerContactInformation(int jobSeekerId);
+      
 
 
 

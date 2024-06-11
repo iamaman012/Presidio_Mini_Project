@@ -13,6 +13,7 @@ namespace Job_Portal_API.Models.DTOs
         public DateTime PostingDate { get; set; }
         public DateTime ClosingDate { get; set; }
         public int EmployerID { get; set; }
-        public List<JobSkillDTO> Skills { get; set; }
+        public List<JobSkillResponseDTO> Skills { get; set; }
+
     }
 }

@@ -5,6 +5,7 @@ using Job_Portal_API.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_API.Controllers
 {
@@ -18,7 +19,7 @@ namespace Job_Portal_API.Controllers
         {
             _service = service;
         }
-        [Authorize(Roles = "Employer,Admin")]
+        [Authorize(Roles = "Employer")]
         [HttpPost("AddEmployerDetails")]
         public async Task<ActionResult<ReturnEmployerDTO>> CreateEmployerDetails(AddEmployerDTO employer)
         {
@@ -48,9 +49,9 @@ namespace Job_Portal_API.Controllers
             }
             return BadRequest(new ErrorModelDTO(400,"All fields are Required!1"));
         }
-        [Authorize(Roles = "Employer,Admin")]
-        [HttpPut("UpdateCompanyDescription/{id}")]
-        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyDescription(int employerId, string companyDescription)
+        [Authorize(Roles = "Employer")]
+        [HttpPut("UpdateCompanyDescription")]
+        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyDescription([Required]int employerId,[Required] string companyDescription)
         {
             if (ModelState.IsValid)
             {
@@ -71,9 +72,9 @@ namespace Job_Portal_API.Controllers
             }
             return BadRequest("All fields are required!!");
         }
-        [Authorize(Roles = "Employer,Admin")]
-        [HttpPut("UpdateCompanyLocation/{id}")]
-        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyLocation(int emoloyerId, string companyLocation)
+        [Authorize(Roles = "Employer")]
+        [HttpPut("UpdateCompanyLocation")]
+        public async Task<ActionResult<ReturnEmployerDTO>> UpdateCompanyLocation([Required]int emoloyerId,[Required]string companyLocation)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +95,9 @@ namespace Job_Portal_API.Controllers
             }
             return BadRequest("All fields are required!!");
         }
+        [Authorize(Roles = "Employer")]
         [HttpGet("GetEmployerById")]
-        public async Task<ActionResult<ReturnEmployerDTO>> GetEmployerById(int employerId)
+        public async Task<ActionResult<ReturnEmployerDTO>> GetEmployerById([Required] int employerId)
         {
             try
             {

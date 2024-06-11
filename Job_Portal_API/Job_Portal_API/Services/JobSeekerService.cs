@@ -115,7 +115,7 @@ namespace Job_Portal_API.Services
                 JobSeekerID = jobSeeker.JobSeekerID,
                 UserID = jobSeeker.UserID,
                
-                Skills = jobSeeker.JobSeekerSkills.Select(skill => new JobSeekerSkillResponseDTO { SkillName = skill.SkillName }).ToList(),
+                Skills = jobSeeker.JobSeekerSkills.Select(skill => new JobSeekerSkillResponseDTO {SkillID=skill.JobSeekerSkillID, SkillName = skill.SkillName }).ToList(),
                 Educations = jobSeeker.JobSeekerEducations.Select(edu => new EducationResponseDTO
                 {
                     EducationID = edu.EducationID,
@@ -156,7 +156,7 @@ namespace Job_Portal_API.Services
 
                 return addedJobSeekerSkills.Select(skill => new JobSeekerSkillResponseDTO
                 {
-
+                    SkillID=skill.JobSeekerSkillID,
                     SkillName = skill.SkillName
                 });
             }
@@ -236,7 +236,11 @@ namespace Job_Portal_API.Services
             try
             {
                 var jobSeeker = await _jobSeekerRepo.GetById(educationDTO.JobSeekerID);
-                var education = await _educationRepository.GetById(educationDTO.EducationID);
+                var education = jobSeeker.JobSeekerEducations.FirstOrDefault(edu => edu.EducationID == educationDTO.EducationID);
+                if (education==null)
+                {
+                    throw new EducationNotFoundException();  
+                }
                 education.Degree=educationDTO.Degree;
                 education.Institution = educationDTO.Institution;
                 education.Location = educationDTO.Location;
@@ -273,8 +277,12 @@ namespace Job_Portal_API.Services
         {
             try
             {
-                var experience = await _experienceRepository.GetById(experienceDTO.ExperienceID);
+                
                 var jobSeeker =  await _jobSeekerRepo.GetById(experienceDTO.JobSeekerID);
+                var experience = jobSeeker.JobSeekerExperiences.FirstOrDefault(exp => exp.ExperienceID == experienceDTO.ExperienceID);
+                if (experience==null)
+                {
+                    throw new ExperienceNotFoundException();              }
                 experience.JobTitle = experienceDTO.JobTitle;
                 experience.CompanyName = experienceDTO.CompanyName;
                 experience.Location = experienceDTO.Location;
@@ -299,7 +307,12 @@ namespace Job_Portal_API.Services
             try
             {
                 var jobSeeker = await _jobSeekerRepo.GetById(jobSeekerId);
-                var jobSeekerSkill = await _jobSeekerSkillRepository.GetById(skillId);
+
+                var jobSeekerSkill = jobSeeker.JobSeekerSkills.FirstOrDefault(skill => skill.JobSeekerSkillID == skillId);
+                if(jobSeekerSkill == null)
+                {
+                    throw new JobSeekerSkillNotFoundException("Skill not found");
+                }
                 jobSeekerSkill.SkillName = skillName;
                 await _jobSeekerSkillRepository.Update(jobSeekerSkill);
                 var result = new UpdateSkillDTO

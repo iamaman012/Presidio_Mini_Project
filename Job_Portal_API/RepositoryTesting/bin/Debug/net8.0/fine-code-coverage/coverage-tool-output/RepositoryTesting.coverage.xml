@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.4818" branch-rate="0.4264" version="1.9" timestamp="1717421761" lines-covered="1716" lines-valid="3561" branches-covered="58" branches-valid="136">
+<coverage line-rate="0.4805" branch-rate="0.4202" version="1.9" timestamp="1717502518" lines-covered="1716" lines-valid="3571" branches-covered="58" branches-valid="138">
   <sources>
     <source>C:\Users\VC\</source>
   </sources>
   <packages>
-    <package name="Job_Portal_API" line-rate="0.23579999999999998" branch-rate="0.4264" complexity="504">
+    <package name="Job_Portal_API" line-rate="0.2348" branch-rate="0.4202" complexity="505">
       <classes>
         <class name="Job_Portal_API.Program" filename="Desktop\Presidio_mini_Project\Job_Portal_API\Job_Portal_API\Program.cs" line-rate="0" branch-rate="0" complexity="2">
           <methods>
@@ -1071,7 +1071,7 @@
                 <line number="66" hits="0" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.JobListing&gt;,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.Employer&gt;,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.Application&gt;,Job_Portal_API.Interfaces.IUser,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.JobSeeker&gt;)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="(Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.JobListing&gt;,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.Employer&gt;,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.Application&gt;,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.User&gt;,Job_Portal_API.Interfaces.IRepository`2&lt;System.Int32,Job_Portal_API.Models.JobSeeker&gt;)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="19" hits="0" branch="False" />
                 <line number="20" hits="0" branch="False" />
@@ -1758,23 +1758,37 @@
             <line number="295" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Job_Portal_API.Services.JobListingService/&lt;GetJobSeekerContactInformation&gt;d__19" filename="Desktop\Presidio_mini_Project\Job_Portal_API\Job_Portal_API\Services\JobListingService.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="Job_Portal_API.Services.JobListingService/&lt;GetJobSeekerContactInformation&gt;d__19" filename="Desktop\Presidio_mini_Project\Job_Portal_API\Job_Portal_API\Services\JobListingService.cs" line-rate="0" branch-rate="0" complexity="2">
           <methods>
-            <method name="MoveNext" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="MoveNext" signature="()" line-rate="0" branch-rate="0" complexity="2">
               <lines>
                 <line number="347" hits="0" branch="False" />
                 <line number="349" hits="0" branch="False" />
                 <line number="350" hits="0" branch="False" />
                 <line number="351" hits="0" branch="False" />
                 <line number="352" hits="0" branch="False" />
-                <line number="353" hits="0" branch="False" />
+                <line number="353" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="365" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="354" hits="0" branch="False" />
+                <line number="355" hits="0" branch="False" />
                 <line number="356" hits="0" branch="False" />
                 <line number="357" hits="0" branch="False" />
                 <line number="358" hits="0" branch="False" />
+                <line number="359" hits="0" branch="False" />
                 <line number="360" hits="0" branch="False" />
                 <line number="361" hits="0" branch="False" />
                 <line number="362" hits="0" branch="False" />
-                <line number="364" hits="0" branch="False" />
+                <line number="363" hits="0" branch="False" />
+                <line number="366" hits="0" branch="False" />
+                <line number="367" hits="0" branch="False" />
+                <line number="368" hits="0" branch="False" />
+                <line number="370" hits="0" branch="False" />
+                <line number="371" hits="0" branch="False" />
+                <line number="372" hits="0" branch="False" />
+                <line number="374" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
@@ -1784,14 +1798,28 @@
             <line number="350" hits="0" branch="False" />
             <line number="351" hits="0" branch="False" />
             <line number="352" hits="0" branch="False" />
-            <line number="353" hits="0" branch="False" />
+            <line number="353" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="365" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="354" hits="0" branch="False" />
+            <line number="355" hits="0" branch="False" />
             <line number="356" hits="0" branch="False" />
             <line number="357" hits="0" branch="False" />
             <line number="358" hits="0" branch="False" />
+            <line number="359" hits="0" branch="False" />
             <line number="360" hits="0" branch="False" />
             <line number="361" hits="0" branch="False" />
             <line number="362" hits="0" branch="False" />
-            <line number="364" hits="0" branch="False" />
+            <line number="363" hits="0" branch="False" />
+            <line number="366" hits="0" branch="False" />
+            <line number="367" hits="0" branch="False" />
+            <line number="368" hits="0" branch="False" />
+            <line number="370" hits="0" branch="False" />
+            <line number="371" hits="0" branch="False" />
+            <line number="372" hits="0" branch="False" />
+            <line number="374" hits="0" branch="False" />
           </lines>
         </class>
         <class name="Job_Portal_API.Services.JobListingService/&lt;UpdateApplicationStatus&gt;d__17" filename="Desktop\Presidio_mini_Project\Job_Portal_API\Job_Portal_API\Services\JobListingService.cs" line-rate="0" branch-rate="1" complexity="1">

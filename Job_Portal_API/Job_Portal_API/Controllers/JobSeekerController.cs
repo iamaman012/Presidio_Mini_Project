@@ -2,8 +2,10 @@
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models.DTOs;
 using Job_Portal_API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_API.Controllers
 {
@@ -21,6 +23,7 @@ namespace Job_Portal_API.Controllers
         }
 
         // Endpoint to add a new job seeker experience
+        [Authorize(Roles ="JobSeeker")]
         [HttpPost("AddExperience")]
         public async Task<IActionResult> AddExperience( ExperienceDTO experienceDTO)
         {
@@ -43,6 +46,7 @@ namespace Job_Portal_API.Controllers
         }
 
         // Endpoint to add a new job seeker education
+        [Authorize(Roles = "JobSeeker")]
         [HttpPost("AddEducation")]
         public async Task<IActionResult> AddEducation([FromBody] EducationDTO educationDTO)
         {
@@ -66,8 +70,10 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetResumeById")]
-        public async Task<IActionResult> GetResumeById(int jobSeekerId)
+        
+        public async Task<IActionResult> GetResumeById([Required]int jobSeekerId)
         {
             try
             {
@@ -84,11 +90,15 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpPost("AddSkills")]
         public async Task<IActionResult> AddJobSeekerSkills([FromBody] JobSeekerSkillDTO jobSeekerSkillDto)
         {
             try
-            {
+            {   if(jobSeekerSkillDto.SkillNames.Count == 0)
+                {
+                    return BadRequest(new ErrorModelDTO(400, "Skill Name is Required"));
+                }
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
@@ -108,12 +118,12 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-           
 
-            
-        
+
+
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetApplicationsByJobSeekerID")]
-        public async Task<IActionResult> GetApplicationFilteredByJobSeekerID(int jobSeekerID)
+        public async Task<IActionResult> GetApplicationFilteredByJobSeekerID( [Required]int jobSeekerID)
         {
             try
             {
@@ -134,8 +144,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpDelete("DeleteExperienceById")]
-        public async Task<IActionResult> DeleteExperienceById(int experienceId)
+        public async Task<IActionResult> DeleteExperienceById([Required]int experienceId)
         {
             try
             {
@@ -153,8 +164,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpDelete("DeleteEducationById")]
-        public async Task<IActionResult> DeleteEducationById(int educationId)
+        public async Task<IActionResult> DeleteEducationById([Required] int educationId)
         {
             try
             {
@@ -172,8 +184,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpDelete("DeleteSkillById")]
-        public async Task<IActionResult> DeleteSkillById(int skillId)
+        public async Task<IActionResult> DeleteSkillById([Required] int skillId)
         {
             try
             {
@@ -191,6 +204,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpPut("UpdateEducation")]
         public async Task<IActionResult> UpdateEducation(EducationResponseDTO educationDTO)
         {
@@ -214,6 +228,7 @@ namespace Job_Portal_API.Controllers
             }
 
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpPut("UpdateExperience")]
         public async Task<IActionResult> UpdateExperience(ExperienceResponseDTO experienceDTO)
         {
@@ -237,8 +252,9 @@ namespace Job_Portal_API.Controllers
             }
 
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpPut("UpdateSkill")]
-        public async Task<IActionResult> UpdateSkill(int jobSeekerId,int skillId,string skillName)
+        public async Task<IActionResult> UpdateSkill([Required] int jobSeekerId,[Required]int skillId,[Required]string skillName)
         {
             try
             {

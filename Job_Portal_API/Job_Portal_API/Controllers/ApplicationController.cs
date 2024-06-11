@@ -1,8 +1,10 @@
 ﻿using Job_Portal_API.Exceptions;
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_API.Controllers
 {
@@ -17,9 +19,9 @@ namespace Job_Portal_API.Controllers
             _applicationService = applicationService;
             _jobListingService = jobListingService;
         }
-
+        [Authorize(Roles = "JobSeeker")]
         [HttpPost("ApplyForJob")]
-        public async Task<IActionResult> SubmitApplication( int jobSeekerID,int jobID)
+        public async Task<IActionResult> SubmitApplication([Required] int jobSeekerID,[Required]int jobID)
         {
 
             try
@@ -45,7 +47,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetAllJobs")]
         public async Task<IActionResult> GetAllJobs()
         {
@@ -64,8 +66,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetJobsFilterByLocation")]
-        public async Task<IActionResult> GetJobsFilterByLocation( string location)
+        public async Task<IActionResult> GetJobsFilterByLocation([Required] string location)
         {
             try
             {
@@ -82,9 +85,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetJobsFilterBySalary")]
-        public async Task<IActionResult> GetJobsFilterBySalary(double sRange,double eRange)
+        public async Task<IActionResult> GetJobsFilterBySalary([Required] double sRange,[Required] double eRange)
         {
             try
             {
@@ -101,8 +104,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetJobsFilterByJobTitle")]
-        public async Task<IActionResult> GetJobsFilterByTitle(string jobTitle)
+        public async Task<IActionResult> GetJobsFilterByTitle([Required] string jobTitle)
         {
             try
             {
@@ -119,8 +123,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetJobsFilterByJobType")]
-        public async Task<IActionResult> GetJobsFilterByJobType(string jobType)
+        public async Task<IActionResult> GetJobsFilterByJobType([Required] string jobType)
         {
             try
             {
@@ -141,6 +146,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetApplicationStatus")]
         public async Task<IActionResult> GetApplicationStatus(int applicationId)
         {
@@ -159,8 +165,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpGet("GetApplicationFilteredByJobSeekerID")]
-        public async Task<IActionResult> GetApplicationFilteredByJobSeekerID(int jobSeekerID)
+        public async Task<IActionResult> GetApplicationFilteredByJobSeekerID([Required] int jobSeekerID)
         {
             try
             {
@@ -181,8 +188,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "JobSeeker")]
         [HttpDelete("DeleteApplicationById")]
-        public async Task<IActionResult> DeleteApplicationById(int applicationId)
+        public async Task<IActionResult> DeleteApplicationById([Required] int applicationId)
         {
             try
             {

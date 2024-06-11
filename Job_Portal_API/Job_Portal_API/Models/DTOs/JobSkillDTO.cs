@@ -2,6 +2,7 @@
 {
     public class JobSkillDTO
     {
+        
         public string SkillName { get; set; }
     }
 }

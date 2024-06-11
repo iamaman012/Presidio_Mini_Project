@@ -1,8 +1,10 @@
 ﻿using Job_Portal_API.Exceptions;
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_API.Controllers
 {
@@ -21,6 +23,7 @@ namespace Job_Portal_API.Controllers
             _applicationService = applicationService;
             _jobListingService = jobListingService;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -39,6 +42,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllApplications")]
         public async Task<IActionResult> GetAllApplications()
         {
@@ -57,6 +61,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllEmployers")]
         public async Task<IActionResult> GetAllEmployers()
         {
@@ -75,7 +80,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllJobSeekers")]
         public async Task<IActionResult> GetAllJobSeekers()
         {
@@ -94,7 +99,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllJobs")]
         public async Task<IActionResult> GetAllJobs()
         {
@@ -113,8 +118,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteUserById")]
-        public async Task<IActionResult> DeleteUserById(int userId)
+        public async Task<IActionResult> DeleteUserById([Required]int userId)
         {
             try
             {
@@ -131,8 +137,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteApplicationById")]
-        public async Task<IActionResult> DeleteApplicationById(int applicationId)
+        public async Task<IActionResult> DeleteApplicationById([Required]int applicationId)
         {
             try
             {
@@ -149,8 +156,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteJobListingById")]
-        public async Task<IActionResult> DeleteJobListingById(int jobID)
+        public async Task<IActionResult> DeleteJobListingById([Required] int jobID)
         {
             try
             {

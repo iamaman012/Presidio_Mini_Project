@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_API.Controllers
 {
@@ -21,7 +22,7 @@ namespace Job_Portal_API.Controllers
             _service = service;
             _jobSeekerService = jobSeekerService;
         }
-        [Authorize(Roles = "Employer,Admin")]
+        [Authorize(Roles = "Employer")]
         [HttpPost("AddJobListing")]
         public async Task<IActionResult> AddJobListing([FromBody] JobListingDTO jobListingDto)
         {
@@ -45,27 +46,12 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        //[HttpGet("GetAllJobListings")]
-        //public async Task<IActionResult> GetAllJobListings()
-        //{
-        //    try
-        //    {
-        //        var jobListings = await _service.GetAllJobListingsAsync();
-        //        return Ok(jobListings);
-        //    }
-        //    catch (JobListingNotFoundException e)
-        //    {
-        //        return NotFound(new ErrorModelDTO(404,e.Message));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        var errorResponse = new ErrorModelDTO(500, e.Message);
-        //        return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
-        //    }
-        //}
+
+        [Authorize(Roles = "Employer")]
         [HttpGet("ByEmployerId")]
 
-        public async Task<IActionResult> GetJobListingsByEmployerId(int employerId)
+
+        public async Task<IActionResult> GetJobListingsByEmployerId([ Required] int employerId)
         {
             try
             {
@@ -74,16 +60,16 @@ namespace Job_Portal_API.Controllers
             }
             catch (UserNotFoundException e)
             {
-                return NotFound("Employer not found.");
+                return NotFound(new ErrorModelDTO(404,e.Message));
             }
             catch (JobListingNotFoundException e)
             {
-                return NotFound("No job listings found.");
+                return NotFound(new ErrorModelDTO(404, e.Message));
             }
         }
-
+        [Authorize(Roles = "Employer")]
         [HttpGet("GetApplicationByJobID")]
-        public async Task<IActionResult> GetJobResponseByJobID( int jobID)
+        public async Task<IActionResult> GetJobResponseByJobID( [Required]int jobID)
         {
             try
             {
@@ -104,8 +90,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Employer")]
         [HttpPut("UpdateApplicationStatus")]
-        public async Task<IActionResult> UpdateApplicationStatus(int applicationId,string status)
+        public async Task<IActionResult> UpdateApplicationStatus([Required]int applicationId,[Required]string status)
         {
             try
             {
@@ -122,8 +109,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Employer")]
         [HttpGet("ReviewJobSeekerResume")]
-        public async Task<IActionResult> ReviewJobSeekerResume(int jobSeekerID)
+        public async Task<IActionResult> ReviewJobSeekerResume([Required]int jobSeekerID)
         {
             try
             {
@@ -140,8 +128,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Employer")]
         [HttpDelete("DeleteJobListingById")]
-        public async Task<IActionResult> DeleteJobListingById(int jobID)
+        public async Task<IActionResult> DeleteJobListingById([Required]int jobID)
         {
             try
             {
@@ -158,8 +147,9 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles = "Employer")]
         [HttpGet("JobSeekerContactDetails")]
-        public async Task<IActionResult> GetJobSeekerContactDetails(int jobSeekerID)
+        public async Task<IActionResult> GetJobSeekerContactDetails([Required]int jobSeekerID)
         {
             try
             {
@@ -176,6 +166,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+      
 
     }
 }
