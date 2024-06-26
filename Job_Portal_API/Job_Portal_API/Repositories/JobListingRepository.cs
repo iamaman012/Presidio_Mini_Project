@@ -81,6 +81,7 @@ namespace Job_Portal_API.Repositories
         {
             var results = await _context.JobListings
                 .Include(jl => jl.JobSkills)
+                .Include(jl=>jl.Employer)
                 .ToListAsync();
             return results;
         }

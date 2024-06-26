@@ -166,7 +166,64 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-      
+        [Authorize(Roles = "Employer")]
+        [HttpDelete("DeleteJobSkillByID")]
+        public async Task<IActionResult> DeleteJobSkillByID([Required] int jobID, [Required] int skillID)
+        {
+            try
+            {
+                var response = await _service.DeleteJobSkillByID(jobID, skillID);
+                return Ok(response);
+            }
+            catch (JobSkillNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
+        }
+
+        [Authorize(Roles ="Employer")]
+        [HttpPut("ChangeJobLocation")]
+        public async Task<IActionResult> ChangeJobLocation([Required] int jobID, [Required] string location)
+        {
+            try
+            {
+                var response = await _service.ChangeJobLocation(jobID, location);
+                return Ok(response);
+            }
+            catch (JobListingNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
+        }
+        [Authorize(Roles = "Employer")]
+        [HttpPut("ChangeJobSalary")]
+        public async Task<IActionResult> ChangeJobSalary([Required] int jobID, [Required] double salary)
+        {
+            try
+            {
+                var response = await _service.ChangeJobSalary(jobID, salary);
+                return Ok(response);
+            }
+            catch (JobListingNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
+        }
 
     }
 }

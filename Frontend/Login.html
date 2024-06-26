@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center">Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" onblur="validateEmail()">
+                                <div id="emailError" style="color: red;"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password" onblur="validatePass()">
+                                <div id="passwordError" style="color: red;"></div>
+                            </div>
+                            <div>
+                                <p>Don't have an account? <a href="Registration.html">Register here</a></p>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                            <div id="loginError" style="color: red; margin-top: 10px;"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var email = document.getElementById('email');
+        var password = document.getElementById('password');
+        var emailError = document.getElementById('emailError');
+        var passwordError = document.getElementById('passwordError');
+        var loginError = document.getElementById('loginError');
+
+        function validateEmail(){
+            if(email.value === ""){
+                emailError.innerHTML = "Email is required";
+                email.style.border = "1px solid red";
+            } else {
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    emailError.innerHTML = "Invalid email format";
+                    email.style.border = "1px solid red";
+                } else {
+                    emailError.innerHTML = "";
+                    email.style.border = "1px solid green";
+                }
+            }
+        }
+
+        function validatePass(){
+            if(password.value === ""){
+                passwordError.innerHTML = "Password is required";
+                password.style.border = "1px solid red";
+            } else {
+                passwordError.innerHTML = "";
+                password.style.border = "1px solid green";
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', handleSubmit);
+
+        function handleSubmit(e) {
+            e.preventDefault(); // prevent form submission
+            validateEmail();
+            validatePass();
+            
+            if(email.value === "" || password.value === "") {
+                loginError.innerHTML = "Please fill in all fields";
+                return;
+            }
+
+            fetch('http://localhost:5190/api/User/Login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    password: password.value
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw new Error(error.message) });
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem('token', data.token);
+                window.location.href = "HomePage.html"; // redirect to home page
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error: ' + error.message);   
+                loginError.innerHTML = "Login failed. Please check your credentials.";
+            });
+        }
+    </script>
+</body>
+</html>

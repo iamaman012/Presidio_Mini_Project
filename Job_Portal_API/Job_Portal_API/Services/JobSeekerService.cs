@@ -221,7 +221,7 @@ namespace Job_Portal_API.Services
             {
                 var skill =  await _jobSeekerSkillRepository.DeleteById(skillId);
                 return new JobSeekerSkillResponseDTO
-                {
+                { SkillID=skill.JobSeekerSkillID,
                     SkillName = skill.SkillName
                 };
             }

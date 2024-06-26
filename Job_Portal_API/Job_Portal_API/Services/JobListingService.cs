@@ -15,16 +15,18 @@ namespace Job_Portal_API.Services
         private readonly IRepository<int, Application> _applicationRepository;
         private readonly IRepository<int, JobSeeker> _jobSeekerRepository;
         private readonly IRepository<int, User> _userRepository;
+        private readonly IRepository<int, JobSkill> _jobSkillRepository;
         
 
-        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IRepository<int,User> userRepository,IRepository<int,JobSeeker> jobSeekerRepository)
+        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IRepository<int,User> userRepository,IRepository<int,JobSeeker> jobSeekerRepository,IRepository<int,JobSkill> jobSkillRepository)
         {
             _jobListingRepository = jobListingRepository;
             _employerRepository = employerRepository;
             _applicationRepository = applicationRepository;
             _jobSeekerRepository = jobSeekerRepository;
             _userRepository = userRepository;
-         
+            _jobSkillRepository = jobSkillRepository;
+
 
         }
 
@@ -102,6 +104,7 @@ namespace Job_Portal_API.Services
             {
                 JobID = jobListing.JobID,
                 JobTitle = jobListing.JobTitle,
+                CompanyName = jobListing.Employer.CompanyName,
                 JobDescription = jobListing.JobDescription,
                 JobType = jobListing.JobType.ToString(),
                 Location = jobListing.Location,
@@ -375,6 +378,77 @@ namespace Job_Portal_API.Services
             }
         }
 
-      
+        public async Task<JobSkillResponseDTO> DeleteJobSkillByID(int jobID, int skillID)
+        {
+            try
+            {
+                var job = await _jobListingRepository.GetById(jobID);
+                var skill = await _jobSkillRepository.GetById(skillID);
+                skill = await _jobSkillRepository.DeleteById(skillID);
+                return new JobSkillResponseDTO
+                {
+                    SkillID = skill.JobSkillID,
+                    SkillName = skill.SkillName
+                };
+            }
+            catch (JobSkillNotFoundException e)
+            {
+                throw new JobSkillNotFoundException(e.Message);
+            }
+
+        }
+
+        public async Task<JobListingResponseDTO> ChangeJobLocation(int jobID, string location)
+        {
+            try
+            {
+                var job = await _jobListingRepository.GetById(jobID);
+                job.Location = location;
+                await _jobListingRepository.Update(job);
+                return new JobListingResponseDTO
+                {
+                    JobID = job.JobID,
+                    JobTitle = job.JobTitle,
+                    JobDescription = job.JobDescription,
+                    JobType = job.JobType.ToString(),
+                    Location = job.Location,
+                    Salary = job.Salary,
+                    PostingDate = job.PostingDate,
+                    ClosingDate = job.ClosingDate,
+                    EmployerID = job.EmployerID,
+                    Skills = job.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID, SkillName = skill.SkillName }).ToList()
+                };
+            }
+            catch(JobListingNotFoundException e)
+            { throw new JobListingNotFoundException(e.Message);
+            }
+        }
+
+        public async Task<JobListingResponseDTO> ChangeJobSalary(int jobID, double salary)
+        {
+            try
+            {
+                var job = await _jobListingRepository.GetById(jobID);
+                job.Salary = salary;
+                await _jobListingRepository.Update(job);
+                return new JobListingResponseDTO
+                {
+                    JobID = job.JobID,
+                    JobTitle = job.JobTitle,
+                    JobDescription = job.JobDescription,
+                    JobType = job.JobType.ToString(),
+                    Location = job.Location,
+                    Salary = job.Salary,
+                    PostingDate = job.PostingDate,
+                    ClosingDate = job.ClosingDate,
+                    EmployerID = job.EmployerID,
+                    Skills = job.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID, SkillName = skill.SkillName }).ToList()
+                };
+            }
+            catch (JobListingNotFoundException e)
+            {
+                throw new JobListingNotFoundException(e.Message);
+            }
+        }
     }
 }

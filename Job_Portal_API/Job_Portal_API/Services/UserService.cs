@@ -82,7 +82,7 @@ namespace Job_Portal_API.Services
             try
             {
                 var user = await _repository.DeleteById(id);
-                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + " "+ user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID };
+                ReturnUserDTO returnUser = new ReturnUserDTO { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + " "+ user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID };
                 return returnUser;
             }
             catch (UserNotFoundException e)
@@ -98,7 +98,7 @@ namespace Job_Portal_API.Services
             try
             {
                 var user = await _repository.GetById(id);
-                ReturnUserDTO returnUser = new ReturnUserDTO() { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID };
+                ReturnUserDTO returnUser = new ReturnUserDTO { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID};
                 return returnUser;
             }
             catch (UserNotFoundException e)

@@ -74,6 +74,7 @@ namespace Job_Portal_API
             builder.Services.AddScoped<IRepository<int, JobSeekerExperience>, ExperienceRepository>();
             builder.Services.AddScoped<IRepository<int, Application>, ApplicationRepository>();
             builder.Services.AddScoped<IRangeRepository<int, JobSeekerSkill>, JobSeekerSkillRepository>();
+            builder.Services.AddScoped<IRepository<int, JobSkill>, JobSkillRepository>();
 
             #endregion
 
@@ -86,6 +87,15 @@ namespace Job_Portal_API
             builder.Services.AddScoped<IApplication, ApplicationService>();
             builder.Services.AddScoped<IAdmin, AdminService>();
             #endregion
+            #region CORS
+            builder.Services.AddCors(opts =>
+            {
+                opts.AddPolicy("MyCors", options =>
+                {
+                    options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
+            #endregion
 
             var app = builder.Build();
 
@@ -95,6 +105,7 @@ namespace Job_Portal_API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("MyCors");
             app.UseAuthentication();
             app.UseAuthorization();
 

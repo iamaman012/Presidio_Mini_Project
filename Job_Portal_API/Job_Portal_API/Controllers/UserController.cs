@@ -4,6 +4,7 @@ using Job_Portal_API.Models;
 using Job_Portal_API.Models.DTOs;
 using Job_Portal_API.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ namespace Job_Portal_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class UserController : ControllerBase
     {
         private readonly IUser _service;
