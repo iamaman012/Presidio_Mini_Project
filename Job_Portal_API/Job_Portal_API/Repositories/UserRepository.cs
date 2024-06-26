@@ -64,7 +64,7 @@ namespace Job_Portal_API.Repositories
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            var results = await _context.Users.ToListAsync();
+            var results = await _context.Users.Include(u=>u.JobSeeker).ToListAsync();
             return results;
 
         }   

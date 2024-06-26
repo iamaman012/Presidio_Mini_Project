@@ -2,6 +2,7 @@
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace Job_Portal_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class ApplicationController : ControllerBase
     {
         private readonly IApplication _applicationService;
@@ -47,7 +49,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [Authorize(Roles = "JobSeeker")]
+       
         [HttpGet("GetAllJobs")]
         public async Task<IActionResult> GetAllJobs()
         {

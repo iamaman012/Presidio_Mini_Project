@@ -164,6 +164,7 @@ namespace Job_Portal_API.Services
             returnDTO.Role = user.UserType.ToString();
             returnDTO.Email = user.Email;
             returnDTO.Token = _tokenService.GenerateJSONWebToken(user);
+            returnDTO.JobSeekerId = (int)(user.JobSeeker?.JobSeekerID);
             return returnDTO;
         }
 

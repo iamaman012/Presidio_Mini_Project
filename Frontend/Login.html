@@ -103,7 +103,16 @@
             })
             .then(data => {
                 localStorage.setItem('token', data.token);
-                window.location.href = "HomePage.html"; // redirect to home page
+                localStorage.setItem('JobSeekerId', data.jobSeekerId);
+                if(data.role=="Employer")
+                    window.location.href = "EmployerHome.html"; // redirect to employer home page
+                else if(data.role=="JobSeeker")
+                    window.location.href = "JobSeekerHome.html"; // redirect to job seeker home page
+                else if(data.role=="Admin")
+                    window.location.href = "AdminHome.html"; // redirect to admin home page
+                
+                else
+                window.location.href = "LandingPage.html"; // redirect to home page
             })
             .catch(error => {
                 console.error(error);

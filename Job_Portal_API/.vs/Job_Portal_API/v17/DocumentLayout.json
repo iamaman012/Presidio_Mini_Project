@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\controllers\\applicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\controllers\\applicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\models\\jobseeker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\models\\jobseeker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\models\\dtos\\returnlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\models\\dtos\\returnlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,20 +63,8 @@
       "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\services\\applicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\controllers\\applicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\controllers\\applicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\job_portal_api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\job_portal_api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|solutionrelative:job_portal_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5C0C8BB5-98B0-49F1-A76D-966D973B7FE5}|Job_Portal_API\\Job_Portal_API.csproj|c:\\users\\vc\\desktop\\presidio_mini_project\\job_portal_api\\job_portal_api\\services\\jobseekerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,15 +78,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 10,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Job_Portal_API\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "Job_Portal_API\\Repositories\\UserRepository.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAgwEIAAABVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T05:06:42.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "JobSeeker.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\JobSeeker.cs",
+              "RelativeDocumentMoniker": "Job_Portal_API\\Models\\JobSeeker.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\JobSeeker.cs",
+              "RelativeToolTip": "Job_Portal_API\\Models\\JobSeeker.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T05:02:58.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReturnLoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\DTOs\\ReturnLoginDTO.cs",
+              "RelativeDocumentMoniker": "Job_Portal_API\\Models\\DTOs\\ReturnLoginDTO.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\DTOs\\ReturnLoginDTO.cs",
+              "RelativeToolTip": "Job_Portal_API\\Models\\DTOs\\ReturnLoginDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T05:01:00.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Job_Portal_API\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Job_Portal_API\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T04:07:37.442Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "JobListingRepository.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Repositories\\JobListingRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Repositories\\JobListingRepository.cs",
@@ -82,7 +150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "JobListing.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\JobListing.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Models\\JobListing.cs",
@@ -94,7 +162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "JobListingResponseDTO.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\DTOs\\JobListingResponseDTO.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Models\\DTOs\\JobListingResponseDTO.cs",
@@ -106,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "JobListingService.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Services\\JobListingService.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Services\\JobListingService.cs",
@@ -114,12 +182,11 @@
               "RelativeToolTip": "Job_Portal_API\\Services\\JobListingService.cs",
               "ViewState": "AQIAAFsAAAAAAAAAAAAkwGoAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T11:33:01.403Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T11:33:01.403Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "ApplicationService.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Services\\ApplicationService.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Services\\ApplicationService.cs",
@@ -131,19 +198,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "ApplicationController.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Controllers\\ApplicationController.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Controllers\\ApplicationController.cs",
               "ToolTip": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Controllers\\ApplicationController.cs",
               "RelativeToolTip": "Job_Portal_API\\Controllers\\ApplicationController.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAYwAAAAAAAAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAA0AAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T11:29:35.929Z"
+              "WhenOpened": "2024-06-20T11:29:35.929Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "Job_Portal_API.http",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Job_Portal_API.http",
               "RelativeDocumentMoniker": "Job_Portal_API\\Job_Portal_API.http",
@@ -155,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Program.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Program.cs",
@@ -163,12 +231,11 @@
               "RelativeToolTip": "Job_Portal_API\\Program.cs",
               "ViewState": "AQIAAEkAAAAAAAAAAAAgwFkAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T04:28:59.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T04:28:59.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Models\\User.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Models\\User.cs",
@@ -176,23 +243,25 @@
               "RelativeToolTip": "Job_Portal_API\\Models\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T13:02:17.997Z"
+              "WhenOpened": "2024-06-11T13:02:17.997Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Services\\UserService.cs",
               "ToolTip": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Services\\UserService.cs",
               "RelativeToolTip": "Job_Portal_API\\Services\\UserService.cs",
-              "ViewState": "AQIAAKUAAAAAAAAAAAAIwAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKYAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T12:59:55.965Z"
+              "WhenOpened": "2024-06-11T12:59:55.965Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Controllers\\UserController.cs",
@@ -205,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "JobSeekerService.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Services\\JobSeekerService.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Services\\JobSeekerService.cs",
@@ -217,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "JobPortalApiContext.cs",
               "DocumentMoniker": "C:\\Users\\VC\\Desktop\\Presidio_mini_Project\\Job_Portal_API\\Job_Portal_API\\Context\\JobPortalApiContext.cs",
               "RelativeDocumentMoniker": "Job_Portal_API\\Context\\JobPortalApiContext.cs",
@@ -225,8 +294,7 @@
               "RelativeToolTip": "Job_Portal_API\\Context\\JobPortalApiContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-11T11:39:47.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T11:39:47.103Z"
             }
           ]
         }
