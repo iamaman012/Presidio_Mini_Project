@@ -104,6 +104,7 @@
             .then(data => {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('JobSeekerId', data.jobSeekerId);
+                localStorage.setItem('UserId', data.userID);
                 if(data.role=="Employer")
                     window.location.href = "EmployerHome.html"; // redirect to employer home page
                 else if(data.role=="JobSeeker")

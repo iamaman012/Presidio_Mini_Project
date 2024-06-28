@@ -148,7 +148,7 @@ namespace Job_Portal_API.Controllers
             }
             catch (ArgumentException e)
             {
-                return BadRequest(new ErrorModelDTO(400, e.Message));
+                return BadRequest(new ErrorModelDTO(400, "Argument Error"));
             }
             catch (UnauthorizedUserException e)
             {

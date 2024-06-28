@@ -153,10 +153,11 @@ namespace Job_Portal_API.Services
                     SkillName = skillName
                 });
                 var addedJobSeekerSkills = await _jobSeekerSkillRepository.AddRange(jobSeekerSkills);
+                Console.WriteLine(addedJobSeekerSkills);
 
                 return addedJobSeekerSkills.Select(skill => new JobSeekerSkillResponseDTO
-                {
-                    SkillID=skill.JobSeekerSkillID,
+                {   
+                SkillID =skill.JobSeekerSkillID,
                     SkillName = skill.SkillName
                 });
             }

@@ -103,7 +103,21 @@ namespace Job_Portal_API.Services
                     JobID = application.JobID,
                     JobSeekerID = application.JobSeekerID,
                     Status = application.Status,
-                    ApplicationDate = application.ApplicationDate
+                    ApplicationDate = application.ApplicationDate,
+                    JobListing = new JobListingResponseDTO
+                    {
+                        JobID = application.JobListing.JobID,
+                        JobTitle = application.JobListing.JobTitle,
+                        JobDescription = application.JobListing.JobDescription,
+                        JobType = application.JobListing.JobType.ToString(),
+                        Location = application.JobListing.Location,
+                        Salary = application.JobListing.Salary,
+                        PostingDate = application.JobListing.PostingDate,
+                        ClosingDate = application.JobListing.ClosingDate,
+                        EmployerID = application.JobListing.EmployerID,
+                        CompanyName = application.JobListing.Employer.CompanyName
+
+                    }
                 });
             }
             catch (JobSeekerNotFoundException e) {

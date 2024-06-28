@@ -58,7 +58,7 @@ namespace Job_Portal_API.Repositories
 
         public async Task<IEnumerable<Application>> GetAll()
         {
-            return await _context.Applications.ToListAsync();
+            return await _context.Applications.Include(app=>app.JobListing).Include(app=>app.JobListing.Employer).ToListAsync();
         }
     }
 }
