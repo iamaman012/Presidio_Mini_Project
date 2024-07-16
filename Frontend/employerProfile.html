@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Favicon -->
+    <link href="img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <style>
+        .toast-container {
+            z-index: 1050;
+            /* Ensure it's higher than the navbar */
+            margin-top: 70px;
+            /* Adjust as necessary to ensure visibility */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Toast Message-->
+        <div class="toast-container position-fixed top-3 end-0 p-3" style="z-index: 11">
+            <div id="myToast" class="toast align-items-center  bg-primary border-0" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body text-light" id="toastMessage">
+                        Hello, world! This is a toast message.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top  p-0" id="navBar">
+
+            <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+                <h1 class="m-0 text-primary">JobEntry</h1>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link ">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="#" class="nav-item nav-link d-none" id="logOut">LogOut</a>
+                    <a href="login.html" class="nav-item nav-link" id="login-resgister">Login/Register</a>
+                    <a href="employerProfile.html" class="nav-item nav-link d-none " id="empProfile">
+                        <i class="fa fa-2x fa-user-tie text-primary mb-0"></i>
+                    </a>
+                    <a href="JobSeekerProfile.html" class="nav-item nav-link d-none " id="jobProfile">
+                        <i class="fa fa-2x fa-user-tie text-primary mb-0"></i>
+                    </a>
+
+                </div>
+                <button class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" onclick="postJob()">Post A
+                    Job<i class="fa fa-arrow-right ms-3"></i></button>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+
+        <!-- Profile 1 - Bootstrap Brain Component -->
+        <section class="py-3 py-md-5 py-xl-8">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                        <h2 class="mb-4 text-primary text-center">Profile</h2>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container">
+                <div class="row gy-4 gy-lg-0">
+                    <div class="col-12 col-lg-4 col-xl-3">
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="card widget-card border-light shadow-sm">
+                                    <div class="card-header bg-primary text-light " id="welcome">Welcome, Ethan Leo
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text-center mb-3">
+                                            <img src="" class="img-fluid rounded-circle" alt="Luna John" id="userImg">
+                                        </div>
+                                        <h5 class="text-center mb-1" id="name">Ethan Leo</h5>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card widget-card border-light shadow-sm">
+                                    <div class="card-header bg-primary text-light">About Me</div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush mb-0">
+                                            <li class="list-group-item">
+                                                <h6 class="mb-1">
+                                                    <i class="fa-solid fa-building me-2"></i>
+                                                    Company
+                                                </h6>
+                                                <span id="company"></span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h6 class="mb-2">
+                                                    <span class="bii bi-briefcase-fill me-2"></span>
+                                                    Company Description
+                                                </h6>
+                                                <span id="description"></span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h6 class="mb-2">
+                                                    <i class="fa-solid fa-location-dot me-2"></i>
+                                                    Location
+                                                </h6>
+                                                <span id="location"></span>
+                                            </li>
+
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8 col-xl-9">
+                        <div class="card widget-card border-light shadow-sm">
+                            <div class="card-body p-4">
+                                <ul class="nav nav-tabs" id="profileTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                                            data-bs-target="#overview-tab-pane" type="button" role="tab"
+                                            aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="company-details-tab" data-bs-toggle="tab"
+                                            data-bs-target="#company-details-tab-pane" type="button" role="tab"
+                                            aria-controls="company-details-tab-pane" aria-selected="false">Add/Update Company
+                                            Details</button>
+                                    </li>
+
+
+                                    <li class="nav-item  " role="presentation">
+                                        <button class="nav-link" id="password-tab" data-bs-toggle="tab"
+                                            data-bs-target="#password-tab-pane" type="button" role="tab"
+                                            aria-controls="password-tab-pane" aria-selected="false"> Change
+                                            Password</button>
+                                    </li>
+
+
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="job-listings-tab" data-bs-toggle="tab"
+                                            data-bs-target="#job-listings-tab-pane" type="button" role="tab"
+                                            aria-controls="job-listings-tab-pane" aria-selected="false">Job
+                                            Listings</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="applications-tab" data-bs-toggle="tab"
+                                            data-bs-target="#applications-tab-pane" type="button" role="tab"
+                                            aria-controls="applications-tab-pane"
+                                            aria-selected="false">Applications</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="resume-tab" data-bs-toggle="tab"
+                                            data-bs-target="#resume-tab-pane" type="button" role="tab"
+                                            aria-controls="resume-tab-pane" aria-selected="false">Resume</button>
+                                    </li>
+
+
+
+
+                                </ul>
+                                <div class="tab-content pt-4" id="profileTabContent">
+                                    <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel"
+                                        aria-labelledby="overview-tab" tabindex="0">
+
+                                        <h5 class="mb-3">Profile</h5>
+                                        <div class="row g-0">
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">Name</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2" id="userName">Ethan</div>
+                                            </div>
+
+
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">Role</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2" id="role">Mountain View, California</div>
+                                            </div>
+
+
+
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">Phone</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2" id="contact">+1 (248) 679-8745</div>
+                                            </div>
+                                            <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                                <div class="p-2">Email</div>
+                                            </div>
+                                            <div
+                                                class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                                <div class="p-2" id="email">leo@example.com</div>
+                                            </div>
+                                        </div>
+                                        <i id="deleteIcon" class="fa-solid fa-2x fa-trash text-primary mt-2" title="Delete Profile"></i>
+
+                                    </div>
+
+                                    <div class="tab-pane fade" id="company-details-tab-pane" role="tabpanel"
+                                        aria-labelledby="company-details-tab" tabindex="0">
+                                        <form id="companyDetailsForm">
+                                            <div class="row gy-3 gy-xxl-4">
+                                                <div class="col-12">
+                                                    <label for="companyName" class="form-label">Company Name</label>
+                                                    <input type="text" class="form-control" id="companyName">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="companyAddress" class="form-label">Company
+                                                        Description</label>
+                                                    <input type="text" class="form-control" id="companyDescription">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="companyPhone" class="form-label">Company
+                                                        Location</label>
+                                                    <input type="text" class="form-control" id="companyLocation">
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Save Company
+                                                        Details</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab"
+                                    tabindex="0">
+                                    <form id="passwordForm">
+                                      <div class="row gy-3 gy-xxl-4">
+                                        <div class="col-12">
+                                          <label for="currentPassword" class="form-label">Current Password</label>
+                                          <input type="password" class="form-control" id="currentPassword">
+                                        </div>
+                                        <div class="col-12">
+                                          <label for="newPassword" class="form-label">New Password</label>
+                                          <input type="password" class="form-control" id="newPassword">
+                                          <p id="errorNewPass"></p>
+                                        </div>
+                                        <div class="col-12">
+                                          <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                          <input type="password" class="form-control" id="confirmPassword">
+                                          <p id="errorConfirmPass"></p>
+                                        </div>
+                                        <div class="col-12">
+                                          <button type="submit" class="btn btn-primary">Change Password</button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                    <div class="tab-pane fade" id="job-listings-tab-pane" role="tabpanel"
+                                        aria-labelledby="job-listings-tab" tabindex="0">
+                                        <!-- Content for the job listings tab goes here -->
+                                    </div>
+
+                                    <div class="tab-pane fade" id="applications-tab-pane" role="tabpanel"
+                                        aria-labelledby="applications-tab" tabindex="0">
+                                        <!-- Content for the application tab goes here -->
+                                    </div>
+                                    <div class="tab-pane fade" id="resume-tab-pane" role="tabpanel"
+                                        aria-labelledby="resume-tab" tabindex="0">
+                                        <!-- Content for the resume tab goes here -->
+                                        <div class="row gy-4">
+                                            <div class="col-12">
+                                                <div class="card widget-card border-light shadow-sm">
+                                                    <div class="card-header bg-primary text-light"> Education</div>
+                                                    <div class="card-body" id="education-body">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="card widget-card border-light shadow-sm">
+                                                    <div class="card-header bg-primary text-light"> Experience</div>
+                                                    <div class="card-body" id="experience-body">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="card widget-card border-light shadow-sm">
+                                                    <div class="card-header text-light bg-primary">Skills</div>
+                                                    <div class="card-body" id="skills-body">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+            <div id="myToast" class="toast align-items-center text-bg-primary border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- job Details Modal -->
+        <div class="modal fade" id="jobModal" tabindex="-1" aria-labelledby="jobModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-center">
+                        <h5 class="modal-title   text-light" id="jobModalLabel">Job Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="jobModalImage" class="img-fluid border rounded mb-3" src="" alt="" style="width: 100%; height: auto;">
+                        <p><strong>Company Name:</strong> <span id="jobModalCompanyName"></span></p>
+                        <p><strong>Job Title:</strong> <span id="jobModalJobTitle"></span></p>
+                        <p><strong>Category:</strong> <span id="jobModalCategory"></span></p>
+                        <p><strong>Description:</strong></p><p id="jobModalDescription"></p>
+                        <p><strong>Salary:</strong> <span id="jobModalSalary"></span></p>
+                        <p><strong>Location:</strong> <span id="jobModalLocation"></span></p>
+                        <p><strong>Type:</strong> <span id="jobModalType"></span></p>
+                        <p><strong>Skills:</strong></p>
+                <ul id="jobModalSkills"></ul> <!-- Updated to use <ul> for skills -->
+                        <p><strong>Posting Date:</strong> <span id="jobModalPostingDate"></span></p>
+                        <p><strong>Closing Date:</strong> <span id="jobModalClosingDate"></span></p>
+                      
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- job details model end -->
+
+
+
+
+
+    </div>
+
+
+
+    <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="./assets/javascript/jobSeekerProfile.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+
+        if (localStorage.getItem('token')) {
+            document.getElementById('logOut').classList.remove('d-none');
+            document.getElementById('login-resgister').classList.add('d-none');
+        }
+        if (localStorage.getItem('EmployerId')) {
+            document.getElementById('empProfile').classList.remove('d-none');
+
+        }
+        if (localStorage.getItem('JobSeekerId')) {
+            document.getElementById('jobProfile').classList.remove('d-none');
+
+        }
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('UserId');
+        const employerId = localStorage.getItem('EmployerId');
+
+        document.getElementById('deleteIcon').addEventListener('click', async () => {
+    const confirmDelete = confirm("Are you sure you want to delete the profile?");
+    if (confirmDelete) {
+        try {
+            const response = await fetch(`http://localhost:5190/api/User/DeleteUserById?userid=${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + token, // Include token for authentication
+                    'Content-Type': 'application/json'
+                },
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`Status: ${errorData.statusCode}, message: ${errorData.message}`);
+            }
+            document.getElementById('toastMessage').innerText = 'Profile Deleted Successfully';
+                var toastElement = document.getElementById('myToast');
+                var toast = new bootstrap.Toast(toastElement);
+                toast.show();
+               
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                localStorage.clear();
+                window.location.href = 'login.html';
+
+        } catch (error) {
+            console.error('Error deleting profile:', error);
+            alert('Error deleting profile. Please try again.');
+        }
+    }
+});
+
+
+        function formatDate(datetimeStr) {
+    const date = new Date(datetimeStr);
+
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-GB', options);
+}
+
+        const jobListings = async () => {
+
+            try {
+                const response = await fetch(`http://localhost:5190/api/JobListing/ByEmployerId?employerId=${employerId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                const Jobs = document.getElementById('job-listings-tab-pane');
+                Jobs.innerHTML = ''; // Clear existing jobs before displaying new ones
+                data.forEach(job => {
+                    const jobItem = document.createElement('div');
+                    jobItem.classList.add('job-item', 'p-4', 'mb-4');
+                    jobItem.innerHTML = `
+                <div class="row g-4">
+                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                        <img class="flex-shrink-0 img-fluid border rounded" src=${job.imageUrl} alt="" style="width: 80px; height: 80px;">
+                        <div class="text-start ps-4">
+                            <h5 class="mb-3">${job.jobTitle}</h5>
+                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>${job.location}</span>
+                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>${job.jobType}</span>
+                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>${job.salary}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                        <div class="d-flex mb-3">
+                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                            <button class="btn btn-primary me-2" onclick="deleteJob(${job.jobID},event)">Delete</button>
+                            <button class="btn btn-primary" onclick="loadapplications(${job.jobID},event)">Applications</button>
+                        </div>
+                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: ${formatDate(job.closingDate)}</small>
+                    </div>
+                </div>
+            `;      jobItem.addEventListener('click', () => {
+                displayJobDetails(job);
+            });
+                    Jobs.appendChild(jobItem);
+                })
+
+
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+        const displayJobDetails = (job) => {
+    console.log(job);
+
+    document.getElementById('jobModalLabel').innerText = job.jobTitle;
+    document.getElementById('jobModalImage').src = job.imageUrl;
+    document.getElementById('jobModalCompanyName').innerText = job.companyName;
+    document.getElementById('jobModalJobTitle').innerText = job.jobTitle;
+    document.getElementById('jobModalCategory').innerText = job.category;
+    document.getElementById('jobModalDescription').innerText = job.jobDescription;
+    document.getElementById('jobModalSalary').innerText = job.salary;
+    document.getElementById('jobModalLocation').innerText = job.location;
+    document.getElementById('jobModalType').innerText = job.jobType;
+    document.getElementById('jobModalPostingDate').innerText = formatDate(job.postingDate);
+    document.getElementById('jobModalClosingDate').innerText = formatDate(job.closingDate);
+
+    // Display skills as a list
+    const skillsList = document.getElementById('jobModalSkills');
+    skillsList.innerHTML = ''; // Clear previous skills
+    job.skills.forEach(skill => {
+        const skillItem = document.createElement('li');
+        skillItem.innerText = skill.skillName;
+        skillsList.appendChild(skillItem);
+    });
+
+    const jobModal = new bootstrap.Modal(document.getElementById('jobModal'));
+    jobModal.show();
+}
+        const profileLoading = async () => {
+            try {
+                var response = await fetch(`http://localhost:5190/api/User/GetUserById?userid=${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                    }
+                });
+                // Check if the response is okay (status in the range 200-299)
+                if (!response.ok) {
+                    const errorData = await response.json(); // Convert error response to JSON
+
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data.imageUrl);
+                document.getElementById('name').innerText = data.name;
+                document.getElementById('userName').innerText = data.name;
+                document.getElementById('welcome').innerText = 'Welcome ' + data.name;
+                document.getElementById('email').innerText = data.email;
+                document.getElementById('role').innerText = data.role;
+                document.getElementById('contact').innerText = data.contactNumber;
+                document.getElementById('userImg').src=data.imageUrl;
+
+            }
+            catch (error) {
+                console.log(error.message);
+            }
+        }
+        profileLoading();
+        const loadCompanyDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:5190/api/Employer/GetEmployerById?employerId=${employerId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                document.getElementById('company').innerText = data.companyName;
+                document.getElementById('description').innerText = data.companyDescription;
+                document.getElementById('location').innerText = data.companyLocation;
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+        loadCompanyDetails();
+
+        document.getElementById('companyDetailsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const companyName = document.getElementById('companyName').value;
+            const companyDescription = document.getElementById('companyDescription').value;
+            const companyLocation = document.getElementById('companyLocation').value;
+            try {
+                const response = await fetch(`http://localhost:5190/api/Employer/UpdateCompanyDetails`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        "employerID": employerId,
+                        "companyName": companyName,
+                        "companyDescription": companyDescription,
+                        "companyLocation": companyLocation
+                    })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                document.getElementById('toastMessage').innerText = 'Company Details Updated Successfully';
+                var toastElement = document.getElementById('myToast');
+                var toast = new bootstrap.Toast(toastElement);
+                toast.show();
+                document.getElementById('companyName').value = '';
+                document.getElementById('companyDescription').value = '';
+                document.getElementById('companyLocation').value = '';
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                await loadCompanyDetails();
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        })
+        const deleteJob = async (jobId,event) => {
+            try {
+                event.stopPropagation();
+                console.log(jobId)
+                const response = await fetch(`http://localhost:5190/api/JobListing/DeleteJobListingById?jobID=${jobId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                document.getElementById('toastMessage').innerText = 'Job Deleted Successfully';
+                var toastElement = document.getElementById('myToast');
+                var toast = new bootstrap.Toast(toastElement);
+                toast.show();
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                await jobListings();
+
+
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+
+        const loadapplications = async (jobId,event) => {
+            try {
+                event.stopPropagation();
+                const response = await fetch(`http://localhost:5190/api/JobListing/GetApplicationByJobID?jobID=${jobId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                const Jobs = document.getElementById('applications-tab-pane');
+                Jobs.innerHTML = ''; // Clear existing jobs before displaying new ones
+                data.forEach(job => {
+                    const jobItem = document.createElement('div');
+                    jobItem.classList.add('job-item', 'p-4', 'mb-4');
+                    jobItem.innerHTML = `
+              <div class="row g-4">
+                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                        <img class="flex-shrink-0 img-fluid border rounded" src=${job.companyImage} alt="" style="width: 80px; height: 80px;">
+                        <div class="text-start ps-4">
+                            <h5 class="mb-3">${job.jobSeekerName}</h5>
+                            <h6 class="mb-3">${job.jobTitle}</h6>
+                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>${job.location}</span>
+                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>${job.jobType}</span>
+                            <span class="text-truncate me-3"><i class="far fa-money-bill-alt text-primary me-2"></i>${job.salary}</span>
+                            <span class="text-truncate me-3"><i class="far fa-check-circle text-primary me-2"></i>${job.status}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                        <div class="d-flex mb-3">
+                            <select class="form-select applicationStatus" >
+                                <option selected>Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                            <input type="hidden" id="applicationID" value="${job.applicationID}">
+                            <input type="hidden" id="jobID" value="${job.jobID}">
+                             <button class="btn btn-primary" onclick="loadResume(${job.jobSeekerID})">Resume</button>
+                        </div>
+                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: ${formatDate(job.applicationDate)}</small>
+                    </div>
+                </div>
+            `;
+                    Jobs.appendChild(jobItem);
+                })
+                document.getElementById('applications-tab').click();
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+        const loadResume = async (jobSeekerId) => {
+            try {
+                const response = await fetch(`http://localhost:5190/api/JobListing/ReviewJobSeekerResume?jobSeekerID=${jobSeekerId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                }
+                const data = await response.json();
+                console.log(data);
+
+
+                const educationBody = document.getElementById('education-body');
+                educationBody.innerHTML = '';
+                const educationItem = document.createElement('ul');
+                data.educations.forEach(education => {
+                    educationData = document.createElement('li');
+                    educationData.classList.add('list-group', 'list-group-flush', 'mb-0')
+                    educationData.innerHTML = `
+                    
+                        <span class="bii bi-mortarboard-fill me-2"></span>
+                        
+                    
+                    <span>${education.degree} in ${education.description} from ${education.institution}</span>
+                    <span>GPA : ${education.gpa}<span>
+                
+                    `;
+                    educationItem.appendChild(educationData);
+                })
+
+                const experienceBody = document.getElementById('experience-body');
+                experienceBody.innerHTML = '';
+                const experienceItem = document.createElement('ul');
+                data.experiences.forEach(experience => {
+                    experienceData = document.createElement('li');
+                    experienceData.classList.add('list-group', 'list-group-flush', 'mb-0')
+                    experienceData.innerHTML = `
+                    
+                        <span class="bii bi-briefcase-fill me-2"></span>
+                        
+                    
+                    <span>${experience.jobTitle} at ${experience.companyName}</span>
+                    <span>Duration : ${formatDate(experience.startDate)} to ${formatDate(experience.endDate)}<span>
+                
+                    `;
+                    experienceItem.appendChild(experienceData);
+                })
+
+                const skillsBody = document.getElementById('skills-body');
+                skillsBody.innerHTML = '';
+                data.skills.forEach(skill => {
+                    const span = document.createElement('span');
+                    span.classList.add('badge');
+                    span.classList.add('text-dark');
+                    span.innerText = skill.skillName;
+                    skillsBody.appendChild(span);
+                });
+
+                experienceBody.appendChild(experienceItem);
+                educationBody.appendChild(educationItem);
+
+
+
+
+                document.getElementById('resume-tab').click();
+
+
+
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+
+
+        // const updateStatus = async () => {
+        //     try {
+        //         console.log('updateStatus');
+        //         const applicationID = document.getElementById('applicationID').value;
+        //         const jobID = document.getElementById('jobID').value;
+        //         const status = document.getElementById('appStatus').value;
+
+        //         const response = await fetch(`http://localhost:5190/api/JobListing/UpdateApplicationStatus?applicationId=${applicationID}&status=${status}`, {
+        //             method: 'PUT',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 'Authorization': `Bearer ${token}` // Ensure 'token' is defined and holds a valid token
+        //             }
+        //         });
+
+        //         if (!response.ok) {
+        //             const errorData = await response.json();
+        //             throw new Error(`Status: ${errorData.statusCode}, message: ${errorData.message}`);
+        //         }
+
+        //         const data = await response.json();
+        //         console.log(data);
+        //         document.getElementById('toastMessage').innerText = 'Application Status Updated Successfully';
+
+        //         var toastElement = document.getElementById('myToast');
+        //         var toast = new bootstrap.Toast(toastElement);
+        //         toast.show();
+
+        //         // Wait for the toast to disappear before reloading applications
+        //         await new Promise(resolve => setTimeout(resolve, 1000));
+
+        //         await loadApplications(jobID); // Ensure 'loadApplications' function is defined
+        //     }
+        //     catch (err) {
+        //         console.log(err.message);
+        //         document.getElementById('toastMessage').innerText = `Error: ${err.message}`;
+
+        //         var toastElement = document.getElementById('myToast');
+        //         var toast = new bootstrap.Toast(toastElement);
+        //         toast.show();
+        //     }
+        // }
+
+
+
+
+
+
+
+
+
+        jobListings();
+        document.addEventListener('change', async (event) => {
+            if (event.target.classList.contains('applicationStatus')) {
+                const status = event.target.value;
+                const applicationID = event.target.nextElementSibling.value;
+                const jobID = event.target.nextElementSibling.nextElementSibling.value;
+
+                try {
+                    const response = await fetch(`http://localhost:5190/api/JobListing/UpdateApplicationStatus?applicationId=${applicationID}&status=${status}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+
+                    });
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    document.getElementById('toastMessage').innerText = 'Application status updated successfully';
+                    var toastElement = document.getElementById('myToast');
+                    var toast = new bootstrap.Toast(toastElement);
+                    toast.show();
+                } catch (err) {
+                    console.log(err.message);
+                }
+            }
+        });
+        document.getElementById('logOut').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        });
+        const postJob = async () => {
+            try {
+                const employerId = localStorage.getItem('EmployerId');
+                if (!employerId) {
+
+
+                    document.getElementById('toastMessage').innerText = 'Please login as a Employer to post a job';
+                    var toastElement = document.getElementById('myToast');
+                    var toast = new bootstrap.Toast(toastElement);
+                    toast.show();
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+
+
+
+                    return;
+                }
+                window.location.href = 'jobPosting.html';
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+        const updatePassword = async (e) => {
+  e.preventDefault()
+  var currentPassword = document.getElementById('currentPassword').value;
+  var newPassword = document.getElementById('newPassword').value;
+ var confirmPassword = document.getElementById('confirmPassword').value;
+
+  if (newPassword !== confirmPassword) {
+    document.getElementById('errorNewPass').innerHTML = 'Password does not match';
+    document.getElementById('errorNewPass').style.color = 'red';
+    document.getElementById('errorConfirmPass').style.color = 'red';
+    document.getElementById('errorConfirmPass').innerHTML = 'Password does not match';
+    document.getElementById('newPassword').style.border = '1px solid red';
+    document.getElementById('confirmPassword').style.border = '1px solid red';
+    return;
+  }
+
+
+
+  await fetch(`http://localhost:5190/api/User/ChangePassword?userid=${userId}&oldPassword=${currentPassword}&newPassword=${newPassword}&confirmPassword=${confirmPassword}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'Bearer ' + token,
+
+    },
+
+  }).then(response => {
+
+    if (!response.ok) {
+
+      return response.json().then(error => {
+        throw new Error(error.message);
+      });
+    }
+    return response;
+  }).then(data => {
+    console.log("aman")
+    console.log(data);
+    document.getElementById('toastMessage').innerText = "Password Changed Successfully";
+    var toastElement = document.getElementById('myToast');
+    var toast = new bootstrap.Toast(toastElement);
+    toast.show();
+    // Clear form values
+    document.getElementById('currentPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+    
+  }).catch(error => {
+    console.log(error.message);
+    document.getElementById('toastMessage').innerText = error.message;
+    var toastElement = document.getElementById('myToast');
+    var toast = new bootstrap.Toast(toastElement);
+    toast.show();
+  });
+}
+document.getElementById('passwordForm').addEventListener('submit',updatePassword)
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

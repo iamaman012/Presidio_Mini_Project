@@ -1,0 +1,18 @@
+aaseaman01@gmail.com
+aman1234
+UserID : 43
+JobSeekerID : 13
+Role : JobSeeker
+
+
+employer@gmail.com
+aman1234
+UserID :44
+Employer ID : 9
+Role : Employer
+
+
+
+admin@gmail.com
+aman1234
+UserID : 45
