@@ -119,5 +119,23 @@ namespace Job_Portal_API.Services
                 throw new UserNotFoundException("Employer Not Exist!!");
             }
         }
+
+        
+    public async Task<ReturnEmployerDTO> UpdateEmployer(UpdateEmployerDTO updateEmployerDTO)
+        {
+            try
+            {
+                var employer = await _repository.GetById(updateEmployerDTO.EmployerID);
+                employer.CompanyName = updateEmployerDTO.CompanyName;
+                employer.CompanyDescription = updateEmployerDTO.CompanyDescription;
+                employer.CompanyLocation = updateEmployerDTO.CompanyLocation;
+                var result = await _repository.Update(employer);
+                return await MapEmployeroDTO(result);
+            }
+            catch(UserNotFoundException e)
+            {
+                throw new UserNotFoundException("Employer Not Exist!!");
+            }
+        }
     }
 }

@@ -153,7 +153,10 @@ namespace Job_Portal_API.Services
                     SkillName = skillName
                 });
                 var addedJobSeekerSkills = await _jobSeekerSkillRepository.AddRange(jobSeekerSkills);
-                Console.WriteLine(addedJobSeekerSkills);
+                foreach (var skill in addedJobSeekerSkills)
+                {
+                    Console.WriteLine($"Added Skill: ID = {skill.JobSeekerSkillID}, Name = {skill.SkillName}");
+                }
 
                 return addedJobSeekerSkills.Select(skill => new JobSeekerSkillResponseDTO
                 {   

@@ -86,6 +86,7 @@ namespace Job_Portal_API
             builder.Services.AddScoped<IJobSeeker, JobSeekerService>();
             builder.Services.AddScoped<IApplication, ApplicationService>();
             builder.Services.AddScoped<IAdmin, AdminService>();
+            builder.Services.AddSingleton(new EmailService("smtp.gmail.com", 587, "amanagrawal2001.am.aa@gmail.com", "upjufivltdryzmyj"));
             #endregion
             #region CORS
             builder.Services.AddCors(opts =>

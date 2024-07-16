@@ -114,5 +114,28 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize(Roles ="Employer")]
+        [HttpPut("UpdateCompanyDetails")]
+        public async Task<ActionResult<ReturnEmployerDTO>> UpdateEmployer(UpdateEmployerDTO updateEmployerDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _service.UpdateEmployer(updateEmployerDTO);
+                    return Ok(result);
+                }
+                catch (UserNotFoundException e)
+                {
+                    return NotFound(new ErrorModelDTO(404, e.Message));
+                }
+                catch (Exception e)
+                {
+                    var errorResponse = new ErrorModelDTO(500, e.Message);
+                    return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+                }
+            }
+            return BadRequest("All fields are required!!");
+        }
     }
 }

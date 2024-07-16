@@ -2,23 +2,27 @@
 using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models;
 using Job_Portal_API.Models.DTOs;
+using System.Xml.Linq;
 
 namespace Job_Portal_API.Services
 {
     public class ApplicationService : IApplication
-    {
+    {   
         private readonly IRepository<int, Application> _applicationRepository;
         private readonly IRepository<int, JobListing> _jobListingRepository;
         private readonly IRepository<int, JobSeeker> _jobSeekerRepository;
+        private readonly EmailService _emailService;
 
         public ApplicationService(
             IRepository<int, Application> applicationRepository,
             IRepository<int, JobListing> jobListingRepository,
-            IRepository<int, JobSeeker> jobSeekerRepository)
+            IRepository<int, JobSeeker> jobSeekerRepository,
+            EmailService emailService)
         {
             _applicationRepository = applicationRepository;
             _jobListingRepository = jobListingRepository;
             _jobSeekerRepository = jobSeekerRepository;
+            _emailService = emailService;
         }
         public async  Task<ApplicationResponseDTO> SubmitApplication(int jobID, int jobSeekerID)
         {
@@ -38,6 +42,17 @@ namespace Job_Portal_API.Services
                 };
 
                 var addedApplication = await _applicationRepository.Add(application);
+                
+                var email = jobSeeker.User.Email;
+                var name = jobSeeker.User.FirstName + " " + jobSeeker.User.LastName;
+              
+               
+                var jobTitle = jobListing.JobTitle;
+                var companyName = jobListing.CompanyName;
+                // Send notification email
+                string subject = $"Applied Successfully";
+                string body = $"Dear {name},\n\nYour Have Successfully Applied for the Job , Our people will review your application and notify you shortly.\nJobID :{jobID}\nJob Title : {jobTitle}\nCompany : {companyName}\n\nBest regards,\nJob Entry";
+                _emailService.SendEmail(email, subject, body);
                 return await MapToDTO(addedApplication);
 
             }
@@ -104,20 +119,16 @@ namespace Job_Portal_API.Services
                     JobSeekerID = application.JobSeekerID,
                     Status = application.Status,
                     ApplicationDate = application.ApplicationDate,
-                    JobListing = new JobListingResponseDTO
-                    {
-                        JobID = application.JobListing.JobID,
-                        JobTitle = application.JobListing.JobTitle,
-                        JobDescription = application.JobListing.JobDescription,
-                        JobType = application.JobListing.JobType.ToString(),
-                        Location = application.JobListing.Location,
-                        Salary = application.JobListing.Salary,
-                        PostingDate = application.JobListing.PostingDate,
-                        ClosingDate = application.JobListing.ClosingDate,
-                        EmployerID = application.JobListing.EmployerID,
-                        CompanyName = application.JobListing.Employer.CompanyName
+                    CompanyImage = application.JobListing.ImageUrl,
+                    JobTitle = application.JobListing.JobTitle,
+                    JobType = application.JobListing.JobType.ToString(),
+                    Location = application.JobListing.Location,
+                    Salary = application.JobListing.Salary,
+                    JobSeekerName = jobSeeker.User.FirstName + " " + jobSeeker.User.LastName,
+                   
 
-                    }
+
+
                 });
             }
             catch (JobSeekerNotFoundException e) {

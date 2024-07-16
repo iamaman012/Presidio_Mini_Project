@@ -48,7 +48,7 @@ namespace Job_Portal_API.Repositories
 
         public async Task<Application> GetById(int id)
         {
-            var application = await _context.Applications.FindAsync(id);
+            var application = await _context.Applications.FirstOrDefaultAsync(a => a.ApplicationID == id);
             if (application == null)
             {
                 throw new ApplicationNotFoundException();
@@ -58,7 +58,7 @@ namespace Job_Portal_API.Repositories
 
         public async Task<IEnumerable<Application>> GetAll()
         {
-            return await _context.Applications.Include(app=>app.JobListing).Include(app=>app.JobListing.Employer).ToListAsync();
+            return await _context.Applications.Include(app=>app.JobListing).Include(app=>app.JobListing.Employer).Include(app=>app.JobSeeker.User).ToListAsync();
         }
     }
 }

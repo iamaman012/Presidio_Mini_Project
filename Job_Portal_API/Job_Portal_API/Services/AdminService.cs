@@ -29,14 +29,22 @@ namespace Job_Portal_API.Services
             {
                 var applications = await _applicationRepository.GetAll();
                 if(!applications.Any() )throw new ApplicationNotFoundException("No Applications Found");
-                var applicationDTOs = applications.Select(application => new ApplicationResponseDTO
+                return applications.Select(app => new ApplicationResponseDTO
                 {
-                    ApplicationID = application.ApplicationID,
-                    JobID = application.JobID,
-                    JobSeekerID = application.JobSeekerID,
-                    Status = application.Status
+                    ApplicationID = app.ApplicationID,
+                    JobID = app.JobID,
+                    JobSeekerID = app.JobSeekerID,
+                    ApplicationDate = app.ApplicationDate,
+                    Status = app.Status.ToString(),
+                    JobSeekerName = app.JobSeeker.User.FirstName + " " + app.JobSeeker.User.LastName,
+                    JobTitle = app.JobListing.JobTitle,
+                    Salary = app.JobListing.Salary,
+                    Location = app.JobListing.Location,
+                    CompanyImage = app.JobListing.ImageUrl,
+                    JobType = app.JobListing.JobType.ToString(),
+
                 });
-                return applicationDTOs;
+                
             }
             catch(ApplicationNotFoundException e)
             {
@@ -135,6 +143,7 @@ namespace Job_Portal_API.Services
                     Role = user.UserType.ToString(),
                     Name = user.FirstName + " " + user.LastName,
                     ContactNumber = user.ContactNumber,
+                    ImageUrl=user.ImageUrl
                     
                 });
                 return userDTOs;

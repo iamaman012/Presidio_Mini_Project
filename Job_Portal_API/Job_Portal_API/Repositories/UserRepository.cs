@@ -42,13 +42,42 @@ namespace Job_Portal_API.Repositories
 
         public async Task<User> DeleteById(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if(user == null)
+            var user = await _context.Users
+                                     .Include(u => u.Employer) // Include Employer first
+                                     .Include(u => u.JobSeeker)
+                                     .FirstOrDefaultAsync(u => u.UserID == id);
+
+            if (user == null)
             {
-                throw new UserNotFoundException("User Not Found!!");
+                throw new UserNotFoundException("User not found!");
             }
+
+            if (user.Employer != null)
+            {
+                // Load JobListings separately if Employer is not null
+                var employer = _context.Employers
+                                          .Include(e => e.JobListings)
+                                          .ThenInclude(j => j.Applications)
+                                          .FirstOrDefault(e => e.EmployerID == user.Employer.EmployerID);
+                _context.Applications.RemoveRange(employer.JobListings.SelectMany(j => j.Applications));
+                _context.JobListings.RemoveRange(employer.JobListings);
+                _context.Employers.Remove(employer);
+
+            }
+            if(user.JobSeeker!=null)
+            {
+                var jobSeeker = _context.JobSeekers
+                    .Include(j => j.Applications)
+                    .FirstOrDefault(j => j.JobSeekerID == user.JobSeeker.JobSeekerID);
+                _context.Applications.RemoveRange(jobSeeker.Applications);
+                _context.JobSeekers.Remove(jobSeeker);
+
+            }
+           
+
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
+
             return user;
         }
 
@@ -64,7 +93,7 @@ namespace Job_Portal_API.Repositories
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            var results = await _context.Users.Include(u=>u.JobSeeker).ToListAsync();
+            var results = await _context.Users.Include(u=>u.JobSeeker).Include(u=>u.Employer).ToListAsync();
             return results;
 
         }   

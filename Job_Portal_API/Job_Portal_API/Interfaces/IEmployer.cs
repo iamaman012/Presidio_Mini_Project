@@ -11,5 +11,7 @@ namespace Job_Portal_API.Interfaces
         public Task<ReturnEmployerDTO> UpdateCompanyDescription(int id, String companyDescription);
 
         public Task<ReturnEmployerDTO> UpdateCompanyLocation(int id, String companyLocation);
+
+        public Task<ReturnEmployerDTO> UpdateEmployer(UpdateEmployerDTO updateEmployerDTO);
     }
 }

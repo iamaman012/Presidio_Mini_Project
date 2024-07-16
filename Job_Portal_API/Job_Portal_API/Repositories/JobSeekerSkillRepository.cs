@@ -67,6 +67,19 @@ namespace Job_Portal_API.Repositories
             // and save changes asynchronously
             await _context.JobSeekerSkills.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
+            // Reload the entities from the database to ensure IDs are populated
+            // Reload the entities from the database to ensure IDs are populated
+            foreach (var entity in entities)
+            {
+                // Attach the entity to the context if it was detached
+                if (_context.Entry(entity).State == EntityState.Detached)
+                {
+                    _context.JobSeekerSkills.Attach(entity);
+                }
+
+                // Reload the entity to ensure the database-generated ID is populated
+                await _context.Entry(entity).ReloadAsync();
+            }
 
             // Return the added entities
             return entities;

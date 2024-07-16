@@ -54,14 +54,19 @@ namespace Job_Portal_API.Repositories
         public async Task<JobListing> DeleteById(int id)
         {
             var jobListing = await _context.JobListings
-                .Include(jl => jl.JobSkills)
+                .Include(jl => jl.JobSkills).Include(jl=>jl.Applications)
                 .FirstOrDefaultAsync(jl => jl.JobID == id);
             if (jobListing == null)
             {
                 throw new JobListingNotFoundException();
             }
-            _context.JobListings.Remove(jobListing);
-            await _context.SaveChangesAsync();
+            
+            
+            
+                _context.Applications.RemoveRange(jobListing.Applications);
+                _context.JobListings.Remove(jobListing);
+                _context.SaveChanges();
+            
             return jobListing;
         }
 

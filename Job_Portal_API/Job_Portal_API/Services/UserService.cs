@@ -28,10 +28,14 @@ namespace Job_Portal_API.Services
                 User user = MapRegisterUserDTOToUser(userDTO); 
                 if(user.UserType == UserType.JobSeeker)
                 user.JobSeeker = new JobSeeker();
+                if(user.UserType == UserType.Employer)
+                {
+                    user.Employer = new Employer();
+                }
                 var result= await _repository.Add(user);
                 
 
-                ReturnUserDTO returnUser = new ReturnUserDTO {UserID=result.UserID, Email = result.Email,Role = result.UserType.ToString(),Name=result.FirstName+result.LastName,ContactNumber=result.ContactNumber,JobSeekerID=result.JobSeeker?.JobSeekerID };
+                ReturnUserDTO returnUser = new ReturnUserDTO {UserID=result.UserID, Email = result.Email,Role = result.UserType.ToString(),Name=result.FirstName+result.LastName,ContactNumber=result.ContactNumber,ImageUrl=result.ImageUrl, JobSeekerID=result.JobSeeker?.JobSeekerID,EmployerID=result.Employer?.EmployerID };
               
                 return returnUser;
             }
@@ -80,7 +84,7 @@ namespace Job_Portal_API.Services
         public async Task<ReturnUserDTO> DeleteUserById(int id)
         {
             try
-            {
+            {   
                 var user = await _repository.DeleteById(id);
                 ReturnUserDTO returnUser = new ReturnUserDTO { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + " "+ user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID };
                 return returnUser;
@@ -98,7 +102,7 @@ namespace Job_Portal_API.Services
             try
             {
                 var user = await _repository.GetById(id);
-                ReturnUserDTO returnUser = new ReturnUserDTO { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber,JobSeekerID=user.JobSeeker?.JobSeekerID};
+                ReturnUserDTO returnUser = new ReturnUserDTO { UserID = user.UserID, Email = user.Email, Role = user.UserType.ToString(), Name = user.FirstName + user.LastName, ContactNumber = user.ContactNumber,ImageUrl=user.ImageUrl, JobSeekerID=user.JobSeeker?.JobSeekerID};
                 return returnUser;
             }
             catch (UserNotFoundException e)
@@ -137,7 +141,8 @@ namespace Job_Portal_API.Services
                 LastName = userDTO.LastName,
                 UserType = userType,
                 ContactNumber = userDTO.ContactNumber,
-                
+                ImageUrl= userDTO.ImageUrl
+
             };
             
             
@@ -164,13 +169,15 @@ namespace Job_Portal_API.Services
             returnDTO.Role = user.UserType.ToString();
             returnDTO.Email = user.Email;
             returnDTO.Token = _tokenService.GenerateJSONWebToken(user);
-            returnDTO.JobSeekerId = (int)(user.JobSeeker?.JobSeekerID);
+            returnDTO.JobSeekerId = user.JobSeeker?.JobSeekerID ?? 0; // Provide a default value of 0 if JobSeeker is null
+            returnDTO.EmployerId = user.Employer?.EmployerID ?? 0; // Provide a default value of 0 if Employer is null
             return returnDTO;
         }
 
-        
 
-        public  async Task<string> ChangePassword(int id, string oldPassword, string newPassword, string confirmPassword)
+
+
+        public async Task<string> ChangePassword(int id, string oldPassword, string newPassword, string confirmPassword)
         {
             try
             {

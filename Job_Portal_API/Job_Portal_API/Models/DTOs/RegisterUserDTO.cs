@@ -18,6 +18,8 @@ namespace Job_Portal_API.Models.DTOs
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [Required(ErrorMessage = "Contact number is required")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Contact number must be 10 digits long")]
         public string ContactNumber { get; set; }

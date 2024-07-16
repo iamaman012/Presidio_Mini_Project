@@ -125,7 +125,7 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
-        [Authorize(Roles = "JobSeeker")]
+
         [HttpGet("GetJobsFilterByJobType")]
         public async Task<IActionResult> GetJobsFilterByJobType([Required] string jobType)
         {

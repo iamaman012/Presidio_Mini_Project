@@ -1,1085 +1,499 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-<body>
-    <!-- Profile 1 - Bootstrap Brain Component -->
-<section class="bg-light py-3 py-md-5 py-xl-8">  
-    <div class="container">
-      <div class="row justify-content-md-center">
-        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-          <h2 class="mb-4 display-5 text-center">Profile</h2>
-          <p class="text-secondary text-center lead fs-4 mb-5">The Profile page is your digital hub, where you can fine-tune your experience. Here's a closer look at the settings you can expect to find in your profile page.</p>
-          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-        </div>
-      </div>
-      <button onclick="window.location.href = 'JobSeekerHome.html'" class="btn btn-primary float-end">Go to Homepage</button>
-    </div>
-  
-    <div class="container">
-      <div class="row gy-4 gy-lg-0">
-        <div class="col-12 col-lg-4 col-xl-3">
-          <div class="row gy-4">
-            <div class="col-12">
-              <div class="card widget-card border-light shadow-sm">
-                <div class="card-header text-bg-primary" id="welcome">Welcome, Ethan Leo</div>
-                <div class="card-body">
-                  <div class="text-center mb-3">
-                    <img src="./assets/img/profile-img-1.jpg" class="img-fluid rounded-circle" alt="Luna John">
-                  </div>
-                  <h5 class="text-center mb-1" id="name">Ethan Leo</h5>
-                 
-                 
-                </div>
-              </div>
-            </div>
-         
-            <div class="col-12">
-              <div class="card widget-card border-light shadow-sm">
-                <div class="card-header text-bg-primary">About Me</div>
-                <div class="card-body">
-                  <ul class="list-group list-group-flush mb-0">
-                    <li class="list-group-item">
-                      <h6 class="mb-1">
-                        <span class="bii bi-mortarboard-fill me-2"></span>
-                        Education
-                      </h6>
-                      <span>M.S Computer Science</span>
-                    </li>
-                  <li class="list-group-item">
-                    <h6 class="mb-2">
-                      <span class="bii bi-briefcase-fill me-2"></span>
-                      Experience
-                    </h6>
-                    <span>Software Engineer</span>
-                  </li>
-                   
-                   
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="card widget-card border-light shadow-sm">
-                <div class="card-header text-bg-primary">Skills</div>
-                <div class="card-body" id="skills">
-                  <!-- <span class="badge text-bg-primary">HTML</span>
-                  <span class="badge text-bg-primary">SCSS</span>
-                  <span class="badge text-bg-primary">Javascript</span>
-                  <span class="badge text-bg-primary">React</span>
-                  <span class="badge text-bg-primary">Vue</span>
-                  <span class="badge text-bg-primary">Angular</span>
-                  <span class="badge text-bg-primary">UI</span>
-                  <span class="badge text-bg-primary">UX</span> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-8 col-xl-9">
-          <div class="card widget-card border-light shadow-sm">
-            <div class="card-body p-4">
-              <ul class="nav nav-tabs" id="profileTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
-                </li>
-                
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Password</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education-tab-pane" type="button" role="tab" aria-controls="education-tab-pane" aria-selected="false">Education</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience-tab-pane" type="button" role="tab" aria-controls="experience-tab-pane" aria-selected="false">Experience</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills-tab-pane" type="button" role="tab" aria-controls="skills-tab-pane" aria-selected="false">Skills</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="applications-tab" data-bs-toggle="tab" data-bs-target="#applications-tab-pane" type="button" role="tab" aria-controls="applications-tab-pane" aria-selected="false">Applications</button>
-                </li>
-                            
-                
-                
-              </ul>
-              <div class="tab-content pt-4" id="profileTabContent">
-                <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
-                  <h5 class="mb-3">About</h5>
-                  <p class="lead mb-3">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</p>
-                  <h5 class="mb-3">Profile</h5>
-                  <div class="row g-0">
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2" >Name</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="userName">Ethan</div>
-                    </div>
-                    
-                    
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Role</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">Mountain View, California</div>
-                    </div>
-                   
-                    
-                   
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Phone</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="contact">+1 (248) 679-8745</div>
-                    </div>
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Email</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="email">leo@example.com</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
-                  <form action="#!">
-                    <div class="row gy-3 gy-xxl-4">
-                      <div class="col-12">
-                        <label for="currentPassword" class="form-label">Current Password</label>
-                        <input type="password" class="form-control" id="currentPassword">
-                      </div>
-                      <div class="col-12">
-                        <label for="newPassword" class="form-label">New Password</label>
-                        <input type="password" class="form-control" id="newPassword">
-                        <p id="errorNewPass"></p>
-                      </div>
-                      <div class="col-12">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword">
-                        <p id="errorConfirmPass"></p>
-                      </div>
-                      <div class="col-12">
-                        <button type="submit" class="btn btn-primary" onclick="updatePassword()">Change Password</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane fade" id="education-tab-pane" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
-                    <button type="button" class="btn btn-primary btn-sm float-end" onclick="addEdu()">Add Education</button>
-                </div>
-                <div class="tab-pane fade" id="experience-tab-pane" role="tabpanel" aria-labelledby="experience-tab" tabindex="0">
-                  <button type="button" class="btn btn-primary btn-sm float-end" onclick="expModal()">Add Experience</button>
-                </div>
-                <div class="tab-pane fade" id="skills-tab-pane" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
-                  <button type="button" class="btn btn-primary btn-sm float-end" onclick="skillModal()">Add Skills</button>
-                </div>
-                <div class="tab-pane fade" id="applications-tab-pane" role="tabpanel" aria-labelledby="applications    -tab" tabindex="0">
-                  <!-- Content for the application tab goes here -->
-                </div>
-            
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  
-  </section>
-  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
-    <div id="myToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Favicon -->
+  <link href="img/favicon.png" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <style>
+    .toast-container {
+      z-index: 1050;
+      /* Ensure it's higher than the navbar */
+      margin-top: 70px;
+      /* Adjust as necessary to ensure visibility */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Toast Message-->
+  <div class="toast-container position-fixed top-3 end-0 p-3" style="z-index: 11">
+    <div id="myToast" class="toast align-items-center  bg-primary border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body text-light" id="toastMessage">
+          Hello, world! This is a toast message.
         </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
     </div>
   </div>
+  <div class="container-xxl bg-white p-0">
+    <!-- Profile 1 - Bootstrap Brain Component -->
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top  p-0" id="navBar">
 
-  <!-- Modal Structure for adding Education -->
-  <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModalLabel" aria-hidden="true">
+      <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">JobEntry</h1>
+      </a>
+      <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a href="index.html" class="nav-item nav-link">Home</a>
+          <a href="about.html" class="nav-item nav-link">About</a>
+
+          <a href="contact.html" class="nav-item nav-link">Contact</a>
+          <a href="#" class="nav-item nav-link d-none" id="logOut">LogOut</a>
+          <a href="login.html" class="nav-item nav-link" id="login-resgister">Login/Register</a>
+          <a href="employerProfile.html" class="nav-item nav-link d-none" id="empProfile">
+            <i class="fa fa-2x fa-user-tie text-primary mb-0"></i>
+          </a>
+          <a href="JobSeekerProfile.html" class="nav-item nav-link d-none" id="jobProfile">
+            <i class="fa fa-2x fa-user-tie text-primary mb-0"></i>
+          </a>
+
+        </div>
+        <button class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" onclick="postJob()">Post A Job<i
+            class="fa fa-arrow-right ms-3"></i></button>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <section class=" py-3 py-md-5 py-xl-8">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+            <h2 class="mb-4 display-7 text-center text-primary">Profile</h2>
+
+          </div>
+
+
+          <div class="container">
+            <div class="row gy-4 gy-lg-0">
+              <div class="col-12 col-lg-4 col-xl-3">
+                <div class="row gy-4">
+                  <div class="col-12">
+                    <div class="card widget-card border-light shadow-sm">
+                      <div class="card-header bg-primary text-light" id="welcome">Welcome, Ethan Leo</div>
+                      <div class="card-body">
+                        <div class="text-center mb-3">
+                          <img src="" class="img-fluid rounded-circle" alt="Luna John" id="userImg">
+                        </div>
+                        <h5 class="text-center mb-1 text-primary" id="name">Ethan Leo</h5>
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="card widget-card border-light shadow-sm">
+                      <div class="card-header bg-primary text-light">About Me</div>
+                      <div class="card-body">
+                        <ul class="list-group list-group-flush mb-0">
+                          <li class="list-group-item">
+                            <h6 class="mb-1">
+                              <span class="bii bi-mortarboard-fill me-2"></span>
+                              Education
+                            </h6>
+                            <div id="aboutEdu"></div>
+                          </li>
+                          <li class="list-group-item">
+                            <h6 class="mb-2">
+                              <span class="bii bi-briefcase-fill me-2"></span>
+                              Experience
+                            </h6>
+                            <div id="aboutExp"></div>
+                          </li>
+
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="card widget-card border-light shadow-sm">
+                      <div class="card-header bg-primary text-light">Skills</div>
+                      <div class="card-body" id="skills">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-8 col-xl-9">
+                <div class="card widget-card border-light shadow-sm">
+                  <div class="card-body p-4">
+                    <ul class="nav nav-tabs" id="profileTab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                          data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane"
+                          aria-selected="true">Overview</button>
+                      </li>
+
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="password-tab" data-bs-toggle="tab"
+                          data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane"
+                          aria-selected="false">Password</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="education-tab" data-bs-toggle="tab"
+                          data-bs-target="#education-tab-pane" type="button" role="tab"
+                          aria-controls="education-tab-pane" aria-selected="false">Education</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="experience-tab" data-bs-toggle="tab"
+                          data-bs-target="#experience-tab-pane" type="button" role="tab"
+                          aria-controls="experience-tab-pane" aria-selected="false">Experience</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills-tab-pane"
+                          type="button" role="tab" aria-controls="skills-tab-pane" aria-selected="false">Skills</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="applications-tab" data-bs-toggle="tab"
+                          data-bs-target="#applications-tab-pane" type="button" role="tab"
+                          aria-controls="applications-tab-pane" aria-selected="false">Applications</button>
+                      </li>
+
+
+
+                    </ul>
+                    <div class="tab-content pt-4" id="profileTabContent">
+                      <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel"
+                        aria-labelledby="overview-tab" tabindex="0">
+
+
+                        <div class="row g-0">
+                          <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                            <div class="p-2">Name</div>
+                          </div>
+                          <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                            <div class="p-2" id="userName">Ethan</div>
+                          </div>
+
+
+                          <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                            <div class="p-2">Role</div>
+                          </div>
+                          <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                            <div class="p-2" id="role">Mountain View, California</div>
+                          </div>
+
+
+
+                          <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                            <div class="p-2">Phone</div>
+                          </div>
+                          <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                            <div class="p-2" id="contact">+1 (248) 679-8745</div>
+                          </div>
+                          <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                            <div class="p-2">Email</div>
+                          </div>
+                          <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                            <div class="p-2" id="email">leo@example.com</div>
+                          </div>
+                        </div>
+                        <i id="deleteIcon" class="fa-solid fa-2x fa-trash text-primary mt-2" title="Delete Profile"></i>
+                      </div>
+
+                      <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab"
+                        tabindex="0">
+                        <form id="passwordForm">
+                          <div class="row gy-3 gy-xxl-4">
+                            <div class="col-12">
+                              <label for="currentPassword" class="form-label">Current Password</label>
+                              <input type="password" class="form-control" id="currentPassword">
+                            </div>
+                            <div class="col-12">
+                              <label for="newPassword" class="form-label">New Password</label>
+                              <input type="password" class="form-control" id="newPassword">
+                              <p id="errorNewPass"></p>
+                            </div>
+                            <div class="col-12">
+                              <label for="confirmPassword" class="form-label">Confirm Password</label>
+                              <input type="password" class="form-control" id="confirmPassword">
+                              <p id="errorConfirmPass"></p>
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" class="btn btn-primary">Change Password</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="tab-pane fade" id="education-tab-pane" role="tabpanel" aria-labelledby="education-tab"
+                        tabindex="0">
+                        <button type="button" class="btn btn-primary btn-sm float-end" onclick="addEdu()">Add
+                          Education</button>
+                        <div id="education-content"></div>
+
+                      </div>
+                      <div class="tab-pane fade" id="experience-tab-pane" role="tabpanel"
+                        aria-labelledby="experience-tab" tabindex="0">
+                        <button type="button" class="btn btn-primary btn-sm float-end" onclick="expModal()">Add
+                          Experience</button>
+                        <div id="experience-content"></div>
+                      </div>
+                      <div class="tab-pane fade" id="skills-tab-pane" role="tabpanel" aria-labelledby="skills-tab"
+                        tabindex="0">
+                        <button type="button" class="btn btn-primary btn-sm float-end" onclick="skillModal()">Add
+                          Skills</button>
+                        <div id="skills-content"></div>
+                      </div>
+                      <div class="tab-pane fade" id="applications-tab-pane" role="tabpanel"
+                        aria-labelledby="applications    -tab" tabindex="0">
+                        <!-- Content for the application tab goes here -->
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    </section>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+      <div id="myToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure for adding Education -->
+    <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content ">
+          <div class="modal-header bg-primary text-light text-aling-center">
+            <h5 class="modal-title text-center text-light" id="educationModalLabel">Education</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="#!">
+              <div class="row gy-3 gy-xxl-4">
+                <div class="col-12">
+                  <label for="inputInstitution" class="form-label">Institution</label>
+                  <input type="text" class="form-control" id="inputInstitution">
+                  <p id="errorInstitution"></p>
+                </div>
+                <div class="col-12">
+                  <label for="inputDegree" class="form-label">Degree</label>
+                  <input type="text" class="form-control" id="inputDegree">
+                  <p id="errorDegree"></p>
+                </div>
+                <div class="col-12">
+                  <label for="inputStartDate" class="form-label">Start Date</label>
+                  <input type="date" class="form-control" id="inputStartDate">
+                  <p id="errorStartDate"></p>
+                </div>
+                <div class="col-12">
+                  <label for="inputEndDate" class="form-label">End Date</label>
+                  <input type="date" class="form-control" id="inputEndDate">
+                  <p id="errorEndDate"></p>
+                </div>
+                <div class="col-12">
+                  <label for="inputDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="inputDescription"></textarea>
+                  <p id="errorDescription"></p>
+                </div>
+                <div class="col-12">
+                  <label for="inputGPA" class="form-label">GPA</label>
+                  <input type="text" class="form-control" id="inputGPA">
+                  <p id="errorGPA"></p>
+                </div>
+                <div class="col-12">
+                  <label for="inputLocation" class="form-label">Location</label>
+                  <input type="text" class="form-control" id="inputLocation">
+                  <p id="errorLocation"></p>
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="addEdu" data-bs-dismiss="modal"
+              onclick="addEducation()">Add Education</button>
+            <button type="button" class="btn btn-primary" id="updtEdu" data-bs-dismiss="modal"
+              onclick="updateEducation()">Update Education</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure for adding Experience -->
+    <div class="modal fade" id="experienceModal" tabindex="-1" aria-labelledby="experienceModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="experienceModalLabel">Experience</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="#!">
+              <div class="row gy-3 gy-xxl-4">
+                <div class="col-12">
+                  <label for="inputCompany" class="form-label">Company Name</label>
+                  <input type="text" class="form-control" id="Company">
+
+                </div>
+                <div class="col-12">
+                  <label for="inputRole" class="form-label">Job Title</label>
+                  <input type="text" class="form-control" id="JobTitle">
+
+                </div>
+                <div class="col-12">
+                  <label for="inputStartDate" class="form-label">Start Date</label>
+                  <input type="date" class="form-control" id="StartDate">
+
+                </div>
+                <div class="col-12">
+                  <label for="inputEndDate" class="form-label">End Date</label>
+                  <input type="date" class="form-control" id="EndDate">
+
+                </div>
+                <div class="col-12">
+                  <label for="inputDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="Description"></textarea>
+
+                </div>
+                <div class="col-12">
+                  <label for="inputLocation" class="form-label">Location</label>
+                  <input type="text" class="form-control" id="Location">
+
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary " id="addExp" data-bs-dismiss="modal"
+              onclick="addExperience()">Add Experience</button>
+
+            <button type="button" class="btn btn-primary" id="updtExp" data-bs-dismiss="modal"
+              onclick="updateExpereinnce()">Update Experience</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure for adding Skills -->
+    <div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h5 class="modal-title text-light" id="skillsModalLabel">Skills</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="#!">
+              <div class="row gy-3 gy-xxl-4">
+                <div class="col-12">
+                  <label for="inputSkill" class="form-label">Skill</label>
+                  <input type="text" class="form-control" id="Skill">
+
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary me-2" data-bs-dismiss="modal" id="addSkill"onclick="addSkill()">Add
+              Skill</button>
+              <button type="button" class="btn btn-primary me-2" data-bs-dismiss="modal" id="updateSkill" onclick="updateDbSkill()">Update
+                Skill</button>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- job Details Modal -->
+  <div class="modal fade" id="jobModal" tabindex="-1" aria-labelledby="jobModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="educationModalLabel">Education</h5>
+            <div class="modal-header bg-primary text-center">
+                <h5 class="modal-title   text-light" id="jobModalLabel">Job Title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#!">
-                    <div class="row gy-3 gy-xxl-4">
-                        <div class="col-12">
-                            <label for="inputInstitution" class="form-label">Institution</label>
-                            <input type="text" class="form-control" id="inputInstitution">
-                            <p id="errorInstitution"></p>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputDegree" class="form-label">Degree</label>
-                            <input type="text" class="form-control" id="inputDegree">
-                            <p id="errorDegree"></p>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputStartDate" class="form-label">Start Date</label>
-                            <input type="date" class="form-control" id="inputStartDate">
-                            <p id="errorStartDate"></p>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputEndDate" class="form-label">End Date</label>
-                            <input type="date" class="form-control" id="inputEndDate">
-                            <p id="errorEndDate"></p>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="inputDescription"></textarea>
-                            <p id="errorDescription"></p>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputGPA" class="form-label">GPA</label>
-                            <input type="text" class="form-control" id="inputGPA">
-                            <p id="errorGPA"></p>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputLocation" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="inputLocation">
-                            <p id="errorLocation"></p>
-                        </div>
-                        
-                    </div>
-                </form>
+                <img id="jobModalImage" class="img-fluid border rounded mb-3" src="" alt="" style="width: 100%; height: auto;">
+                <p><strong>Company Name:</strong> <span id="jobModalCompanyName"></span></p>
+                <p><strong>Job Title:</strong> <span id="jobModalJobTitle"></span></p>
+                <p><strong>Category:</strong> <span id="jobModalCategory"></span></p>
+                <p><strong>Description:</strong></p><p id="jobModalDescription"></p>
+                <p><strong>Salary:</strong> <span id="jobModalSalary"></span></p>
+                <p><strong>Location:</strong> <span id="jobModalLocation"></span></p>
+                <p><strong>Type:</strong> <span id="jobModalType"></span></p>
+                <p><strong>Skills:</strong></p>
+        <ul id="jobModalSkills"></ul> <!-- Updated to use <ul> for skills -->
+                <p><strong>Posting Date:</strong> <span id="jobModalPostingDate"></span></p>
+                <p><strong>Closing Date:</strong> <span id="jobModalClosingDate"></span></p>
+              
+                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="addEdu" onclick="addEducation()">Add Education</button>
-                <button type="button" class="btn btn-primary" id="updtEdu" onclick="updateEducation()">Update Education</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
                 
             </div>
         </div>
     </div>
 </div>
+<!-- job details model end -->
 
-<!-- Modal Structure for adding Experience -->
-<div class="modal fade" id="experienceModal" tabindex="-1" aria-labelledby="experienceModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="experienceModalLabel">Experience</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form action="#!">
-                  <div class="row gy-3 gy-xxl-4">
-                      <div class="col-12">
-                          <label for="inputCompany" class="form-label">Company Name</label>
-                          <input type="text" class="form-control" id="Company">
-                          
-                      </div>
-                      <div class="col-12">
-                          <label for="inputRole" class="form-label">Job Title</label>
-                          <input type="text" class="form-control" id="JobTitle">
-                         
-                      </div>
-                      <div class="col-12">
-                          <label for="inputStartDate" class="form-label">Start Date</label>
-                          <input type="date" class="form-control" id="StartDate">
 
-                      </div>
-                      <div class="col-12">
-                          <label for="inputEndDate" class="form-label">End Date</label>
-                          <input type="date" class="form-control" id="EndDate">
-                          
-                      </div>
-                      <div class="col-12">
-                          <label for="inputDescription" class="form-label">Description</label>
-                          <textarea class="form-control" id="Description"></textarea>
-                          
-                      </div>
-                      <div class="col-12">
-                          <label for="inputLocation" class="form-label">Location</label>
-                          <input type="text" class="form-control" id="Location">
-                          
-                      </div>
-                      
-                  </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button"  class="btn btn-primary " id="addExp" onclick="addExperience()">Add Experience</button>
-              <button type="button"  class="btn btn-primary" id="updtExp" onclick="updateExpereinnce()" >Update Experience</button>
 
-          </div>
-      </div>
-  </div>
-</div>
-
-<!-- Modal Structure for adding Skills -->
-<div class="modal fade" id="skillsModal" tabindex="-1" aria-labelledby="skillsModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="skillsModalLabel">Skills</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form action="#!">
-                  <div class="row gy-3 gy-xxl-4">
-                      <div class="col-12">
-                          <label for="inputSkill" class="form-label">Skill</label>
-                          <input type="text" class="form-control" id="Skill">
-                          
-                      </div>
-                      
-                  </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="addSkill()">Add Skill</button>
-          </div>
-      </div>
-  </div>
-</div>
-
-  
-  
   <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('UserId');
+  <script src="./assets/javascript/jobSeekerProfile.js"></script>
 
-   
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-      const profileLoading=async ()=>{
-        try{
-                var response = await fetch(`http://localhost:5190/api/User/GetUserById?userid=16`,{
-                  method:'GET',
-                  headers:{
-                    'Authorization': 'Bearer ' + token,
-                  }
-                });
-          // Check if the response is okay (status in the range 200-299)
-                if (!response.ok) {
-                const errorData = await response.json(); // Convert error response to JSON
-                
-                throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-                }
-                const data = await response.json();
-                console.log(data);
-                document.getElementById('name').innerText=data.name;
-                document.getElementById('userName').innerText=data.name;
-                document.getElementById('welcome').innerText='Welcome '+data.name;
-                document.getElementById('email').innerText=data.email;
-                document.getElementById('role').innerText=data.role;
-                document.getElementById('contact').innerText=data.contactNumber;
-
-          }
-        catch(error){
-          console.log(error.message);
-        }
-    }
-    const resumeLoading=async()=>{
-      try{
-
-        var response = await fetch(`http://localhost:5190/api/JobSeeker/GetResumeById?jobSeekerId=4`,{
-          method:'GET',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-          }
-        })
-        if (!response.ok) {
-                const errorData = await response.json(); // Convert error response to JSON
-                
-                throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-                }
-                const data = await response.json();
-                console.log(data);
-                var Skills = document.getElementById('skills');
-                data.skills.forEach(skill => {
-                  const span = document.createElement('span');
-                  span.classList.add('badge');
-                  span.classList.add('text-bg-primary');
-                  span.innerText=skill.skillName;
-                  Skills.appendChild(span);
-                });
-
-                const education= document.getElementById('education-tab-pane');
-                data.educations.forEach(edu=>{
-                  const div = document.createElement('div');
-                  div.classList.add('col-12','card');
-                  div.innerHTML=`
-                  <div class="row g-3">
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Institute</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="userName">${edu.institution}</div>
-                    </div>
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Degree</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${edu.degree}</div>
-                    </div>
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Start Date</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${edu.startDate}</div>
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">End Date</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${edu.endDate}</div>
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Description</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${edu.description}</div>
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">GPA</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${edu.gpa}</div>
-
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Location</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${edu.location}</div>
-                    </div>
-
-
-                    
-                    <div class="col-12">
-                      <button type="button" class="btn btn-primary btn-sm float-end" onclick="updateEduModal(${edu.educationID},'${edu.institution}','${edu.degree}','${edu.startDate}','${edu.endDate}','${edu.description}',${edu.gpa},'${edu.location}')">Update</button>
-                      <button type="button" class="btn btn-danger btn-sm float-end" onclick="delEdu(${edu.educationID})">Delete</button>
-                    </div>
-                  </div>
-                  `;
-                  education.appendChild(div);
-
-                });
-                const experience = document.getElementById('experience-tab-pane');
-                data.experiences.forEach(exp=>{
-                  const div = document.createElement('div');
-                  div.classList.add('col-12','card');
-                  div.innerHTML=`
-                  <div class="row g-3">
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Company </div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="userName">${exp.companyName}</div>
-                    </div>
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Job Title</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${exp.jobTitle}</div>
-                    </div>
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Start Date</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${exp.startDate}</div>
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">End Date</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${exp.endDate}</div>
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Description</div>
-                    </div>
-
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${exp.description}</div>
-                    </div>
-
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Location</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="role">${exp.location}</div>
-                    </div>
-
-
-
-                    <div class="col-12">
-                      <button type="button" class="btn btn-primary btn-sm float-end" onclick="updateExp(${exp.experienceID}, '${exp.companyName}', '${exp.jobTitle}', '${exp.startDate}', '${exp.endDate}', '${exp.description}','${exp.location}')">Update</button>
-                      <button type="button" class="btn btn-danger btn-sm float-end" onclick="delExp(${exp.experienceID})">Delete</button>
-                    </div>
-                  </div>
-                  `;
-                  experience.appendChild(div);
-                });
-
-                const skills = document.getElementById('skills-tab-pane');
-                data.skills.forEach(skill=>{
-                  const div = document.createElement('div');
-                  div.classList.add('col-12','card');
-                  div.innerHTML=`
-                  <div class="row g-3">
-                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                      <div class="p-2">Skill</div>
-                    </div>
-                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                      <div class="p-2" id="userName">${skill.skillName}</div>
-                    </div>
-                    <div class="col-12">
-                      <button type="button" class="btn btn-primary btn-sm float-end">Update</button>
-                      <button type="button" class="btn btn-danger btn-sm float-end" onclick="delSkill(${skill.skillID})">Delete</button>
-                    </div>
-                  </div>
-                  `;
-                  skills.appendChild(div);
-
-                });
-
-                
-        } 
-        catch(error){
-          console.log(error.message);
-        }
-
-    }
-    
-      profileLoading();
-     resumeLoading();
-    const updatePassword = async () => {
-      const currentPassword = document.getElementById('currentPassword').value;
-      const newPassword = document.getElementById('newPassword').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
-  
-      if (newPassword !== confirmPassword) {
-        document.getElementById('errorNewPass').innerHTML = 'Password does not match';
-        document.getElementById('errorNewPass').style.color = 'red';
-        document.getElementById('errorConfirmPass').style.color = 'red';
-        document.getElementById('errorConfirmPass').innerHTML = 'Password does not match';
-        document.getElementById('newPassword').style.border = '1px solid red';
-        document.getElementById('confirmPassword').style.border = '1px solid red';
-        return;
-      }
-  
-      
-  
-     await fetch(`http://localhost:5190/api/User/ChangePassword?userid=${userId}&oldPassword=${currentPassword}&newPassword=${newPassword}&confirmPassword=${confirmPassword}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          
-        },
-        
-      }).then(response => {
-        
-        if (!response.ok) {
-          
-          return response.json().then(error => {
-            throw new Error(error.message);
-          });
-        }
-        return response;
-      }).then(data => {
-        console.log("aman")
-        console.log(data);
-        alert("Password Changed Successfully");
-      }).catch(error => {
-        console.log(error);
-        alert(error);
-      });
-    }
-    const delEdu= async(eduId)=>{
-        try{
-          var response = await fetch(`http://localhost:5190/api/JobSeeker/DeleteEducationById?educationId=${eduId}`,{
-            method:'DELETE',
-            headers:{
-              'Authorization': 'Bearer ' + token,
-            }
-          });
-          if(!response.ok){
-            const errorData = await response.json();
-            throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-          }
-          
-          
-          const data = await response.json();
-          console.log(data);
-          var toastElement = document.getElementById('myToast');
-          var toast = new bootstrap.Toast(toastElement);
-          toast.show();
-          await new Promise(resolve => setTimeout(resolve, 3000));
-          window.location.reload();
-          await resumeLoading();
-          // Show toast message
-          
-        }
-        catch(error){
-          console.log(error.message);
-        }
-    }
-    // for deleting experience
-    const delExp= async(expId)=>{
-        try{
-          var response = await fetch(`http://localhost:5190/api/JobSeeker/DeleteExperienceById?experienceId=${expId}`,{
-            method:'DELETE',
-            headers:{
-              'Authorization': 'Bearer ' + token,
-            }
-          });
-          if(!response.ok){
-            const errorData = await response.json();
-            throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-          }
-          
-          
-          const data = await response.json();
-          console.log(data);
-          var toastElement = document.getElementById('myToast');
-          var toast = new bootstrap.Toast(toastElement);
-          toast.show();
-          await new Promise(resolve => setTimeout(resolve, 3000));
-          window.location.reload();
-          await resumeLoading();
-          // Show toast message
-          
-        }
-        catch(error){
-          console.log(error.message);
-        }
-    }
-    const addEdu=()=>{
-      const modal = new bootstrap.Modal(document.getElementById('educationModal'));
-            modal.show();
-            
-            document.getElementById('updtEdu').style.display = 'none';
-            document.getElementById('addEdu').style.display = 'block';
-            const institution = document.getElementById('inputInstitution').value="";
-      const degree = document.getElementById('inputDegree').value="";
-      const startDate = document.getElementById('inputStartDate').value="";
-      const endDate = document.getElementById('inputEndDate').value="";
-      const description = document.getElementById('inputDescription').value="";
-      const gpa = document.getElementById('inputGPA').value="";
-      const location = document.getElementById('inputLocation').value="";
-
-
-    }
-    const addEducation=async()=>{
-      const institution = document.getElementById('inputInstitution').value;
-      const degree = document.getElementById('inputDegree').value;
-      const startDate = document.getElementById('inputStartDate').value;
-      const endDate = document.getElementById('inputEndDate').value;
-      const description = document.getElementById('inputDescription').value;
-      const gpa = document.getElementById('inputGPA').value;
-      const location = document.getElementById('inputLocation').value;
-      try{
-        var response = await fetch("http://localhost:5190/api/JobSeeker/AddEducation",{
-          method:'POST',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({
-            "jobSeekerId":localStorage.getItem('JobSeekerId'),
-            "institution":institution,
-            "degree":degree,
-            "startDate":startDate,
-            "endDate":endDate,
-            "description":description,
-            "gpa":gpa,
-            "location":location
-          })
-        });
-        if(!response.ok){
-          const errorData = await response.json();
-          throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        var toastElement = document.getElementById('myToast');
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        window.location.reload();
-        await resumeLoading();
-      }
-      catch(error){
-        console.log(error.message);
-      }
-    }
-
-    const expModal=()=>{
-      const modal = new bootstrap.Modal(document.getElementById('experienceModal'));
-            modal.show();
-            document.getElementById('updtExp').style.display = 'none';
-            document.getElementById('addExp').style.display = 'block';
-            const companyName = document.getElementById('Company').value="";
-      const jobTitle = document.getElementById('JobTitle').value="";
-      const startDate = document.getElementById('StartDate').value="";
-      const endDate = document.getElementById('EndDate').value="";
-      const description = document.getElementById('Description').value="";
-      const location = document.getElementById('Location').value="";
-    }
-    const addExperience=async ()=>{
-      const companyName = document.getElementById('Company').value;
-      const jobTitle = document.getElementById('JobTitle').value;
-      const startDate = document.getElementById('StartDate').value;
-      const endDate = document.getElementById('EndDate').value;
-      const description = document.getElementById('Description').value;
-      const location = document.getElementById('Location').value;
-      try{
-        var response = await fetch("http://localhost:5190/api/JobSeeker/AddExperience",{
-          method:'POST',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({
-            "jobSeekerId":localStorage.getItem('JobSeekerId'),
-            "companyName":companyName,
-            "jobTitle":jobTitle,
-            "startDate":startDate,
-            "endDate":endDate,
-            "description":description,
-            "location":location
-          })
-        });
-        if(!response.ok){
-          const errorData = await response.json();
-          throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        var toastElement = document.getElementById('myToast');
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        window.location.reload();
-        await resumeLoading();
-      }
-      catch(error){
-        console.log(error.message);
-      }
-      
-    }
-    const delSkill=async(skillId)=>{
-      try{
-        var response = await fetch(`http://localhost:5190/api/JobSeeker/DeleteSkillById?skillId=${skillId}`,{
-          method:'DELETE',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-          }
-        });
-        if(!response.ok){
-          const errorData = await response.json();
-          throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        var toastElement = document.getElementById('myToast');
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        window.location.reload();
-        await resumeLoading();
-      }
-      catch(error){
-        console.log(error.message);
-      }
-    }
-    const skillModal=()=>{
-      const modal = new bootstrap.Modal(document.getElementById('skillsModal'));
-            modal.show();
-    }
-    const addSkill=async()=>{
-      const skill = document.getElementById('Skill').value;
-      try{
-        var response = await fetch("http://localhost:5190/api/JobSeeker/AddSkills",{
-          method:'POST',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({
-            "jobSeekerId":localStorage.getItem('JobSeekerId'),
-            "skillName":[skill]
-          })
-        });
-        if(!response.ok){
-          const errorData = await response.json();
-          throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        var toastElement = document.getElementById('myToast');
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        window.location.reload();
-        await resumeLoading();
-      }
-      catch(error){
-        console.log(error.message);
-      }
-    }
-  var experienceId=0;
-const updateExp = (expId, companyName, jobTitle, startDate, endDate, description, location) => {
-    try {
-        // Ensure the date values are in 'yyyy-MM-dd' format
-        const formatDate = (date) => {
-            const d = new Date(date);
-            const year = d.getFullYear();
-            const month = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        };
-
-        const formattedStartDate = formatDate(startDate);
-        const formattedEndDate = formatDate(endDate);
-
-        console.log(expId, companyName, jobTitle, formattedStartDate, formattedEndDate, description, location);
-        const modal = new bootstrap.Modal(document.getElementById('experienceModal'));
-        modal.show();
-        document.getElementById('addExp').style.display = 'none';
-        document.getElementById('updtExp').style.display = 'block';
-
-        document.getElementById('Company').value = companyName;
-        document.getElementById('JobTitle').value = jobTitle;
-        document.getElementById('StartDate').value = formattedStartDate;
-        document.getElementById('EndDate').value = formattedEndDate;
-        document.getElementById('Description').value = description;
-        document.getElementById('Location').value = location;
-        experienceId=expId;
-    } catch (error) {
-        console.log(error.message);
-    }
-};
-const updateExpereinnce=async()=>{
-  try{
-    const companyName = document.getElementById('Company').value;
-      const jobTitle = document.getElementById('JobTitle').value;
-      const startDate = document.getElementById('StartDate').value;
-      const endDate = document.getElementById('EndDate').value;
-      const description = document.getElementById('Description').value;
-      const location = document.getElementById('Location').value;
-      var response = await fetch("http://localhost:5190/api/JobSeeker/UpdateExperience",{
-          method:'PUT',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({
-            "experienceID":experienceId,
-            "jobSeekerId":localStorage.getItem('JobSeekerId'),
-            "companyName":companyName,
-            "jobTitle":jobTitle,
-            "startDate":startDate,
-            "endDate":endDate,
-            "description":description,
-            "location":location
-          })
-        });
-        if(!response.ok){
-          const errorData = await response.json();
-          throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        var toastElement = document.getElementById('myToast');
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        window.location.reload();
-        await resumeLoading();
-  }
-  catch(error){
-    console.log(error.message);
-  
-  }
-}
-var educationId=0;
-    
-const updateEduModal=(eduId, institution, degree, startDate, endDate, description, gpa, location)=>{
-  try {
-        // Ensure the date values are in 'yyyy-MM-dd' format
-        const formatDate = (date) => {
-            const d = new Date(date);
-            const year = d.getFullYear();
-            const month = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        };
-
-        const formattedStartDate = formatDate(startDate);
-        const formattedEndDate = formatDate(endDate);
-
-        console.log(eduId, institution, degree, formattedStartDate, formattedEndDate, description, gpa, location);
-        const modal = new bootstrap.Modal(document.getElementById('educationModal'));
-        modal.show();
-        document.getElementById('addEdu').style.display = 'none';
-        document.getElementById('updtEdu').style.display = 'block';
-
-        document.getElementById('inputInstitution').value = institution;
-        document.getElementById('inputDegree').value = degree;
-        document.getElementById('inputStartDate').value = formattedStartDate;
-        document.getElementById('inputEndDate').value = formattedEndDate;
-        document.getElementById('inputDescription').value = description;
-        document.getElementById('inputGPA').value = gpa;
-        document.getElementById('inputLocation').value = location;
-        
-        educationId=eduId;
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-const updateEducation=async()=>{
-  try{
-    const institution = document.getElementById('inputInstitution').value;
-      const degree = document.getElementById('inputDegree').value;
-      const startDate = document.getElementById('inputStartDate').value;
-      const endDate = document.getElementById('inputEndDate').value;
-      const description = document.getElementById('inputDescription').value;
-      const gpa = document.getElementById('inputGPA').value;
-      const location = document.getElementById('inputLocation').value;
-      var response = await fetch("http://localhost:5190/api/JobSeeker/UpdateEducation",{
-          method:'PUT',
-          headers:{
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({
-            "educationID":educationId,
-            "jobSeekerId":localStorage.getItem('JobSeekerId'),
-            "institution":institution,
-            "degree":degree,
-            "startDate":startDate,
-            "endDate":endDate,
-            "description":description,
-            "gpa":gpa,
-            "location":location
-          })
-        });
-        if(!response.ok){
-          const errorData = await response.json();
-          throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        var toastElement = document.getElementById('myToast');
-        var toast = new bootstrap.Toast(toastElement);
-        toast.show();
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        window.location.reload();
-        await resumeLoading();
-  }
-  catch(error){
-    console.log(error.message);
-  
-  }
-}
-
-const applicationLoading = async () => {
-    try {
-        const token = localStorage.getItem('token'); // Ensure token is defined
-        if (!token) {
-            throw new Error('Authorization token not found');
-        }
-
-        const response = await fetch(`http://localhost:5190/api/Application/GetApplicationFilteredByJobSeekerID?jobSeekerID=${localStorage.getItem('JobSeekerId')}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + token,
-            }
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
-
-        const application = document.getElementById('applications-tab-pane');
-
-        data.forEach(app => {
-            const div = document.createElement('div');
-            div.classList.add('card');
-            div.innerHTML = `
-            <div class="card-header">
-                ${app.jobListing.companyName}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">${app.jobListing.jobTitle}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${app.jobListing.jobType}</h6>
-                <p class="card-text">${app.jobListing.jobDescription}</p>
-                <p class="card-text">Status:<strong> ${app.status}</strong>   </p>
-                <p class="card-text">Applied Date: ${app.applicationDate}</p>
-                <button type="button" class="btn btn-danger" onclick="delApplication(${app.applicationID})">Delete</button>
-
-            </div>
-            `;
-
-            application.appendChild(div); // Append inside the loop
-        });
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-applicationLoading();
-const delApplication=async(appId)=>{
-  try{
-      var response = await fetch(`http://localhost:5190/api/Application/DeleteApplicationById?applicationId=${appId}`,{
-        method:'DELETE',
-        headers:{
-          'Authorization': 'Bearer ' + token,
-        }
-    });
-    if(!response.ok){
-      const errorData = await response.json();
-      throw new Error(`Status : ${errorData.statusCode}, message : ${errorData.message}`);
-    }
-    const data = await response.json();
-    console.log(data);
-    var toastElement = document.getElementById('myToast');
-    var toast = new bootstrap.Toast(toastElement);
-    toast.show();
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    window.location.reload();
-    await applicationLoading();
-  }
-  catch(error){
-    console.log(error.message);
-  }
-}
-
-
-
-      
-    
-  </script>
-  
 </body>
+
 </html>

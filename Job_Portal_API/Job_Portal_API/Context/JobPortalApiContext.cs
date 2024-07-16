@@ -67,7 +67,7 @@ namespace Job_Portal_API.Context
                 .HasOne(a => a.JobListing)
                 .WithMany(j => j.Applications)
                 .HasForeignKey(a => a.JobID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<JobListing>()
                 .HasMany(j => j.JobSkills)

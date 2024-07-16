@@ -3,6 +3,7 @@ using Job_Portal_API.Interfaces;
 using Job_Portal_API.Models;
 using Job_Portal_API.Models.DTOs;
 using Job_Portal_API.Models.Enums;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -16,9 +17,11 @@ namespace Job_Portal_API.Services
         private readonly IRepository<int, JobSeeker> _jobSeekerRepository;
         private readonly IRepository<int, User> _userRepository;
         private readonly IRepository<int, JobSkill> _jobSkillRepository;
-        
+        private readonly EmailService _emailService;
 
-        public JobListingService(IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IRepository<int,User> userRepository,IRepository<int,JobSeeker> jobSeekerRepository,IRepository<int,JobSkill> jobSkillRepository)
+
+
+        public JobListingService(EmailService emailService,IRepository<int, JobListing> jobListingRepository, IRepository<int, Employer> employerRepository, IRepository<int, Application> applicationRepository,IRepository<int,User> userRepository,IRepository<int,JobSeeker> jobSeekerRepository,IRepository<int,JobSkill> jobSkillRepository)
         {
             _jobListingRepository = jobListingRepository;
             _employerRepository = employerRepository;
@@ -26,6 +29,8 @@ namespace Job_Portal_API.Services
             _jobSeekerRepository = jobSeekerRepository;
             _userRepository = userRepository;
             _jobSkillRepository = jobSkillRepository;
+            _emailService = emailService;
+            
 
 
         }
@@ -47,7 +52,12 @@ namespace Job_Portal_API.Services
                 PostingDate = jobListingDto.PostingDate,
                 ClosingDate = jobListingDto.ClosingDate,
                 EmployerID = jobListingDto.EmployerID,
-                JobSkills = jobListingDto.Skills.Select(skill => new JobSkill { SkillName = skill.SkillName }).ToList()
+                Category = jobListingDto.Category,
+                ImageUrl = jobListingDto.ImageUrl,
+                CompanyName = jobListingDto.CompanyName,
+                CompanyDescription = jobListingDto.CompanyDescription,
+                CompanyLocation = jobListingDto.CompanyLocation,
+                JobSkills = jobListingDto.Skills.Select(skill => new JobSkill { SkillName = skill }).ToList()
             };
         }
         public JobListingResponseDTO MapJobListingToDto(JobListing jobListing)
@@ -63,6 +73,12 @@ namespace Job_Portal_API.Services
                 Salary = jobListing.Salary,
                 PostingDate = jobListing.PostingDate,
                 ClosingDate = jobListing.ClosingDate,
+                Category = jobListing.Category,
+                ImageUrl = jobListing.ImageUrl,
+                CompanyName = jobListing.CompanyName,
+                CompanyDescription = jobListing.CompanyDescription,
+                CompanyLocation = jobListing.CompanyLocation,
+
                 EmployerID = jobListing.EmployerID,
                 Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID, SkillName = skill.SkillName }).ToList()
             };
@@ -104,13 +120,19 @@ namespace Job_Portal_API.Services
             {
                 JobID = jobListing.JobID,
                 JobTitle = jobListing.JobTitle,
-                CompanyName = jobListing.Employer.CompanyName,
+                
                 JobDescription = jobListing.JobDescription,
                 JobType = jobListing.JobType.ToString(),
                 Location = jobListing.Location,
                 Salary = jobListing.Salary,
                 PostingDate = jobListing.PostingDate,
                 ClosingDate = jobListing.ClosingDate,
+                Category = jobListing.Category,
+                ImageUrl = jobListing.ImageUrl,
+                CompanyName = jobListing.CompanyName,
+                CompanyDescription = jobListing.CompanyDescription,
+                CompanyLocation = jobListing.CompanyLocation,
+
                 EmployerID = jobListing.EmployerID,
                 Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID, SkillName = skill.SkillName }).ToList()
             });
@@ -131,6 +153,12 @@ namespace Job_Portal_API.Services
                     Salary = jobListing.Salary,
                     PostingDate = jobListing.PostingDate,
                     ClosingDate = jobListing.ClosingDate,
+                    CompanyName=jobListing.CompanyName,
+                    CompanyDescription= jobListing.CompanyDescription,
+                    CompanyLocation= jobListing.CompanyLocation,
+                    Category = jobListing.Category,
+                    ImageUrl = jobListing.ImageUrl,
+
                     EmployerID = jobListing.EmployerID,
                     Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID = skill.JobSkillID,SkillName = skill.SkillName }).ToList()
                 };
@@ -165,6 +193,11 @@ namespace Job_Portal_API.Services
                     Salary = jobListing.Salary,
                     PostingDate = jobListing.PostingDate,
                     ClosingDate = jobListing.ClosingDate,
+                    Category = jobListing.Category,
+                    ImageUrl = jobListing.ImageUrl,
+                    CompanyName = jobListing.CompanyName,
+                    CompanyDescription = jobListing.CompanyDescription,
+                    CompanyLocation = jobListing.CompanyLocation,
                     EmployerID = jobListing.EmployerID,
                     Skills = jobListing.JobSkills.Select(skill => new JobSkillResponseDTO { SkillID=skill.JobSkillID,SkillName = skill.SkillName }).ToList()
                 });
@@ -286,7 +319,14 @@ namespace Job_Portal_API.Services
                     JobID = app.JobID,
                     JobSeekerID = app.JobSeekerID,
                     ApplicationDate = app.ApplicationDate,
-                    Status = app.Status.ToString()
+                    Status = app.Status.ToString(),
+                    JobSeekerName = app.JobSeeker.User.FirstName + " " + app.JobSeeker.User.LastName,
+                    JobTitle = app.JobListing.JobTitle,
+                    Salary = app.JobListing.Salary,
+                    Location = app.JobListing.Location,
+                    CompanyImage = app.JobListing.ImageUrl,
+                    JobType = app.JobListing.JobType.ToString(),
+
                 });
             }
             catch (NoApplicationExistException e)
@@ -306,6 +346,20 @@ namespace Job_Portal_API.Services
                 var application = await _applicationRepository.GetById(applicationId);
                 application.Status = status;
                 await _applicationRepository.Update(application);
+                var jobSeeker = await _jobSeekerRepository.GetById(application.JobSeekerID);
+                var email = jobSeeker.User.Email;
+                var name = jobSeeker.User.FirstName + " " + jobSeeker.User.LastName;
+                var jobListings = await _jobListingRepository.GetById(application.JobID);
+                var jobId = application.JobID;
+                var jobTitle = jobListings.JobTitle;
+                var companyName = jobListings.CompanyName;
+                // Send notification email
+                string subject = $"Your Job Application Status: {status}";
+                string body = $"Dear {name},\n\nYour job application status has been updated to {status}.\nJobID :{jobId}\nJob Title : {jobTitle}\nCompany : {companyName}\n\nBest regards,\nJob Entry";
+                _emailService.SendEmail(email, subject, body);
+
+
+
                 return new ApplicationResponseDTO
                 {
                     ApplicationID = application.ApplicationID,

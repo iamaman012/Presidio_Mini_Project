@@ -16,11 +16,14 @@ namespace Job_Portal_API.Controllers
     {
         private readonly IJobListing _service;
         private readonly IJobSeeker _jobSeekerService;
+        
+
 
         public JobListingController(IJobListing service, IJobSeeker jobSeekerService)
         {
             _service = service;
             _jobSeekerService = jobSeekerService;
+            
         }
         [Authorize(Roles = "Employer")]
         [HttpPost("AddJobListing")]
@@ -90,6 +93,29 @@ namespace Job_Portal_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
+        [Authorize]
+        [HttpGet("GetJobListingByJobID")]
+        public async Task<IActionResult> GetJobListingByJobID([Required] int jobID)
+        {
+            try
+            {
+                var jobListings = await _service.GetJobListingByIdAsync(jobID);
+                return Ok(jobListings);
+            }
+            catch (NoApplicationExistException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (JobListingNotFoundException e)
+            {
+                return NotFound(new ErrorModelDTO(404, e.Message));
+            }
+            catch (Exception e)
+            {
+                var errorResponse = new ErrorModelDTO(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
+        }
         [Authorize(Roles = "Employer")]
         [HttpPut("UpdateApplicationStatus")]
         public async Task<IActionResult> UpdateApplicationStatus([Required]int applicationId,[Required]string status)
@@ -97,6 +123,7 @@ namespace Job_Portal_API.Controllers
             try
             {
                 var response = await _service.UpdateApplicationStatus(applicationId,status);
+               
                 return Ok(response);
             }
             catch (ApplicationNotFoundException e)
